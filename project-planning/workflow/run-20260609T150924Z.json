@@ -1,0 +1,166 @@
+{
+  "schema_version": 8,
+  "run_id": "20260609T150924Z",
+  "created_at": "2026-06-09T15:09:24Z",
+  "updated_at": "2026-06-09T15:09:24Z",
+  "product_slug": "aphelion",
+  "product_root": "products/head-application/aphelion",
+  "work_item_type": "prd",
+  "status": "spec_ready",
+  "prd_input_mode": "prompt_only",
+  "platform_target": "content-sdk",
+  "task_breakdown_style": "standard",
+  "scope_dial": {
+    "rigor": "standard",
+    "track": "full",
+    "ui_variants": "2",
+    "docs_at_ship": "auto-lite",
+    "task_breakdown_review": "skip_gate"
+  },
+  "ui_design": {
+    "proposal_count": 2,
+    "divergence": "moderate",
+    "variant_paths": [],
+    "selected_variant_path": null
+  },
+  "source": {
+    "kind": "raw_idea",
+    "values": [
+      "Prompt-only dogfood request (2026-06-09): marketing-ready Content SDK head app themed cosmos/stellar/space; exercise the full pipeline and observe how it reacts."
+    ],
+    "analysis_mode": "greenfield",
+    "source_analysis_artifact": null,
+    "content_dump": null,
+    "assets_bundle": null
+  },
+  "canonical_artifacts": {
+    "brain_dump": null,
+    "prd": "products/head-application/aphelion/project-planning/PRD/prd-000.md",
+    "prd_minimal": "products/head-application/aphelion/project-planning/PRD/prd-minimal-000.md",
+    "architecture": null,
+    "baseline": null,
+    "task_breakdown": null,
+    "task_breakdown_pre_qa": null,
+    "qa_report": null,
+    "content_model": null,
+    "content_examples": null,
+    "ship_report": null,
+    "friction_log": null,
+    "status_index": "products/head-application/aphelion/project-planning/STATUS.md"
+  },
+  "friction_log": {
+    "path": "products/head-application/aphelion/project-planning/workflow/friction-log-20260609T150924Z.md",
+    "min_severity": "medium",
+    "enabled": true
+  },
+  "stage_history": [
+    {
+      "stage": "discovery",
+      "agent": "02-product-manager",
+      "entered_at": "2026-06-09T15:00:00Z",
+      "exited_at": "2026-06-09T15:06:00Z",
+      "outcome": "completed",
+      "one_line": "Standard discovery; scope dial (rigor=std, ui=2, live tenant) + 3 scope questions (5 routes, no commerce, Vercel); content-sdk NEW site",
+      "deliverables": [],
+      "escalations": [],
+      "error": null,
+      "notes": "Sitecore-aware: NEW-site flow, live tenant, App Router. SITE_COLLECTION_NAME=cosmos, SITE_NAME=aphelion."
+    },
+    {
+      "stage": "discovery_summary",
+      "agent": "02-product-manager",
+      "entered_at": "2026-06-09T15:06:00Z",
+      "exited_at": "2026-06-09T15:08:00Z",
+      "outcome": "confirmed",
+      "one_line": "Operator confirmed recap + the two-PRD split (Acts 1-2 / Act 3) + presentational-only forms",
+      "deliverables": [],
+      "escalations": [],
+      "error": null,
+      "notes": null
+    },
+    {
+      "stage": "spec_ready",
+      "agent": "02-product-manager",
+      "entered_at": "2026-06-09T15:08:00Z",
+      "exited_at": "2026-06-09T15:12:00Z",
+      "outcome": "completed",
+      "one_line": "PRD-000 (Acts 1-2) written + standard critical review (6 findings, all resolved + folded) + prd-minimal + 5 ADRs",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/PRD/prd-000.md",
+        "products/head-application/aphelion/project-planning/PRD/prd-minimal-000.md",
+        "products/head-application/aphelion/project-planning/ADR/adr-0002-two-prd-split-acts-1-2-vs-act-3.md",
+        "products/head-application/aphelion/project-planning/ADR/adr-0003-static-app-first-build-ordering.md",
+        "products/head-application/aphelion/project-planning/ADR/adr-0004-theme-architecture-preflight-usesyncexternalstore.md",
+        "products/head-application/aphelion/project-planning/ADR/adr-0005-content-model-driven-component-boundary.md",
+        "products/head-application/aphelion/project-planning/ADR/adr-0006-presentational-only-forms-v1.md",
+        "products/head-application/aphelion/project-planning/STATUS.md"
+      ],
+      "escalations": [
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "Arrays map to folder-of-child-items datasource (SXA Children resolver), not multilist — load-bearing content-model decision (ADR-0005)",
+          "resolved_at": "2026-06-09T15:11:00Z"
+        },
+        {
+          "severity": "info",
+          "kind": "assumption",
+          "item": "Newsletter + Contact presentational-only in v1 (no backend) — ADR-0006",
+          "resolved_at": "2026-06-09T15:11:00Z"
+        }
+      ],
+      "error": null,
+      "notes": "Critical review standard level; operator answered YES to all six resolutions (build mode, fidelity threshold, array rule, missing rows, nav exception, Lighthouse soft-target)."
+    }
+  ],
+  "implementation": {
+    "mode": "pipeline",
+    "target_directory": "static",
+    "branch_name": "prd-000",
+    "remote_url": "https://github.com/Chris1415/Project.Aphelion.git",
+    "status": "not_started",
+    "resumed_from_stage": null
+  },
+  "smoke_outcomes": {},
+  "operator_attention": [
+    {
+      "stage": "create-prd",
+      "severity": "info",
+      "kind": "decision",
+      "item": "NEW-site build split into PRD-000 (Acts 1-2, no tenant) + later PRD-001 (Act 3, live tenant) — ADR-0002",
+      "raised_at": "2026-06-09T15:08:00Z",
+      "resolved_at": null,
+      "references": "project-planning/ADR/adr-0002-two-prd-split-acts-1-2-vs-act-3.md"
+    },
+    {
+      "stage": "create-prd",
+      "severity": "warn",
+      "kind": "assumption",
+      "item": "Newsletter + Contact are presentational-only in v1 (no submit backend) — Assumption A1 / ADR-0006",
+      "raised_at": "2026-06-09T15:11:00Z",
+      "resolved_at": null,
+      "references": "project-planning/ADR/adr-0006-presentational-only-forms-v1.md"
+    },
+    {
+      "stage": "create-prd",
+      "severity": "info",
+      "kind": "question",
+      "item": "Typography pairing + accent hue (OQ-1) and final destination/experience content set (OQ-2) deferred to /architect (UI Designer proposes 2 variants)",
+      "raised_at": "2026-06-09T15:11:00Z",
+      "resolved_at": null,
+      "references": "project-planning/PRD/prd-000.md#14-open-questions"
+    }
+  ],
+  "archive": {},
+  "notes": {
+    "base_branch": "main",
+    "stacked_on": null,
+    "sdk_surface_split": "n/a",
+    "discovery_level": "standard",
+    "discovery_summary": "confirmed",
+    "critical_review": "completed",
+    "critical_review_level": "standard",
+    "scope_dial": "asked",
+    "lineage": "PRD-000 = Acts 1-2 of Content SDK NEW-site flow (static app + content-model spec). PRD-001 (future) = Act 3 (head-app port + deploy). Dogfood of custom_content-sdk-website-build-flow."
+  }
+}
