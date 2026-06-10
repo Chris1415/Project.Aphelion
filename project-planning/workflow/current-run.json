@@ -6,7 +6,7 @@
   "product_slug": "aphelion",
   "product_root": "products/head-application/aphelion",
   "work_item_type": "prd",
-  "status": "implementation_in_progress",
+  "status": "implemented",
   "prd_input_mode": "prompt_only",
   "platform_target": "content-sdk",
   "task_breakdown_style": "tdd",
@@ -54,7 +54,7 @@
     "task_breakdown": "products/head-application/aphelion/project-planning/plans/task-breakdown-20260609T150924Z.md",
     "task_breakdown_pre_qa": null,
     "qa_report": null,
-    "content_model": null,
+    "content_model": "products/head-application/aphelion/project-planning/sitecore-content-model.md",
     "content_examples": null,
     "ship_report": null,
     "friction_log": null,
@@ -221,6 +221,36 @@
       "escalations": [],
       "error": null,
       "notes": "No standalone qa-report (enriched breakdown IS the test contract). No real-tenant smoke (no tenant in PRD-000); fidelity gate + axe a11y are the bar. SDK fixture rule N/A (no SDK calls) — deferred to PRD-001."
+    },
+    {
+      "stage": "implemented",
+      "agent": "08-developer",
+      "entered_at": "2026-06-10T00:35:00Z",
+      "exited_at": "2026-06-10T16:00:00Z",
+      "outcome": "completed",
+      "one_line": "40 tasks across E1-E5 (5 sequential Developer tranches); v5b Flux static app on 5 routes; T013 hydration + T038 fidelity gates PASS; content-model spec derived",
+      "deliverables": [
+        "products/head-application/aphelion/static/ (Next 16 App Router static app, 5 routes, ~60 source files)",
+        "products/head-application/aphelion/static/tests/ (100 Vitest + 85 Playwright, 20 screenshot baselines)",
+        "products/head-application/aphelion/project-planning/sitecore-content-model.md",
+        "products/head-application/aphelion/project-planning/plans/task-breakdown-20260609T150924Z.md"
+      ],
+      "escalations": [
+        {
+          "severity": "info",
+          "kind": "concern",
+          "item": "E4 found+fixed a real a11y bug (MobileNav aria-hidden-focus → inert when closed); no other escalations across 5 tranches",
+          "resolved_at": "2026-06-10T15:00:00Z"
+        },
+        {
+          "severity": "warn",
+          "kind": "decision",
+          "item": "Content-model spec flags 3 net-new operator decisions for Act-2/PRD-001: HeroMeta array (flatten to 6 fields?), ContactDetails rendering (inline in route, needs its own rendering+template), Marquee items sourcing (TBD)",
+          "resolved_at": null
+        }
+      ],
+      "error": null,
+      "notes": "Pre-completion gate green: lint + next build (5 routes) + tsc + 100 Vitest + 85 Playwright; git-status clean. Screenshot baselines are first-run (regression value); final Home visual fidelity vs POC is operator visual judgment."
     }
   ],
   "implementation": {
@@ -228,7 +258,7 @@
     "target_directory": "static",
     "branch_name": "prd-000",
     "remote_url": "https://github.com/Chris1415/Project.Aphelion.git",
-    "status": "in_progress",
+    "status": "completed",
     "resumed_from_stage": null
   },
   "smoke_outcomes": {},
@@ -295,6 +325,24 @@
       "raised_at": "2026-06-10T00:32:00Z",
       "resolved_at": null,
       "references": "project-planning/plans/task-breakdown-20260609T150924Z.md"
+    },
+    {
+      "stage": "implement",
+      "severity": "info",
+      "kind": "concern",
+      "item": "Screenshot-diff baselines are FIRST-RUN (20 PNGs) — they catch future regressions but final Home visual fidelity vs the v5b POC is YOUR visual judgment. Recommend opening the running app + the POC side by side at /code-review or /test.",
+      "raised_at": "2026-06-10T16:00:00Z",
+      "resolved_at": null,
+      "references": "products/head-application/aphelion/static/tests/e2e/fidelity.spec.ts-snapshots/"
+    },
+    {
+      "stage": "implement",
+      "severity": "warn",
+      "kind": "decision",
+      "item": "sitecore-content-model.md flags 3 net-new operator decisions for Act-2 (PRD-001): (1) HeroMeta array → flatten to 6 fields? (2) ContactDetails is inline in the route → needs its own rendering + datasource template; (3) Marquee items sourcing TBD. Resolve at PRD-001 kickoff, not now.",
+      "raised_at": "2026-06-10T16:00:00Z",
+      "resolved_at": null,
+      "references": "project-planning/sitecore-content-model.md"
     }
   ],
   "archive": {},

@@ -54,7 +54,7 @@ T-fidelity (screenshot-diff gate + a11y/contrast + component/theme tests + zero-
   T033  T034  T035  T036  T037  T038(GATE)
 
 T-spec (derive sitecore-content-model.md mechanically from props)
-  T039  T040
+  T039✓ T040✓
 ```
 
 ### Completion criteria
@@ -702,6 +702,23 @@ Rules: groups execute in order; a group starts only when ALL its dependencies ar
   - Reduced-motion: all verified (opacity, count-up final, marquee frozen)
 
 **App fix applied during E4:** MobileNav `inert={!isOpen || undefined}` added to remove focusable elements from tab order when drawer is closed — fixes axe `aria-hidden-focus` WCAG 4.1.2 violation found and fixed by T037.
+
+### E5 coverage status (after T039–T040 derivation — 2026-06-10)
+
+| Task | Status | Verification |
+|------|--------|--------------|
+| T039 Derive `sitecore-content-model.md` from props | DONE | `project-planning/sitecore-content-model.md` written; per-rendering table + folder-of-children mappings + per-page compositions + verbatim content items present |
+| T040 Author as dependency-ordered operator checklist | DONE | 12-step `□ 1…□ 12` checklist; site collection → site → templates → renderings → available renderings → pages → datasource content items → variants → publish |
+
+**TC-50:** Every leaf component has exactly one flat prop object mapped to fields — confirmed (9 leaf datasource templates covering all non-container, non-nav components).
+**TC-51:** Every container maps to folder-of-children (6 containers: ValueProps, DestinationsGrid, ExperienceShowcase, StatsBand, Testimonials, ContactDetails) — confirmed; no multilist used.
+**TC-52:** Nav (SiteHeader, SiteFooter, MobileNav) documented as excluded in derivation log and nav exclusion note — confirmed.
+**TC-53:** All 5 page compositions present with `cosmos`/`aphelion` path prefixes — confirmed (§ 9-B through 9-F).
+**TC-54:** Spec is dependency-ordered top-to-bottom (Steps 1–12) — confirmed.
+
+**Net-new flags recorded:** HeroMeta array (recommend flatten to 3×2 fields); ContactDetails rendering (not a named static component); Marquee items sourcing strategy (TBD for PRD-001).
+
+**PRD-000 completion status: ALL TASKS DONE.** T038 GATE passed; T039–T040 DONE. `sitecore-content-model.md` complete. PRD-000 is shippable (M5 milestone reached).
 
 ## 9. TDD and quality contract
 
