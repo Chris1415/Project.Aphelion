@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/ui/theme-provider';
 import { SiteHeader } from '@/components/chrome/SiteHeader';
 import { MobileNav } from '@/components/chrome/MobileNav';
 import { SiteFooter } from '@/components/chrome/SiteFooter';
+import { RevealController } from '@/ui/reveal-controller';
 
 /**
  * Root layout — App Router
@@ -64,6 +65,10 @@ export default function RootLayout({
         </svg>
 
         <ThemeProvider>
+          {/* Global scroll-reveal controller — queries [data-reveal] on mount,
+              adds .in via IntersectionObserver. Renders nothing. ADR-0007. */}
+          <RevealController />
+
           {/* Skip-to-main link for keyboard users */}
           <a href="#main" className="skip-link">
             Skip to main content

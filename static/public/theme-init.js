@@ -13,8 +13,12 @@
     var applied = choice === 'system' ? (systemDark ? 'dark' : 'light') : choice;
     document.documentElement.setAttribute('data-theme', applied);
     document.documentElement.setAttribute('data-theme-choice', choice);
+    // Mark JS as available so [data-reveal] hide rule activates (html.js guard).
+    // Without this class the hide rule is inert — content stays visible for no-JS visitors.
+    document.documentElement.classList.add('js');
   } catch (e) { void e; // silences unused-var in older tooling
     document.documentElement.setAttribute('data-theme', 'dark');
     document.documentElement.setAttribute('data-theme-choice', 'system');
+    document.documentElement.classList.add('js');
   }
 })();

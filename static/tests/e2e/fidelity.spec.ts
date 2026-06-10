@@ -47,6 +47,30 @@ async function goWithTheme(page: Page, route: string, theme: 'light' | 'dark') {
 
   // Wait for network to settle (aborted requests settle immediately)
   await page.waitForLoadState('networkidle');
+
+  // Settle the page deterministically BEFORE a fullPage capture: scroll the whole
+  // page to trigger every lazy <img> (→ abort → onError → mesh fallback) and the
+  // reveal controller, then return to top. Without this, lazy-image height and
+  // reveal state settle differently between the baseline capture and the test
+  // capture, producing non-deterministic page heights (e.g. 2109px vs 5507px).
+  await page.evaluate(
+    () =>
+      new Promise<void>((resolve) => {
+        let y = 0;
+        const step = () => {
+          window.scrollTo(0, y);
+          y += 400;
+          if (y < document.body.scrollHeight) requestAnimationFrame(step);
+          else {
+            window.scrollTo(0, 0);
+            resolve();
+          }
+        };
+        step();
+      })
+  );
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(400);
 }
 
 // ── Screenshot captures: 5 routes × 2 themes (run per viewport project) ─────

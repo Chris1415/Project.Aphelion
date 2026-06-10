@@ -1,9 +1,14 @@
 'use client';
 
 /**
- * useReveal — scroll-triggered reveal via IntersectionObserver.
- * Reduced-motion or no IO support: immediately visible.
- * Normal: reveals on intersection.
+ * useReveal — per-element scroll-reveal hook.
+ * Returns { ref, isVisible } based on IntersectionObserver.
+ *
+ * NOTE: Global page reveal is now handled by RevealController (src/ui/reveal-controller.tsx)
+ * which manages ALL [data-reveal] elements via a single IO instance. Components should use
+ * data-reveal attributes and let the global controller manage visibility rather than wiring
+ * this hook to toggle .in themselves. This hook is kept as a standalone utility for cases
+ * where code needs programmatic isVisible knowledge (e.g. countUp trigger).
  *
  * Browser globals accessed ONLY via useSyncExternalStore snapshots or inside
  * useEffect callbacks (NFR-2 — no window access in render body).
