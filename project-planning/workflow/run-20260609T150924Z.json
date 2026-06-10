@@ -342,6 +342,32 @@
       "escalations": [],
       "error": null,
       "notes": "POC sweep partial: pocs/poc-v2-prd000 (a losing variant) stayed put due to a Windows file lock (Permission denied); winner poc-v5b moved. Durable kept in canonical folders: prd-000.md, ADRs, ship-report, STATUS.md, sitecore-content-model.md, manifests."
+    },
+    {
+      "stage": "post_ship_fix",
+      "agent": "08-developer",
+      "entered_at": "2026-06-10T17:40:00Z",
+      "exited_at": "2026-06-10T18:30:00Z",
+      "outcome": "completed",
+      "one_line": "Operator-found CRITICAL post-ship bug: reveal-on-scroll never fired → all content below hero invisible. Root cause CSS specificity inversion; fixed + regression test added; 99 Playwright + 100 Vitest green",
+      "deliverables": [
+        "products/head-application/aphelion/static/src/ui/reveal-controller.tsx",
+        "products/head-application/aphelion/static/src/app/globals.css",
+        "products/head-application/aphelion/static/public/theme-init.js",
+        "products/head-application/aphelion/static/src/app/layout.tsx",
+        "products/head-application/aphelion/static/tests/e2e/reveal.spec.ts",
+        "products/head-application/aphelion/static/tests/e2e/fidelity.spec.ts"
+      ],
+      "escalations": [
+        {
+          "severity": "warn",
+          "kind": "concern",
+          "item": "Framework gap: fidelity screenshot gate runs prefers-reduced-motion (force-shows content via opacity:1!important), so it was BLIND to a motion-on reveal-never-fires bug. The gate gave false-green. New reveal.spec.ts (motion-ON) is the guard. Fold back into QA/test contract for any reveal-on-scroll design.",
+          "resolved_at": null
+        }
+      ],
+      "error": null,
+      "notes": "Also exposed: the prior fix sub-agent reported 'all green' while Playwright silently reused a STALE :3000 dev server (reuseExistingServer). Verify against a fresh prod build, never a leftover dev server. commit 78bb7e1."
     }
   ],
   "implementation": {
