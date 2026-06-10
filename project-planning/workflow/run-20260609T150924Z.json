@@ -58,6 +58,7 @@
     "content_examples": null,
     "ship_report": null,
     "friction_log": null,
+    "code_review": "products/head-application/aphelion/project-planning/plans/code-review-20260609T150924Z.md",
     "status_index": "products/head-application/aphelion/project-planning/STATUS.md"
   },
   "friction_log": {
@@ -251,6 +252,31 @@
       ],
       "error": null,
       "notes": "Pre-completion gate green: lint + next build (5 routes) + tsc + 100 Vitest + 85 Playwright; git-status clean. Screenshot baselines are first-run (regression value); final Home visual fidelity vs POC is operator visual judgment."
+    },
+    {
+      "stage": "code_reviewed",
+      "agent": "08-developer",
+      "entered_at": "2026-06-10T16:05:00Z",
+      "exited_at": "2026-06-10T16:30:00Z",
+      "outcome": "completed",
+      "one_line": "PASS WITH ISSUES: 0 critical, 1 major fixed (dead WCAG-violating duplicate menu button in SiteHeader), 3 minor fixed; 1 minor (m-4 ContactForm aria) left for operator",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/plans/code-review-20260609T150924Z.md",
+        "products/head-application/aphelion/static/src/components/chrome/SiteHeader/index.tsx",
+        "products/head-application/aphelion/static/src/lib/motion/useMagnetic.ts",
+        "products/head-application/aphelion/static/src/ui/theme-provider.tsx",
+        "products/head-application/aphelion/static/src/content/about.ts"
+      ],
+      "escalations": [
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "Minor m-4 left for operator: ContactForm empty aria-describedby placeholders have contradictory role=alert + aria-hidden=true; safe fix = drop empty branches (axe passes either way)",
+          "resolved_at": null
+        }
+      ],
+      "error": null,
+      "notes": "Sitecore SDK-contract / component-map / editing-safe checks N/A (zero-SDK static app). Post-fix: lint+tsc+build+100 Vitest green."
     }
   ],
   "implementation": {

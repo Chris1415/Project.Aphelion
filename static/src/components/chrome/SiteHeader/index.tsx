@@ -1,18 +1,21 @@
 /**
- * SiteHeader — sticky, blur, brand mark + desktop nav + ThemeToggle + menu button
+ * SiteHeader — sticky, blur, brand mark + desktop nav + ThemeToggle
  * ADR-0005: chrome / nav exception — NOT a content-model rendering.
  * Nav links from src/content/navigation.ts, pointing to REAL routes.
+ *
+ * NOTE: The mobile menu trigger button is NOT rendered here.
+ * MobileNav (rendered alongside SiteHeader in layout.tsx) owns its own
+ * trigger button with the correct interactive aria-expanded state.
+ * A duplicate static button here would produce two non-functional ☰
+ * buttons at mobile widths (both have .menu-toggle CSS class), breaking
+ * both UX and WCAG 4.1.2 (Name/Role/Value — aria-expanded never updates).
  */
 
 import Link from 'next/link';
 import { ThemeToggle } from '@/ui/theme-toggle';
 import { headerNav } from '@/content/navigation';
 
-interface SiteHeaderProps {
-  onMenuOpen?: () => void;
-}
-
-export function SiteHeader({ onMenuOpen }: SiteHeaderProps) {
+export function SiteHeader() {
   return (
     <header className="site-header" role="banner">
       <div className="wrap">
@@ -32,20 +35,9 @@ export function SiteHeader({ onMenuOpen }: SiteHeaderProps) {
             ))}
           </nav>
 
-          {/* Actions */}
+          {/* Actions — ThemeToggle only; mobile menu trigger is in MobileNav */}
           <div className="header-actions">
             <ThemeToggle />
-            {/* Menu button — rendered client-side in MobileNav; here we emit it for SSR hydration */}
-            <button
-              type="button"
-              className="menu-toggle"
-              aria-label="Open navigation menu"
-              aria-expanded="false"
-              data-menu-open
-              onClick={onMenuOpen}
-            >
-              ☰
-            </button>
           </div>
         </div>
       </div>

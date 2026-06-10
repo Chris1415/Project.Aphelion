@@ -19,9 +19,9 @@ export function useMagnetic<T extends HTMLElement = HTMLElement>(
   useEffect(() => {
     // Browser globals only inside useEffect (NFR-2)
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isFinePinter = window.matchMedia('(pointer: fine)').matches;
+    const isFinePointer = window.matchMedia('(pointer: fine)').matches;
 
-    if (reducedMotion || !isFinePinter) {
+    if (reducedMotion || !isFinePointer) {
       // No-op: leave --mx/--my at their default (0)
       return;
     }

@@ -130,11 +130,17 @@ function subscribe(callback: () => void): () => void {
   // Register the React re-render callback
   _listeners.add(callback);
 
-  // Sync current choice from storage on first subscribe (client only)
-  if (typeof window !== 'undefined') {
-    _storeChoice = _readChoice();
-    _applyTheme(_storeChoice);
+  // All browser-global access (localStorage, addEventListener, matchMedia) is
+  // guarded by typeof window — useSyncExternalStore only calls subscribe
+  // client-side, but the guard keeps this safe in any environment (unit tests, etc.).
+  if (typeof window === 'undefined') {
+    // SSR / test environment with no window: nothing to subscribe to.
+    return () => { _listeners.delete(callback); };
   }
+
+  // Sync current choice from storage on first subscribe (client only)
+  _storeChoice = _readChoice();
+  _applyTheme(_storeChoice);
 
   // Subscribe to cross-tab storage events
   const onStorage = (e: StorageEvent) => {

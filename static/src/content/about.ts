@@ -6,7 +6,7 @@
 
 import type { PageHeroProps } from '@/components/PageHero';
 import type { RichTextSectionProps } from '@/components/RichTextSection';
-import { valuePropsContent, testimonialsContent, statsBandContent } from '@/content/home';
+import { valuePropsContent, testimonialsContent } from '@/content/home';
 
 export type { ValuePropsProps } from '@/content/home';
 export type { TestimonialsProps } from '@/content/home';
@@ -35,6 +35,3 @@ export { valuePropsContent };
 
 /** Testimonials — reused verbatim from home */
 export { testimonialsContent };
-
-/** Stats — reused verbatim from home */
-export { statsBandContent };
