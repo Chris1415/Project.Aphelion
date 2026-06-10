@@ -6,10 +6,10 @@
   "product_slug": "aphelion",
   "product_root": "products/head-application/aphelion",
   "work_item_type": "prd",
-  "status": "architecture_ready",
+  "status": "qa_ready",
   "prd_input_mode": "prompt_only",
   "platform_target": "content-sdk",
-  "task_breakdown_style": "standard",
+  "task_breakdown_style": "tdd",
   "scope_dial": {
     "rigor": "standard",
     "track": "full",
@@ -51,7 +51,7 @@
     "prd_minimal": "products/head-application/aphelion/project-planning/PRD/prd-minimal-000.md",
     "architecture": "products/head-application/aphelion/project-planning/architecture/architecture-20260609T150924Z.md",
     "baseline": null,
-    "task_breakdown": null,
+    "task_breakdown": "products/head-application/aphelion/project-planning/plans/task-breakdown-20260609T150924Z.md",
     "task_breakdown_pre_qa": null,
     "qa_report": null,
     "content_model": null,
@@ -186,6 +186,41 @@
       ],
       "error": null,
       "notes": "Operator requested 3 extra directions (v3/v4/v5) beyond cap, then 3 variations of chosen v5 (v5a/b/c). v3-v5 + v5a-c POCs are Home-only pitches; v5b fleshed to all 5 routes at /implement."
+    },
+    {
+      "stage": "plan_ready",
+      "agent": "06-lead-developer",
+      "entered_at": "2026-06-10T00:05:00Z",
+      "exited_at": "2026-06-10T00:20:00Z",
+      "outcome": "completed",
+      "one_line": "40-task breakdown (E1-E5: foundation/home/inner/fidelity/spec); theme-hydration probe gated first (T013); all 7 §4c filled (4c-6 N/A no-SDK); scaffold=create-next-app not create-content-sdk-app",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/plans/task-breakdown-20260609T150924Z.md"
+      ],
+      "escalations": [
+        {
+          "severity": "info",
+          "kind": "assumption",
+          "item": "POC is Home-only — inner routes (T030-T032) fidelity-verified against their own committed baselines, not POC frames (§4c-7)",
+          "resolved_at": null
+        }
+      ],
+      "error": null,
+      "notes": "task_breakdown_review=skip_gate → auto-continued to QA without operator stop."
+    },
+    {
+      "stage": "qa_ready",
+      "agent": "07-qa-specialist",
+      "entered_at": "2026-06-10T00:20:00Z",
+      "exited_at": "2026-06-10T00:32:00Z",
+      "outcome": "completed",
+      "one_line": "TDD enrichment in place (587→1027 lines): §9 contract + §10 per-task tests + 54 test cases (TC-01..54) + 3 RED→GREEN splits (T006/T023/T028) + runtime AA-contrast asserts; style=tdd",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/plans/task-breakdown-20260609T150924Z.md"
+      ],
+      "escalations": [],
+      "error": null,
+      "notes": "No standalone qa-report (enriched breakdown IS the test contract). No real-tenant smoke (no tenant in PRD-000); fidelity gate + axe a11y are the bar. SDK fixture rule N/A (no SDK calls) — deferred to PRD-001."
     }
   ],
   "implementation": {
@@ -242,6 +277,24 @@
       "raised_at": "2026-06-10T00:00:00Z",
       "resolved_at": null,
       "references": "project-planning/ui-design/ui-design-20260609T150924Z-v5b.md#7-open-questions-handoff-image-sources"
+    },
+    {
+      "stage": "task-breakdown",
+      "severity": "info",
+      "kind": "assumption",
+      "item": "§4c-6 marked N/A (no backend/live SDK in PRD-000) — intentional; SDK-contract + real-tenant smoke deferred to PRD-001. Validate this is acceptable.",
+      "raised_at": "2026-06-10T00:32:00Z",
+      "resolved_at": null,
+      "references": "project-planning/plans/task-breakdown-20260609T150924Z.md"
+    },
+    {
+      "stage": "task-breakdown",
+      "severity": "info",
+      "kind": "assumption",
+      "item": "POC is Home-only — inner routes (Destinations/Experiences/About/Contact, T030-T032) fidelity-verified against their own committed Playwright baselines, not a POC frame. Your fidelity review of inner routes is judgment, not POC-diff.",
+      "raised_at": "2026-06-10T00:32:00Z",
+      "resolved_at": null,
+      "references": "project-planning/plans/task-breakdown-20260609T150924Z.md"
     }
   ],
   "archive": {},
