@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-theme-choice="system">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aphelion — Flux · Commercial Spaceflight & Cosmos Living</title>
+  <meta name="description" content="Aphelion charters premium orbital and deep-cosmos voyages. Drift past the edge of the familiar." />
+
+  <!--
+    ===========================================================================
+    APHELION — Flux (v5b)  ·  POC clickdummy
+    A VARIATION of operator-chosen v5 "Nebula Drift": same neon-mesh + kinetic-
+    gradient DNA, pushed into ABSTRACT MODERN-RENDER territory with heavier motion
+    (gooey morphing blobs, magnetic hover, scroll count-up, infinite marquee,
+    flowing gradient borders). Imagery is ABSTRACT 3D-render / fluid / iridescent
+    — NOT literal space photos.
+
+    ---------------------------------------------------------------------------
+    IMAGERY — all hotlinked, royalty-free (Unsplash License — free for commercial
+    use, no attribution required; PRD-000 §9 "royalty-free/placeholder only" met).
+    Every <img> has a CSS mesh/gradient fallback (.sky / .art-mesh behind it) and
+    onerror handling in theme.js, so the POC degrades gracefully offline.
+    Verified HTTP 200 + image/jpeg on 2026-06-10.
+
+      Hero focal art   photo-1743010314082-43bb0749436e  iridescent 3D gooey-blob render (cyan/magenta/violet)
+      Destination art  photo-1620121692029-d088224ddc74  blue/violet liquid fluid waves
+                       photo-1618005182384-a83a8bd57fbe  purple/cyan fluid waves
+                       photo-1620641788421-7a1c342ea42e  violet/magenta glow render
+                       photo-1635776062127-d379bfcba9f8  violet grain gradient
+                       photo-1614851099175-e5b30eb6f696  teal/blush diagonal planes
+                       photo-1462331940025-496dfbfc7564  deep nebular gradient
+      Experience art   photo-1639762681485-074b7f938ba0  cyan-edged voxel 3D render
+                       photo-1502691876148-a84978e59af8  abstract atmospheric render
+      Promo/News art   CSS mesh only (.art-mesh)
+    Source: https://unsplash.com  (search: abstract gradient / iridescent / 3d render / fluid)
+    ===========================================================================
+  -->
+
+  <!-- FOUC preflight: resolve theme BEFORE first paint -->
+  <script src="theme.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Inline gooey SVG filter (drives the morphing blob field) -->
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <defs>
+      <filter id="gooey">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="18" result="blur" />
+        <feColorMatrix in="blur" mode="matrix"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9" result="goo" />
+        <feBlend in="SourceGraphic" in2="goo" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- ============================ HEADER ============================ -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#main" aria-label="Aphelion home">
+        <span class="mark" aria-hidden="true"></span>Aphelion
+      </a>
+      <nav class="nav-desktop" aria-label="Primary">
+        <a href="#destinations">Destinations</a>
+        <a href="#experiences">Experiences</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" data-theme-toggle aria-label="Theme: System. Activate to change.">
+          <span data-theme-icon aria-hidden="true">◑</span>
+          <span data-theme-text>System</span>
+        </button>
+        <button class="menu-toggle" data-menu-open aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">☰ Menu</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile drawer -->
+  <div class="nav-scrim" data-scrim></div>
+  <aside id="mobile-nav" class="mobile-nav" data-drawer aria-hidden="true" aria-label="Mobile">
+    <div class="mn-head">
+      <span class="brand"><span class="mark" aria-hidden="true"></span>Aphelion</span>
+      <button class="menu-toggle" data-menu-close aria-label="Close menu">✕</button>
+    </div>
+    <a href="#destinations">Destinations</a>
+    <a href="#experiences">Experiences</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </aside>
+
+  <main id="main">
+
+    <!-- ============================ HERO ============================ -->
+    <section class="hero" aria-labelledby="hero-h">
+      <!-- gooey morphing blob field (decorative) -->
+      <div class="flux-field" aria-hidden="true">
+        <span class="blob b1"></span><span class="blob b2"></span>
+        <span class="blob b3"></span><span class="blob b4"></span>
+      </div>
+      <svg class="stars" aria-hidden="true" preserveAspectRatio="xMidYMid slice" viewBox="0 0 100 100">
+        <g fill="#fff">
+          <circle cx="12" cy="18" r="0.3"/><circle cx="28" cy="42" r="0.22"/><circle cx="62" cy="14" r="0.3"/>
+          <circle cx="78" cy="36" r="0.25"/><circle cx="44" cy="66" r="0.3"/><circle cx="88" cy="72" r="0.2"/>
+          <circle cx="18" cy="84" r="0.28"/><circle cx="54" cy="28" r="0.2"/><circle cx="70" cy="58" r="0.26"/>
+        </g>
+      </svg>
+
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Commercial spaceflight · Est. 2419</span>
+          <h1 id="hero-h">Drift past the<br /><span class="kinetic">edge of the familiar.</span></h1>
+          <p class="lede">Aphelion charters luminous voyages to the far points of the system — where the light bends, the silence sings, and the view rewrites you.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" data-magnetic="0.35" href="#destinations">Explore destinations</a>
+            <a class="btn btn-ghost" data-magnetic="0.25" href="#experiences">View experiences</a>
+          </div>
+          <div class="hero-meta">
+            <div><div class="v">7</div><div class="l">flagship routes</div></div>
+            <div><div class="v">340k</div><div class="l">km apoapsis</div></div>
+            <div><div class="v">100%</div><div class="l">return record</div></div>
+          </div>
+        </div>
+
+        <!-- Abstract 3D-render focal art inside a morphing frame -->
+        <div class="hero-art">
+          <div class="art-mesh" aria-hidden="true"></div>
+          <img data-fallback loading="eager"
+            src="https://images.unsplash.com/photo-1743010314082-43bb0749436e?w=900&q=80&auto=format&fit=crop"
+            alt="Abstract iridescent rendered forms drifting in soft light, evoking distant cosmic bodies." />
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MARQUEE (destinations) ================= -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="marquee-item">Halcyon Belt</span><span class="marquee-item">Vela Drift</span>
+        <span class="marquee-item">The Lyrae Arc</span><span class="marquee-item">Caldera Prime</span>
+        <span class="marquee-item">Umbra Station</span><span class="marquee-item">Aphelion Point</span>
+        <!-- duplicate set for seamless loop -->
+        <span class="marquee-item">Halcyon Belt</span><span class="marquee-item">Vela Drift</span>
+        <span class="marquee-item">The Lyrae Arc</span><span class="marquee-item">Caldera Prime</span>
+        <span class="marquee-item">Umbra Station</span><span class="marquee-item">Aphelion Point</span>
+      </div>
+    </div>
+
+    <!-- ====================== VALUE PROPS =========================== -->
+    <section class="band atmos" aria-labelledby="vp-h">
+      <div class="mesh" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Why Aphelion</span>
+          <h2 id="vp-h">Engineered for wonder, <span class="kinetic">tuned for calm.</span></h2>
+        </div>
+        <div class="grid grid-3">
+          <article class="card flowborder" data-magnetic="0.18" data-reveal data-delay="1">
+            <div class="glyph" aria-hidden="true">◇</div>
+            <h3>Whisper-class craft</h3>
+            <p>Our Lumen-series vessels carry forty guests in near-silence, with full-spectrum cupolas on every deck.</p>
+          </article>
+          <article class="card flowborder" data-magnetic="0.18" data-reveal data-delay="2">
+            <div class="glyph" aria-hidden="true">✶</div>
+            <h3>Guided by navigators</h3>
+            <p>Every voyage is hosted by a flight navigator and an onboard astronomer who narrate the sky as it passes.</p>
+          </article>
+          <article class="card flowborder" data-magnetic="0.18" data-reveal data-delay="3">
+            <div class="glyph" aria-hidden="true">❋</div>
+            <h3>Carbon-settled travel</h3>
+            <p>Each charter is fully offset at launch through our deep-orbit reclamation programme. Wonder without the weight.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== DESTINATIONS ========================== -->
+    <section class="band atmos" id="destinations" aria-labelledby="dest-h">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Destinations</span>
+          <h2 id="dest-h">Six points worth the <span class="kinetic">distance.</span></h2>
+          <p>From the inner glow of the Halcyon Belt to the long dark of Aphelion Point — choose where your story bends.</p>
+        </div>
+        <div class="grid grid-3">
+          <!-- Destination 1 -->
+          <article class="card dest-card" data-reveal>
+            <div class="dest-media"><div class="sky" aria-hidden="true"></div>
+              <img data-fallback loading="lazy" src="https://images.unsplash.com/photo-1620121692029-d088224ddc74?w=600&q=80&auto=format&fit=crop" alt="Fluid blue and violet rendered waves." /></div>
+            <div class="dest-body">
+              <div class="dest-row"><h3>Halcyon Belt</h3><span class="dest-tag">2 days</span></div>
+              <p>A shimmering ring of ice and light. Closest of our routes — the perfect first drift.</p>
+              <a class="dest-link" href="#contact">Plan this voyage</a>
+            </div>
+          </article>
+          <!-- Destination 2 -->
+          <article class="card dest-card" data-reveal data-delay="1">
+            <div class="dest-media"><div class="sky" aria-hidden="true"></div>
+              <img data-fallback loading="lazy" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80&auto=format&fit=crop" alt="Purple and cyan fluid render." /></div>
+            <div class="dest-body">
+              <div class="dest-row"><h3>Vela Drift</h3><span class="dest-tag">4 days</span></div>
+              <p>Ride the slow current of the Vela stream, where dust catches starlight like falling silk.</p>
+              <a class="dest-link" href="#contact">Plan this voyage</a>
+            </div>
+          </article>
+          <!-- Destination 3 -->
+          <article class="card dest-card" data-reveal data-delay="2">
+            <div class="dest-media"><div class="sky" aria-hidden="true"></div>
+              <img data-fallback loading="lazy" src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=600&q=80&auto=format&fit=crop" alt="Violet and magenta glowing render." /></div>
+            <div class="dest-body">
+              <div class="dest-row"><h3>The Lyrae Arc</h3><span class="dest-tag">6 days</span></div>
+              <p>An auroral corridor that paints the cupola in moving colour for the length of the passage.</p>
+              <a class="dest-link" href="#contact">Plan this voyage</a>
+            </div>
+          </article>
+          <!-- Destination 4 -->
+          <article class="card dest-card" data-reveal>
+            <div class="dest-media"><div class="sky" aria-hidden="true"></div>
+              <img data-fallback loading="lazy" src="https://images.unsplash.com/photo-1635776062127-d379bfcba9f8?w=600&q=80&auto=format&fit=crop" alt="Violet grain gradient render." /></div>
+            <div class="dest-body">
+              <div class="dest-row"><h3>Caldera Prime</h3><span class="dest-tag">8 days</span></div>
+              <p>Orbit a world of molten amber seas. Our most dramatic vantage — and our quietest nights.</p>
+              <a class="dest-link" href="#contact">Plan this voyage</a>
+            </div>
+          </article>
+          <!-- Destination 5 -->
+          <article class="card dest-card" data-reveal data-delay="1">
+            <div class="dest-media"><div class="sky" aria-hidden="true"></div>
+              <img data-fallback loading="lazy" src="https://images.unsplash.com/photo-1614851099175-e5b30eb6f696?w=600&q=80&auto=format&fit=crop" alt="Teal and blush diagonal abstract planes." /></div>
+            <div class="dest-body">
+              <div class="dest-row"><h3>Umbra Station</h3><span class="dest-tag">10 days</span></div>
+              <p>Dock at the system's far outpost. Walk the observation ring above an endless field of dark.</p>
+              <a class="dest-link" href="#contact">Plan this voyage</a>
+            </div>
+          </article>
+          <!-- Destination 6 -->
+          <article class="card dest-card" data-reveal data-delay="2">
+            <div class="dest-media"><div class="sky" aria-hidden="true"></div>
+              <img data-fallback loading="lazy" src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600&q=80&auto=format&fit=crop" alt="Deep nebular gradient." /></div>
+            <div class="dest-body">
+              <div class="dest-row"><h3>Aphelion Point</h3><span class="dest-tag">14 days</span></div>
+              <p>The farthest light. Our namesake voyage to the system's edge, where the sun is just one more star.</p>
+              <a class="dest-link" href="#contact">Plan this voyage</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== EXPERIENCES =========================== -->
+    <section class="band atmos" id="experiences" aria-labelledby="exp-h">
+      <div class="mesh" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Experiences</span>
+          <h2 id="exp-h">Not just a view — <span class="kinetic">a way to be there.</span></h2>
+        </div>
+
+        <div class="exp-item" data-reveal>
+          <div class="exp-media"><div class="sky" aria-hidden="true"></div>
+            <img data-fallback loading="lazy" src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80&auto=format&fit=crop" alt="Cyan-edged voxel 3D render suggesting an observation lattice." /></div>
+          <div class="exp-copy">
+            <span class="dur">Every voyage</span>
+            <h3>The Silent Cupola</h3>
+            <p>Two hours, lights down, comms off. The whole deck given over to the sky and nothing else. Our most requested ritual.</p>
+            <a class="dest-link" href="#contact">Reserve a session</a>
+          </div>
+        </div>
+
+        <div class="exp-item" data-reveal>
+          <div class="exp-media"><div class="sky" aria-hidden="true"></div>
+            <img data-fallback loading="lazy" src="https://images.unsplash.com/photo-1502691876148-a84978e59af8?w=800&q=80&auto=format&fit=crop" alt="Soft atmospheric abstract render." /></div>
+          <div class="exp-copy">
+            <span class="dur">3+ day routes</span>
+            <h3>Astronomer's Table</h3>
+            <p>Dine beside the cupola while our resident astronomer maps what you're seeing — course, distance, and the stories behind each light.</p>
+            <a class="dest-link" href="#contact">Reserve a session</a>
+          </div>
+        </div>
+
+        <div class="exp-item" data-reveal>
+          <div class="exp-media"><div class="sky" aria-hidden="true"></div>
+            <img data-fallback loading="lazy" src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=800&q=80&auto=format&fit=crop" alt="Violet and magenta glowing abstract render." /></div>
+          <div class="exp-copy">
+            <span class="dur">Caldera &amp; Aphelion routes</span>
+            <h3>Tether Walk</h3>
+            <p>Suit up for a guided drift outside the hull — fully tethered, fully held, entirely unforgettable.</p>
+            <a class="dest-link" href="#contact">Reserve a session</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== STATS (count-up) ====================== -->
+    <section class="band stats-band atmos" aria-labelledby="stats-h">
+      <div class="mesh" aria-hidden="true"></div>
+      <h2 id="stats-h" class="sr-only">Aphelion by the numbers</h2>
+      <div class="wrap">
+        <div class="stats-grid">
+          <div class="stat" data-reveal>
+            <div class="v"><span class="kinetic" data-countup="7">0</span></div>
+            <div class="l">Flagship routes</div>
+          </div>
+          <div class="stat" data-reveal data-delay="1">
+            <div class="v"><span class="kinetic" data-countup="1240" data-suffix="+">0</span></div>
+            <div class="l">Guests carried</div>
+          </div>
+          <div class="stat" data-reveal data-delay="2">
+            <div class="v"><span class="kinetic" data-countup="100" data-suffix="%">0</span></div>
+            <div class="l">Safe-return record</div>
+          </div>
+          <div class="stat" data-reveal data-delay="3">
+            <div class="v"><span class="kinetic" data-countup="4.9" data-decimals="1">0</span></div>
+            <div class="l">Guest rating</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== PROMO BAND ============================ -->
+    <section class="band" aria-labelledby="promo-h">
+      <div class="wrap">
+        <div class="promo" data-reveal>
+          <div class="art-mesh" aria-hidden="true"></div>
+          <div class="promo-inner">
+            <span class="eyebrow">2419 season</span>
+            <h2 id="promo-h">Charters open for the <span class="kinetic">long dark.</span></h2>
+            <p>Aphelion Point and Caldera Prime release in limited windows. Join the manifest before the lights go out.</p>
+            <a class="btn btn-primary" data-magnetic="0.35" href="#contact">Request a manifest seat</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== TESTIMONIALS ========================== -->
+    <section class="band atmos" aria-labelledby="test-h">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Mission log</span>
+          <h2 id="test-h">What the drift <span class="kinetic">leaves behind.</span></h2>
+        </div>
+        <div class="grid grid-3">
+          <article class="card quote-card" data-reveal>
+            <blockquote>"The silence in the cupola undid something in me — in the best way. I came back lighter."</blockquote>
+            <div class="quote-author"><span class="quote-avatar" aria-hidden="true"></span>
+              <div><div class="name">Inara Voss</div><div class="role">Vela Drift, 2418</div></div></div>
+          </article>
+          <article class="card quote-card" data-reveal data-delay="1">
+            <blockquote>"I've travelled everywhere on Earth. Nothing prepared me for amber seas at three in the morning."</blockquote>
+            <div class="quote-author"><span class="quote-avatar" aria-hidden="true"></span>
+              <div><div class="name">Dr. Okonkwo Reyes</div><div class="role">Caldera Prime, 2417</div></div></div>
+          </article>
+          <article class="card quote-card" data-reveal data-delay="2">
+            <blockquote>"The astronomer named every light we passed. I'll never look up the same way again."</blockquote>
+            <div class="quote-author"><span class="quote-avatar" aria-hidden="true"></span>
+              <div><div class="name">Lena Maru</div><div class="role">The Lyrae Arc, 2418</div></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== NEWSLETTER ============================ -->
+    <section class="band" id="contact" aria-labelledby="nl-h">
+      <div class="wrap">
+        <div class="newsletter">
+          <div class="art-mesh" aria-hidden="true"></div>
+          <span class="eyebrow">Join the manifest</span>
+          <h2 id="nl-h" data-reveal>Be first to the <span class="kinetic">next window.</span></h2>
+          <p data-reveal data-delay="1">Charter releases, route previews, and the occasional dispatch from the dark. No noise.</p>
+          <form class="nl-form" data-newsletter novalidate data-reveal data-delay="2">
+            <div class="nl-field">
+              <label class="sr-only" for="nl-email">Email address</label>
+              <input class="input" id="nl-email" type="email" name="email" placeholder="you@orbit.example" autocomplete="email"
+                aria-describedby="nl-error" required />
+              <p class="field-error" id="nl-error" data-nl-error role="alert" hidden></p>
+            </div>
+            <button class="btn btn-primary" data-magnetic="0.3" type="submit">Join the manifest</button>
+          </form>
+          <p class="nl-success" data-nl-success role="status" tabindex="-1" hidden>You're on the manifest. Watch the dark.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================ FOOTER =========================== -->
+  <footer class="site-footer">
+    <div class="mesh" aria-hidden="true" style="opacity:.4"></div>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <span class="brand"><span class="mark" aria-hidden="true"></span>Aphelion</span>
+          <p>Premium commercial spaceflight & cosmos living. Drift past the edge of the familiar.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Voyages</h4>
+          <a href="#destinations">Destinations</a><a href="#experiences">Experiences</a>
+          <a href="#contact">Charters</a><a href="#contact">Seasons</a>
+        </div>
+        <div class="footer-col">
+          <h4>Aphelion</h4>
+          <a href="#about">About</a><a href="#about">Safety</a>
+          <a href="#about">Sustainability</a><a href="#contact">Press</a>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="#contact">Contact</a><a href="#contact">Newsletter</a>
+          <a href="#">Instagram</a><a href="#">Field journal</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2419 Aphelion Spaceflight. A fictional brand for design demonstration.</span>
+        <span>Privacy · Terms · Flight policy</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

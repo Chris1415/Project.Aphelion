@@ -2,11 +2,11 @@
   "schema_version": 8,
   "run_id": "20260609T150924Z",
   "created_at": "2026-06-09T15:09:24Z",
-  "updated_at": "2026-06-09T15:09:24Z",
+  "updated_at": "2026-06-09T17:30:00Z",
   "product_slug": "aphelion",
   "product_root": "products/head-application/aphelion",
   "work_item_type": "prd",
-  "status": "spec_ready",
+  "status": "architecture_ready",
   "prd_input_mode": "prompt_only",
   "platform_target": "content-sdk",
   "task_breakdown_style": "standard",
@@ -18,10 +18,22 @@
     "task_breakdown_review": "skip_gate"
   },
   "ui_design": {
-    "proposal_count": 2,
-    "divergence": "moderate",
-    "variant_paths": [],
-    "selected_variant_path": null
+    "proposal_count": 5,
+    "divergence": "radical",
+    "variant_paths": [
+      "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v1.md",
+      "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v2.md",
+      "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v3.md",
+      "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v4.md",
+      "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v5.md",
+      "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v5a.md",
+      "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v5b.md",
+      "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v5c.md"
+    ],
+    "selected_variant_path": "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v5b.md",
+    "selected_poc_path": "products/head-application/aphelion/pocs/poc-v5b-prd000/",
+    "chosen_direction_family": "v5 Nebula Drift (bioluminescent neon mesh-gradient)",
+    "note": "Operator requested extra high-polish directions beyond the scope-dial cap of 2. v1 Event Horizon, v2 Almanac, v3 Aurora, v4 Chromatica, v5 Nebula Drift. Operator chose v5 family, then requested 3 variations (v5a Lumen, v5b Flux, v5c Pulse) with real royalty-free imagery + richer effects/animation. v3-v5 + v5a-c POCs are Home-page pitches; winner fleshed to all 5 routes at /implement."
   },
   "source": {
     "kind": "raw_idea",
@@ -37,7 +49,7 @@
     "brain_dump": null,
     "prd": "products/head-application/aphelion/project-planning/PRD/prd-000.md",
     "prd_minimal": "products/head-application/aphelion/project-planning/PRD/prd-minimal-000.md",
-    "architecture": null,
+    "architecture": "products/head-application/aphelion/project-planning/architecture/architecture-20260609T150924Z.md",
     "baseline": null,
     "task_breakdown": null,
     "task_breakdown_pre_qa": null,
@@ -111,6 +123,69 @@
       ],
       "error": null,
       "notes": "Critical review standard level; operator answered YES to all six resolutions (build mode, fidelity threshold, array rule, missing rows, nav exception, Lighthouse soft-target)."
+    },
+    {
+      "stage": "architecture_ready",
+      "agent": "04-software-architect",
+      "entered_at": "2026-06-09T17:20:00Z",
+      "exited_at": "2026-06-09T17:30:00Z",
+      "outcome": "completed",
+      "one_line": "Feature-scoped architecture for Acts 1-2 (static app + content-model derivation); SDK-contract gate N/A (no live SDK), deferred to PRD-001; 2 new ADRs (0007 stack, 0008 test/fidelity)",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/architecture/architecture-20260609T150924Z.md",
+        "products/head-application/aphelion/project-planning/ADR/adr-0007-static-app-stack-scaffold-portable-layout.md",
+        "products/head-application/aphelion/project-planning/ADR/adr-0008-test-and-fidelity-gate-strategy.md"
+      ],
+      "escalations": [],
+      "error": null,
+      "notes": "2 new ADRs this run (< 5 density hard-stop). create-next-app static app (NOT create-content-sdk-app, that's PRD-001)."
+    },
+    {
+      "stage": "baseline_promoted",
+      "agent": "04-software-architect",
+      "entered_at": "2026-06-09T17:30:00Z",
+      "exited_at": "2026-06-09T17:30:00Z",
+      "outcome": "skipped",
+      "one_line": "Baseline-promotion gate met (8 total ADRs) but recommended skip: first PRD, no ADR has survived 2+ PRDs yet",
+      "deliverables": [],
+      "escalations": [],
+      "error": null,
+      "notes": "Re-evaluate promotion at PRD-001/002 once decisions have proven durable."
+    },
+    {
+      "stage": "ui_ready",
+      "agent": "05-ui-designer",
+      "entered_at": "2026-06-09T17:35:00Z",
+      "exited_at": "2026-06-10T00:00:00Z",
+      "outcome": "completed",
+      "one_line": "8 directions explored (v1-v5 + v5a/b/c variations, all radical, dark+light+system); operator chose v5b 'Flux' (Nebula Drift abstract-render edition)",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v1.md",
+        "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v2.md",
+        "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v3.md",
+        "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v4.md",
+        "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v5.md",
+        "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v5a.md",
+        "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v5b.md",
+        "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v5c.md",
+        "products/head-application/aphelion/pocs/poc-v5b-prd000/"
+      ],
+      "escalations": [
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "UI direction = v5b Flux (Nebula Drift abstract-render); winning POC poc-v5b-prd000 is visual source of truth",
+          "resolved_at": "2026-06-10T00:00:00Z"
+        },
+        {
+          "severity": "warn",
+          "kind": "concern",
+          "item": "v5b uses royalty-free Unsplash imagery (real images) + SVG #gooey filter; perf (NFR-1) + font self-host (Clash Display) to confirm at /implement",
+          "resolved_at": null
+        }
+      ],
+      "error": null,
+      "notes": "Operator requested 3 extra directions (v3/v4/v5) beyond cap, then 3 variations of chosen v5 (v5a/b/c). v3-v5 + v5a-c POCs are Home-only pitches; v5b fleshed to all 5 routes at /implement."
     }
   ],
   "implementation": {
@@ -147,8 +222,26 @@
       "kind": "question",
       "item": "Typography pairing + accent hue (OQ-1) and final destination/experience content set (OQ-2) deferred to /architect (UI Designer proposes 2 variants)",
       "raised_at": "2026-06-09T15:11:00Z",
-      "resolved_at": null,
+      "resolved_at": "2026-06-10T00:00:00Z",
       "references": "project-planning/PRD/prd-000.md#14-open-questions"
+    },
+    {
+      "stage": "architect",
+      "severity": "info",
+      "kind": "decision",
+      "item": "UI direction locked = v5b 'Flux' (Nebula Drift abstract-render edition); poc-v5b-prd000 is visual source of truth. Resolves OQ-1/OQ-2.",
+      "raised_at": "2026-06-10T00:00:00Z",
+      "resolved_at": "2026-06-10T00:00:00Z",
+      "references": "project-planning/ui-design/ui-design-20260609T150924Z-v5b.md"
+    },
+    {
+      "stage": "architect",
+      "severity": "warn",
+      "kind": "concern",
+      "item": "v5b carry-forward to /implement: self-host Clash Display (Fontshare) or ship Outfit-as-display; guard SVG #gooey filter perf (NFR-1) with reduced-motion freeze; flesh Home-only POC to all 5 routes; real Unsplash imagery is royalty-free (PRD-compliant) but needs network.",
+      "raised_at": "2026-06-10T00:00:00Z",
+      "resolved_at": null,
+      "references": "project-planning/ui-design/ui-design-20260609T150924Z-v5b.md#7-open-questions-handoff-image-sources"
     }
   ],
   "archive": {},

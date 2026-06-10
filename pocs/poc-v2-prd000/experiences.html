@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Experiences — Aphelion</title>
+  <meta name="description" content="Aphelion flight experiences — the Cupola Watch, certified freefall, and instrumented programmes designed for people who measure their memories.">
+  <script>
+    (function () {
+      try {
+        var p = localStorage.getItem("aphelion-theme") || "system";
+        var dark = p === "dark" || (p === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        if (dark) document.documentElement.classList.add("dark");
+      } catch (e) {}
+      document.documentElement.classList.add("js");
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="shell">
+      <input type="checkbox" id="nav-toggle" aria-hidden="true">
+      <div class="header-bar">
+        <a class="brand" href="index.html" aria-label="Aphelion home">
+          <svg class="mark" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10.5" stroke="currentColor"></circle><ellipse cx="12" cy="12" rx="10.5" ry="4" stroke="currentColor" opacity="0.5"></ellipse><circle cx="20" cy="9" r="2" fill="var(--accent-500)"></circle></svg>
+          Aphelion<span class="tld">001</span>
+        </a>
+        <nav class="primary-nav" aria-label="Primary">
+          <a class="nav-link" href="destinations.html">Destinations</a>
+          <a class="nav-link" href="experiences.html" aria-current="page">Experiences</a>
+          <a class="nav-link" href="about.html">About</a>
+          <a class="nav-link" href="contact.html">Contact</a>
+        </nav>
+        <div class="header-actions">
+          <div class="theme-toggle" role="group" aria-label="Color theme">
+            <button type="button" data-theme="light" aria-pressed="false" title="Light" aria-label="Light theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"></path></svg></button>
+            <button type="button" data-theme="dark" aria-pressed="false" title="Dark" aria-label="Dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg></button>
+            <button type="button" data-theme="system" aria-pressed="false" title="System" aria-label="System theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="1"></rect><path d="M8 21h8M12 17v4"></path></svg></button>
+          </div>
+          <label class="hamburger" for="nav-toggle" tabindex="0" role="button" aria-label="Toggle menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg></label>
+        </div>
+      </div>
+      <nav class="mobile-nav" aria-label="Mobile">
+        <a href="destinations.html"><span>Destinations</span><span class="n">01</span></a>
+        <a href="experiences.html" aria-current="page"><span>Experiences</span><span class="n">02</span></a>
+        <a href="about.html"><span>About</span><span class="n">03</span></a>
+        <a href="contact.html"><span>Contact</span><span class="n">04</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="shell">
+        <div class="crumb"><a class="link" href="index.html">Home</a><span class="sep" aria-hidden="true">/</span><span>Experiences</span></div>
+        <div class="grid12">
+          <div class="page-hero__title">
+            <span class="eyebrow" style="display:block;margin-bottom:var(--s-5)">02 — On board</span>
+            <h1 class="display">What you do<br>once you arrive.</h1>
+            <p class="lead" style="margin-top:var(--s-5);max-width:48ch">Four instrumented programmes, each briefed, certified, and logged. Choose by temperament — gentle to spirited — not by spectacle.</p>
+          </div>
+          <div class="page-hero__meta">
+            <div class="big tnum">04</div>
+            <div class="lbl">Certified programmes</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section--tight">
+      <div class="shell">
+        <div class="idx">
+          <span class="idx__no">↳</span><span class="idx__dash">—</span>
+          <span class="idx__title">The programme</span>
+          <span class="idx__meta">Duration · Capacity · Grade</span>
+        </div>
+
+        <div class="grid12 exp-row reveal">
+          <div class="exp-plate"><div class="plate" aria-hidden="true"></div></div>
+          <div class="exp-body">
+            <div class="exp-no">EXP — 01</div>
+            <h3 class="h3">The Cupola Watch</h3>
+            <p>Eight uninterrupted hours at the largest window ever flown, with a flight astronomer narrating the terminator as it crosses beneath you. The cabin lights are killed; the only illumination is the planet.</p>
+            <div class="exp-meta"><div><span class="k">Duration</span><span class="v tnum">8 hrs</span></div><div><span class="k">Capacity</span><span class="v tnum">4 guests</span></div><div><span class="k">Grade</span><span class="v">Gentle</span></div></div>
+            <a class="btn btn--ghost" href="contact.html">Request briefing <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+
+        <div class="grid12 exp-row reverse reveal">
+          <div class="exp-plate"><div class="plate" aria-hidden="true"></div></div>
+          <div class="exp-body">
+            <div class="exp-no">EXP — 02</div>
+            <h3 class="h3">Freefall, certified</h3>
+            <p>A supervised microgravity programme across three parabola sets, instrumented and recorded. You leave with a signed flight log and the only kind of weightlessness that comes with a checklist.</p>
+            <div class="exp-meta"><div><span class="k">Duration</span><span class="v tnum">2 hrs</span></div><div><span class="k">Capacity</span><span class="v tnum">8 guests</span></div><div><span class="k">Grade</span><span class="v">Spirited</span></div></div>
+            <a class="btn btn--ghost" href="contact.html">Request briefing <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+
+        <div class="grid12 exp-row reveal">
+          <div class="exp-plate"><div class="plate" aria-hidden="true"></div></div>
+          <div class="exp-body">
+            <div class="exp-no">EXP — 03</div>
+            <h3 class="h3">Telemetry Table</h3>
+            <p>A private dinner at the flight director's console, served between burns, where each course is timed to an orbital event. The crème is plated at apoapsis; you will understand why.</p>
+            <div class="exp-meta"><div><span class="k">Duration</span><span class="v tnum">3 hrs</span></div><div><span class="k">Capacity</span><span class="v tnum">6 guests</span></div><div><span class="k">Grade</span><span class="v">Gentle</span></div></div>
+            <a class="btn btn--ghost" href="contact.html">Request briefing <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+
+        <div class="grid12 exp-row reverse reveal">
+          <div class="exp-plate"><div class="plate" aria-hidden="true"></div></div>
+          <div class="exp-body">
+            <div class="exp-no">EXP — 04</div>
+            <h3 class="h3">Hands on the Loop</h3>
+            <p>Under a mission specialist's supervision, take the manual attitude control for a single, real, logged manoeuvre. Modest in scope, immense in the telling. Pre-flight certification required.</p>
+            <div class="exp-meta"><div><span class="k">Duration</span><span class="v tnum">90 min</span></div><div><span class="k">Capacity</span><span class="v tnum">2 guests</span></div><div><span class="k">Grade</span><span class="v">Demanding</span></div></div>
+            <a class="btn btn--ghost" href="contact.html">Request briefing <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROMO -->
+    <section class="section promo">
+      <div class="shell">
+        <hr class="rule rule--strong" style="margin-bottom:var(--s-8)">
+        <div class="grid12">
+          <div class="promo__plate">
+            <span class="tick tl" aria-hidden="true"><svg viewBox="0 0 14 14"><path d="M7 0v14M0 7h14" stroke="currentColor" stroke-width="1"/></svg></span>
+            <span class="tick br" aria-hidden="true"><svg viewBox="0 0 14 14"><path d="M7 0v14M0 7h14" stroke="currentColor" stroke-width="1"/></svg></span>
+            <div class="plate" aria-hidden="true"></div>
+          </div>
+          <div class="promo__body">
+            <span class="eyebrow">Pre-flight</span>
+            <h2 class="h2">Every programme begins on the ground.</h2>
+            <p>Each experience includes a two-day briefing and medical at our coastal flight campus — unhurried, thorough, and yours to keep as a baseline. We never fly a stranger.</p>
+            <a class="btn" href="contact.html">Plan your programme <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="grid12 footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html"><svg class="mark" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10.5" stroke="currentColor"></circle><ellipse cx="12" cy="12" rx="10.5" ry="4" stroke="currentColor" opacity="0.5"></ellipse><circle cx="20" cy="9" r="2" fill="var(--accent-500)"></circle></svg>Aphelion<span class="tld">001</span></a>
+          <p class="blurb">Human spaceflight, engineered with the patience of an instrument. Aphelion is a fictional brand built as a design reference.</p>
+        </div>
+        <div class="footer-col"><h5>Flight</h5><ul><li><a href="destinations.html">Destinations</a></li><li><a href="experiences.html">Experiences</a></li><li><a href="index.html#stats">Fleet</a></li></ul></div>
+        <div class="footer-col"><h5>Program</h5><ul><li><a href="about.html">About</a></li><li><a href="about.html#principles">Principles</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div class="footer-col"><h5>Signal</h5><ul><li><a href="contact.html">Apsis Circle</a></li><li><a href="index.html#news">Dispatch</a></li><li><a href="contact.html">Press</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span class="meta">© <span data-year>2026</span> Aphelion Flight Program · Fictional brand</span>
+        <span class="meta tnum">Lat 28.5729° N · Lon 80.6490° W · Pad 39B</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="theme.js"></script>
+</body>
+</html>
