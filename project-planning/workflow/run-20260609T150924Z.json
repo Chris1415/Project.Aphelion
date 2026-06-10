@@ -6,7 +6,7 @@
   "product_slug": "aphelion",
   "product_root": "products/head-application/aphelion",
   "work_item_type": "prd",
-  "status": "tested",
+  "status": "shipped",
   "prd_input_mode": "prompt_only",
   "platform_target": "content-sdk",
   "task_breakdown_style": "tdd",
@@ -21,17 +21,17 @@
     "proposal_count": 5,
     "divergence": "radical",
     "variant_paths": [
-      "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v1.md",
-      "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v2.md",
-      "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v3.md",
-      "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v4.md",
-      "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v5.md",
-      "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v5a.md",
-      "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v5b.md",
-      "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v5c.md"
+      "products/head-application/aphelion/project-planning/archive/ui-design/ui-design-20260609T150924Z-v1.md",
+      "products/head-application/aphelion/project-planning/archive/ui-design/ui-design-20260609T150924Z-v2.md",
+      "products/head-application/aphelion/project-planning/archive/ui-design/ui-design-20260609T150924Z-v3.md",
+      "products/head-application/aphelion/project-planning/archive/ui-design/ui-design-20260609T150924Z-v4.md",
+      "products/head-application/aphelion/project-planning/archive/ui-design/ui-design-20260609T150924Z-v5.md",
+      "products/head-application/aphelion/project-planning/archive/ui-design/ui-design-20260609T150924Z-v5a.md",
+      "products/head-application/aphelion/project-planning/archive/ui-design/ui-design-20260609T150924Z-v5b.md",
+      "products/head-application/aphelion/project-planning/archive/ui-design/ui-design-20260609T150924Z-v5c.md"
     ],
-    "selected_variant_path": "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v5b.md",
-    "selected_poc_path": "products/head-application/aphelion/pocs/poc-v5b-prd000/",
+    "selected_variant_path": "products/head-application/aphelion/project-planning/archive/ui-design/ui-design-20260609T150924Z-v5b.md",
+    "selected_poc_path": "products/head-application/aphelion/project-planning/archive/pocs/poc-v5b-prd000/",
     "chosen_direction_family": "v5 Nebula Drift (bioluminescent neon mesh-gradient)",
     "note": "Operator requested extra high-polish directions beyond the scope-dial cap of 2. v1 Event Horizon, v2 Almanac, v3 Aurora, v4 Chromatica, v5 Nebula Drift. Operator chose v5 family, then requested 3 variations (v5a Lumen, v5b Flux, v5c Pulse) with real royalty-free imagery + richer effects/animation. v3-v5 + v5a-c POCs are Home-page pitches; winner fleshed to all 5 routes at /implement."
   },
@@ -48,18 +48,18 @@
   "canonical_artifacts": {
     "brain_dump": null,
     "prd": "products/head-application/aphelion/project-planning/PRD/prd-000.md",
-    "prd_minimal": "products/head-application/aphelion/project-planning/PRD/prd-minimal-000.md",
-    "architecture": "products/head-application/aphelion/project-planning/architecture/architecture-20260609T150924Z.md",
+    "prd_minimal": "products/head-application/aphelion/project-planning/archive/PRD/prd-minimal-000.md",
+    "architecture": "products/head-application/aphelion/project-planning/archive/architecture/architecture-20260609T150924Z.md",
     "baseline": null,
-    "task_breakdown": "products/head-application/aphelion/project-planning/plans/task-breakdown-20260609T150924Z.md",
+    "task_breakdown": "products/head-application/aphelion/project-planning/archive/plans/task-breakdown-20260609T150924Z.md",
     "task_breakdown_pre_qa": null,
     "qa_report": null,
     "content_model": "products/head-application/aphelion/project-planning/sitecore-content-model.md",
     "content_examples": null,
-    "ship_report": null,
+    "ship_report": "products/head-application/aphelion/project-planning/plans/ship-report-20260609T150924Z.md",
     "friction_log": null,
-    "code_review": "products/head-application/aphelion/project-planning/plans/code-review-20260609T150924Z.md",
-    "test_report": "products/head-application/aphelion/project-planning/plans/test-report-20260609T150924Z.md",
+    "code_review": "products/head-application/aphelion/project-planning/archive/plans/code-review-20260609T150924Z.md",
+    "test_report": "products/head-application/aphelion/project-planning/archive/plans/test-report-20260609T150924Z.md",
     "status_index": "products/head-application/aphelion/project-planning/STATUS.md"
   },
   "friction_log": {
@@ -293,6 +293,55 @@
       "escalations": [],
       "error": null,
       "notes": "No real-tenant smoke required (PRD-000 = zero-SDK static app); fidelity screenshot-diff + axe a11y are the bar, both green. Content SDK editor/preview verification N/A. smoke_outcomes left empty → status = tested (NOT tested_pending_smoke)."
+    },
+    {
+      "stage": "shipped",
+      "agent": "02-product-manager",
+      "entered_at": "2026-06-10T17:05:00Z",
+      "exited_at": "2026-06-10T17:15:00Z",
+      "outcome": "completed",
+      "one_line": "PRD-000 (Acts 1-2) SHIPPED: all 5 user stories + §12 gates delivered; no smoke required; v5b Flux static app + content-model spec; PR opened",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/plans/ship-report-20260609T150924Z.md"
+      ],
+      "escalations": [],
+      "error": null,
+      "notes": "Clean ship (no caveats): smoke_outcomes empty = no smoke required; all requirements delivered. Act 3 = future PRD-001."
+    },
+    {
+      "stage": "documented",
+      "agent": "02-product-manager",
+      "entered_at": "2026-06-10T17:15:00Z",
+      "exited_at": "2026-06-10T17:16:00Z",
+      "outcome": "completed",
+      "one_line": "Auto-lite docs emission from /ship: README.md + CHANGELOG.md",
+      "deliverables": [
+        "products/head-application/aphelion/README.md",
+        "products/head-application/aphelion/CHANGELOG.md"
+      ],
+      "escalations": [],
+      "error": null,
+      "notes": "auto-lite emission from /ship (Doc Writer 09 not invoked; scope_dial.docs_at_ship=auto-lite)."
+    },
+    {
+      "stage": "archived",
+      "agent": "02-product-manager",
+      "entered_at": "2026-06-10T17:16:00Z",
+      "exited_at": "2026-06-10T17:18:00Z",
+      "outcome": "partial",
+      "one_line": "Post-ship sweep: moved scaffolding (minimal, architecture, task-breakdown, code-review, test-report, 8 ui-design specs, 7/8 POCs incl. winner v5b) to archive/; durable record kept",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/archive/PRD/prd-minimal-000.md",
+        "products/head-application/aphelion/project-planning/archive/architecture/architecture-20260609T150924Z.md",
+        "products/head-application/aphelion/project-planning/archive/plans/task-breakdown-20260609T150924Z.md",
+        "products/head-application/aphelion/project-planning/archive/plans/code-review-20260609T150924Z.md",
+        "products/head-application/aphelion/project-planning/archive/plans/test-report-20260609T150924Z.md",
+        "products/head-application/aphelion/project-planning/archive/ui-design/",
+        "products/head-application/aphelion/project-planning/archive/pocs/"
+      ],
+      "escalations": [],
+      "error": null,
+      "notes": "POC sweep partial: pocs/poc-v2-prd000 (a losing variant) stayed put due to a Windows file lock (Permission denied); winner poc-v5b moved. Durable kept in canonical folders: prd-000.md, ADRs, ship-report, STATUS.md, sitecore-content-model.md, manifests."
     }
   ],
   "implementation": {
