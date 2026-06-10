@@ -47,8 +47,8 @@ T-foundation (scaffold + theme + chrome; THE uncertainty — test theme/hydratio
 T-home (Home route + all home-band components) — IMPLEMENTED 2026-06-10
   T014✓ T015✓ T016✓ T017✓ T018✓ T019✓ T020✓ T021✓ T022✓ T023a[RED]✓ T023b[GREEN]✓ T024✓ T025✓
 
-T-inner (Destinations, Experiences, About, Contact routes + remaining components)
-  T026  T027  T028a[RED]  T028b[GREEN]  T029  T030  T031  T032
+T-inner (Destinations, Experiences, About, Contact routes + remaining components) — IMPLEMENTED 2026-06-10
+  T026✓ T027✓ T028a[RED]✓ T028b[GREEN]✓ T029✓ T030✓ T031✓ T032✓
 
 T-fidelity (screenshot-diff gate + a11y/contrast + component/theme tests + zero-SDK assertion)
   T033  T034  T035  T036  T037  T038(GATE)
@@ -661,6 +661,23 @@ Rules: groups execute in order; a group starts only when ALL its dependencies ar
 **Vitest suite state:** 32 tests passing (23 E1 + 9 T023a/T023b); `npm run lint` 0 errors; `npx tsc --noEmit` clean; `npm run build` green.
 
 **Pending for E3+:** T035 component render-from-props suite (written during T035 pass after inner routes exist); T036 theme+form suite additions; T033 Playwright fidelity; T034 zero-SDK assertion; T037 a11y.
+
+### E3 coverage status (after T026–T032 implementation — 2026-06-10)
+
+| Task | Status | Vitest coverage |
+|------|--------|-----------------|
+| T026 PageHero | DONE | Render test in T035 (pending); optional image + mesh fallback |
+| T027 RichTextSection | DONE | Render test in T035 (pending); `dangerouslySetInnerHTML` with trusted static content |
+| T028a [RED] ContactForm tests | DONE — RED confirmed | 9 tests failing before T028b (module not found) |
+| T028b [GREEN] ContactForm implementation | DONE — GREEN | 9/9 tests pass (TC-32…TC-35 + TC-19 coverage) |
+| T029 Inner content modules | DONE | `src/content/{destinations,experiences,about,contact}.ts`; TypeScript compiles |
+| T030 Destinations + Experiences routes | DONE | Both routes build; composition: PageHero → Grid/Showcase → StatsBand? → NewsletterCTA |
+| T031 About route | DONE | Route builds; composition: PageHero → RichTextSection → ValueProps → Testimonials |
+| T032 Contact route | DONE | Route builds; composition: PageHero → ContactForm + contact details |
+
+**Vitest suite state after E3:** 41 tests passing (23 E1 + 9 T023b + 9 T028b); `npm run lint` 0 errors; `npx tsc --noEmit` clean; `npm run build` green (all 5 routes: /, /destinations, /experiences, /about, /contact).
+
+**Pending for E4+:** T035 component render-from-props suite; T036 theme+form suite additions; T033 Playwright fidelity; T034 zero-SDK assertion; T037 a11y.
 
 ## 9. TDD and quality contract
 
