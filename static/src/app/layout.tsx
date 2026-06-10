@@ -4,6 +4,7 @@ import './globals.css';
 import { ThemeProvider } from '@/ui/theme-provider';
 import { SiteHeader } from '@/components/chrome/SiteHeader';
 import { MobileNav } from '@/components/chrome/MobileNav';
+import { SiteFooter } from '@/components/chrome/SiteFooter';
 
 /**
  * Root layout — App Router
@@ -74,14 +75,7 @@ export default function RootLayout({
 
           <main id="main">{children}</main>
 
-          {/* SiteFooter stub — full implementation in T024 */}
-          <footer className="site-footer" role="contentinfo">
-            <div className="wrap">
-              <p style={{ color: 'var(--fg-muted)', fontSize: 'var(--step--1)', margin: 0 }}>
-                &copy; {new Date().getFullYear()} Aphelion. All rights reserved.
-              </p>
-            </div>
-          </footer>
+          <SiteFooter />
         </ThemeProvider>
       </body>
     </html>

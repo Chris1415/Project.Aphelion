@@ -44,8 +44,8 @@ next_input:
 T-foundation (scaffold + theme + chrome; THE uncertainty — test theme/hydration EARLY)
   T001  T002  T003  T004  T005  T006a[RED]  T006b[GREEN]  T007  T008  T009  T010  T011  T012  T013(GATE)
 
-T-home (Home route + all home-band components)
-  T014  T015  T016  T017  T018  T019  T020  T021  T022  T023a[RED]  T023b[GREEN]  T024  T025
+T-home (Home route + all home-band components) — IMPLEMENTED 2026-06-10
+  T014✓ T015✓ T016✓ T017✓ T018✓ T019✓ T020✓ T021✓ T022✓ T023a[RED]✓ T023b[GREEN]✓ T024✓ T025✓
 
 T-inner (Destinations, Experiences, About, Contact routes + remaining components)
   T026  T027  T028a[RED]  T028b[GREEN]  T029  T030  T031  T032
@@ -631,7 +631,7 @@ Rules: groups execute in order; a group starts only when ALL its dependencies ar
 
 ## 8. What Needs To Be Tested (global testing runbook)
 
-*Lead Developer initial; QA (07) expands into § 9/§ 10.*
+*Lead Developer initial; QA (07) expands into § 9/§ 10. Developer (08) coverage status updated after E2 implementation.*
 
 - **Unit (Vitest + RTL):** every component renders from its flat props (text/links/images/alt); container components render N children from arrays; theme store (`system` resolution, persistence, cycle order); motion-hook reduced-motion branches; presentational form logic (newsletter + contact: invalid/valid → error/success; **never `fetch`**).
 - **UI / component:** card hover/focus states, count-up, image `onerror` fallback, drawer focus-trap/Esc/return, flowborder/magnetic (pointer-fine).
@@ -639,6 +639,28 @@ Rules: groups execute in order; a group starts only when ALL its dependencies ar
 - **Regression:** zero `@sitecore-*` dependency/import in `static/` (T034); presentational forms never network-submit (ADR-0006).
 - **Test commands:** `npm run lint` · `next build` · `npx tsc --noEmit` · `npm run test` (vitest) · `npm run test:e2e` (playwright). NFR-1 perf: `next build && next start` (soft).
 - **Smoke gates:** **none** — no tenant in PRD-000. (Real-tenant smoke is PRD-001.) Operator fidelity review of the screenshot-diff baselines is the human gate.
+
+### E2 coverage status (after T014–T025 implementation — 2026-06-10)
+
+| Task | Status | Vitest coverage |
+|------|--------|-----------------|
+| T014 `src/content/home.ts` | DONE | TypeScript compiles; shapes verified by downstream component rendering |
+| T015 Hero | DONE | Render test in T035 (pending); `'use client'` — `useMagnetic` + `onError` |
+| T016 Marquee | DONE | Render test in T035 (pending); `aria-hidden` on outer div |
+| T017 ValueCard + ValueProps | DONE | Render tests in T035 (pending) |
+| T018 DestinationCard + DestinationsGrid | DONE | `limit` prop tested in T035 (pending); `'use client'` — `onError` |
+| T019 ExperienceItem + ExperienceShowcase | DONE | Render tests in T035 (pending); `'use client'` — `onError` |
+| T020 Stat + StatsBand | DONE | `useCountUp` reduced-motion covered by E1 tests; render tests in T035 (pending) |
+| T021 PromoBand | DONE | Render tests in T035 (pending); `'use client'` — `useMagnetic` |
+| T022 TestimonialCard + Testimonials | DONE | Render tests in T035 (pending) |
+| T023a [RED] NewsletterCTA tests | DONE — RED confirmed | 9 tests failing before T023b |
+| T023b [GREEN] NewsletterCTA implementation | DONE — GREEN | 9/9 tests pass (TC-24…TC-28 + TC-19 coverage) |
+| T024 SiteFooter | DONE | Render tests in T035 (pending); replaces layout stub |
+| T025 Home route `page.tsx` | DONE | Full composition; build green |
+
+**Vitest suite state:** 32 tests passing (23 E1 + 9 T023a/T023b); `npm run lint` 0 errors; `npx tsc --noEmit` clean; `npm run build` green.
+
+**Pending for E3+:** T035 component render-from-props suite (written during T035 pass after inner routes exist); T036 theme+form suite additions; T033 Playwright fidelity; T034 zero-SDK assertion; T037 a11y.
 
 ## 9. TDD and quality contract
 
