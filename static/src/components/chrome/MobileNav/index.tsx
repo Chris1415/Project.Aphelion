@@ -97,11 +97,13 @@ export function MobileNav() {
         aria-hidden="true"
       />
 
-      {/* Drawer */}
+      {/* Drawer — inert when closed prevents focusable children from being tab-reachable
+          (satisfies axe aria-hidden-focus rule: WCAG 4.1.2) */}
       <nav
         ref={drawerRef}
         className={`mobile-nav${isOpen ? ' open' : ''}`}
         aria-hidden={!isOpen}
+        inert={!isOpen || undefined}
         aria-label="Mobile navigation"
       >
         <div className="mn-head">

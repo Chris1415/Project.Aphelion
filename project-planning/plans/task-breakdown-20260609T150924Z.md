@@ -679,6 +679,30 @@ Rules: groups execute in order; a group starts only when ALL its dependencies ar
 
 **Pending for E4+:** T035 component render-from-props suite; T036 theme+form suite additions; T033 Playwright fidelity; T034 zero-SDK assertion; T037 a11y.
 
+### E4 coverage status (after T033–T038 implementation — 2026-06-10)
+
+| Task | Status | Coverage |
+|------|--------|----------|
+| T033 Playwright screenshot-diff fidelity gate | DONE — GREEN | 20 baselines (5×2×2); 85 E2E pass 1 skipped 0 fail; structural DOM assertions |
+| T034 Zero-Sitecore-dependency assertion | DONE — GREEN | 4 Vitest tests (TC-38, TC-39, 2× mutation checks) |
+| T035 Vitest component render-from-props suite | DONE — GREEN | 44 new Vitest tests; all 18 components covered (leaves + containers) |
+| T036 Vitest theme-provider + form-logic suite | DONE — GREEN | 11 new Vitest tests (outside-provider guard, server snapshot, email regex) |
+| T037 axe a11y + runtime contrast + reduced-motion | DONE — GREEN | 10 axe route×theme checks; 4 runtime contrast ratio assertions; 3 reduced-motion freeze checks |
+| T038 GATE — full quality bar | DONE — **PASS** | All gates green (see below) |
+
+**T038 GATE RESULT: PASS**
+- `npm run lint`: 0 errors
+- `npx tsc --noEmit`: clean
+- `npm run build`: green (all 5 routes)
+- `npm run test` (Vitest): **100 tests passing** (8 test files; 41 E1–E3 + 59 E4 new)
+- `npm run test:e2e` (Playwright): **85 passing, 1 intentional skip, 0 failing** (fidelity + a11y + theme + navigation)
+  - 20 screenshot baselines generated at `tests/e2e/fidelity.spec.ts-snapshots/`
+  - axe: zero serious/critical violations across 5 routes × 2 themes
+  - Runtime contrast: dark body 17.94 (≥4.5 ✓), light body 16.25 (≥4.5 ✓), dark accent 5.67 (≥4.5 ✓), light accent 6.37 (≥4.5 ✓)
+  - Reduced-motion: all verified (opacity, count-up final, marquee frozen)
+
+**App fix applied during E4:** MobileNav `inert={!isOpen || undefined}` added to remove focusable elements from tab order when drawer is closed — fixes axe `aria-hidden-focus` WCAG 4.1.2 violation found and fixed by T037.
+
 ## 9. TDD and quality contract
 
 *Written by QA Specialist (07). Governs all implementation work in this task breakdown.*
