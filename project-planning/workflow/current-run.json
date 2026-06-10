@@ -6,7 +6,7 @@
   "product_slug": "aphelion",
   "product_root": "products/head-application/aphelion",
   "work_item_type": "prd",
-  "status": "implemented",
+  "status": "tested",
   "prd_input_mode": "prompt_only",
   "platform_target": "content-sdk",
   "task_breakdown_style": "tdd",
@@ -59,6 +59,7 @@
     "ship_report": null,
     "friction_log": null,
     "code_review": "products/head-application/aphelion/project-planning/plans/code-review-20260609T150924Z.md",
+    "test_report": "products/head-application/aphelion/project-planning/plans/test-report-20260609T150924Z.md",
     "status_index": "products/head-application/aphelion/project-planning/STATUS.md"
   },
   "friction_log": {
@@ -277,6 +278,21 @@
       ],
       "error": null,
       "notes": "Sitecore SDK-contract / component-map / editing-safe checks N/A (zero-SDK static app). Post-fix: lint+tsc+build+100 Vitest green."
+    },
+    {
+      "stage": "tested",
+      "agent": "07-qa-specialist",
+      "entered_at": "2026-06-10T16:35:00Z",
+      "exited_at": "2026-06-10T17:00:00Z",
+      "outcome": "completed",
+      "one_line": "PASS, release-ready: 100 Vitest + 85 Playwright green; 100% req coverage; zero h-scroll @375/768/1280; m-4 ARIA fixed + axe clean; no smoke required (no tenant)",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/plans/test-report-20260609T150924Z.md",
+        "products/head-application/aphelion/static/src/components/ContactForm/index.tsx"
+      ],
+      "escalations": [],
+      "error": null,
+      "notes": "No real-tenant smoke required (PRD-000 = zero-SDK static app); fidelity screenshot-diff + axe a11y are the bar, both green. Content SDK editor/preview verification N/A. smoke_outcomes left empty → status = tested (NOT tested_pending_smoke)."
     }
   ],
   "implementation": {

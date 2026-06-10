@@ -155,10 +155,6 @@ export function ContactForm({
                   {nameError}
                 </p>
               )}
-              {/* Always-present empty alert placeholder for aria-describedby when no error */}
-              {!nameError && (
-                <p className="field-error sr-only" id="cf-name-error" role="alert" aria-hidden="true" />
-              )}
             </div>
 
             {/* Email field */}
@@ -182,9 +178,6 @@ export function ContactForm({
                   {emailError}
                 </p>
               )}
-              {!emailError && (
-                <p className="field-error sr-only" id="cf-email-error" role="alert" aria-hidden="true" />
-              )}
             </div>
 
             {/* Message field */}
@@ -206,9 +199,6 @@ export function ContactForm({
                 <p className="field-error" id="cf-message-error" role="alert">
                   {msgError}
                 </p>
-              )}
-              {!msgError && (
-                <p className="field-error sr-only" id="cf-message-error" role="alert" aria-hidden="true" />
               )}
             </div>
 
