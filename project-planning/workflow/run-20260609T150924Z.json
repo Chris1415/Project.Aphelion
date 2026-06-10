@@ -6,7 +6,7 @@
   "product_slug": "aphelion",
   "product_root": "products/head-application/aphelion",
   "work_item_type": "prd",
-  "status": "qa_ready",
+  "status": "implementation_in_progress",
   "prd_input_mode": "prompt_only",
   "platform_target": "content-sdk",
   "task_breakdown_style": "tdd",
@@ -228,7 +228,7 @@
     "target_directory": "static",
     "branch_name": "prd-000",
     "remote_url": "https://github.com/Chris1415/Project.Aphelion.git",
-    "status": "not_started",
+    "status": "in_progress",
     "resumed_from_stage": null
   },
   "smoke_outcomes": {},
