@@ -6,7 +6,7 @@
   "product_slug": "aphelion",
   "product_root": "products/head-application/aphelion",
   "work_item_type": "prd",
-  "status": "qa_ready",
+  "status": "implementation_in_progress",
   "prd_input_mode": "prompt_only",
   "platform_target": "content-sdk",
   "task_breakdown_style": "standard",
@@ -195,6 +195,34 @@
       ],
       "error": null,
       "notes": "task_breakdown_style=standard (live-Edge port; gates = Playwright smoke + structural diff + editing-safe, not pure unit-TDD). Framework hardened gates (motion-ON, client-nav, fresh-build, operator visual walk) authored into §10/§8."
+    },
+    {
+      "stage": "implementation_in_progress",
+      "agent": "08-developer",
+      "entered_at": "2026-06-11T10:05:00Z",
+      "exited_at": "2026-06-11T10:30:00Z",
+      "outcome": "partial",
+      "one_line": "T-scaffold tenant-independent part done (T001 baseline-copy + T002 App Router scaffold + T003 .d.ts verify + .env.local placeholder); STOPPED at boot gate — needs operator tenant publish + real contextId",
+      "deliverables": [
+        "products/head-application/aphelion/sites/aphelion/ (Content SDK App Router scaffold, Next 16 / React 19, 69 source files)",
+        "products/head-application/aphelion/{sitecore.json,xmcloud.build.json,authoring/,.sitecore/} (CMS baseline, token-replaced cosmos/aphelion)"
+      ],
+      "escalations": [
+        {
+          "severity": "warn",
+          "kind": "concern",
+          "item": "ROUTER TRAP fixed: create-content-sdk-app --template nextjs defaults to PAGES Router; plan needs App Router (ADR-0013/0014). Re-scaffolded with --template nextjs-app-router. The build-flow's documented scaffold command must specify nextjs-app-router for App-Router plans — fold back into the build-flow skill.",
+          "resolved_at": "2026-06-11T10:20:00Z"
+        },
+        {
+          "severity": "blocker",
+          "kind": "decision",
+          "item": "BOOT GATE: /implement paused. Operator must (1) build + publish the full tenant from sitecore-content-model.md, (2) paste the real Edge contextId into sites/aphelion/.env.local. Then resume /implement → T-home port loop.",
+          "resolved_at": null
+        }
+      ],
+      "error": null,
+      "notes": "Deferred to resume (tenant-connected session): T004 theme/reveal/fonts port + T-home component port (build head-app code when the tenant is real, per build-flow). No npm build run (content-sdk build prelude calls Edge — would fail without tenant)."
     }
   ],
   "implementation": {
@@ -202,8 +230,8 @@
     "target_directory": "sites/aphelion",
     "branch_name": "prd-001",
     "remote_url": "https://github.com/Chris1415/Project.Aphelion.git",
-    "status": "not_started",
-    "resumed_from_stage": null
+    "status": "in_progress",
+    "resumed_from_stage": "implement_boot_gate"
   },
   "smoke_outcomes": {
     "smoke_home": { "required_by": "PRD-001 § 12 Home verify gate", "description": "Home (/) live-tenant smoke: 0 <MissingComponent>, every rendering shows expected content, nav works no-flicker, editor/preview safe", "outcome": "pending", "recorded_at": null, "evidence": null, "notes": "Home is the hard verify gate before inner routes", "category": "live_walkthrough" },
@@ -250,6 +278,15 @@
       "raised_at": "2026-06-11T09:55:00Z",
       "resolved_at": null,
       "references": "project-planning/plans/task-breakdown-20260611T085021Z.md"
+    },
+    {
+      "stage": "implement",
+      "severity": "blocker",
+      "kind": "decision",
+      "item": "[BLOCKER] /implement PAUSED at the boot gate. NEXT (operator): (1) build + publish the full tenant from sitecore-content-model.md; (2) paste your real Edge contextId into sites/aphelion/.env.local (both SITECORE_EDGE_CONTEXT_ID + NEXT_PUBLIC_ lines). Then say resume — I verify /api/layout-debug returns real Home layout, then port theme + Home components.",
+      "raised_at": "2026-06-11T10:30:00Z",
+      "resolved_at": null,
+      "references": "products/head-application/aphelion/sites/aphelion/.env.local"
     }
   ],
   "archive": {},
