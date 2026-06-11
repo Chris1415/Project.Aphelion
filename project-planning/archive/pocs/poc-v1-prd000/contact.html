@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Aphelion</title>
+  <meta name="description" content="Request a briefing with an Aphelion flight director — a conversation about your first journey to the far point, with no commitment." />
+  <script>
+    (function () {
+      try {
+        var q = (location.search.match(/[?&]theme=(light|dark|system)/) || [])[1];
+        var c = q || localStorage.getItem("aphelion-theme") || "system";
+        document.documentElement.setAttribute("data-theme", c);
+        var resolved = c === "system"
+          ? (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark")
+          : c;
+        document.documentElement.setAttribute("data-resolved", resolved);
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..460&family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden aria-hidden="true" />
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Aphelion home">
+        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="6.5" fill="var(--accent-500)" /><ellipse cx="16" cy="16" rx="14" ry="6" stroke="var(--accent-glow)" stroke-width="1.4" opacity="0.8" transform="rotate(-24 16 16)" /><circle cx="27.5" cy="9" r="1.6" fill="var(--warm-500)" /></svg>
+        Aphelion
+      </a>
+      <nav class="nav-desktop" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="experiences.html">Experiences</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <div class="theme-toggle" data-theme-toggle role="group" aria-label="Color theme">
+          <button type="button" data-theme-choice="light" aria-pressed="false" title="Light" aria-label="Light theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+          <button type="button" data-theme-choice="dark" aria-pressed="false" title="Dark" aria-label="Dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+          <button type="button" data-theme-choice="system" aria-pressed="false" title="System" aria-label="System theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></button>
+        </div>
+        <a class="btn btn--primary" href="contact.html">Book a Briefing</a>
+        <label for="nav-toggle" class="hamburger" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></label>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-drawer" aria-label="Mobile navigation">
+    <nav aria-label="Mobile primary">
+      <a href="index.html">Home</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="experiences.html">Experiences</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+    <span class="mobile-drawer__label">Theme</span>
+    <div class="theme-toggle" data-theme-toggle role="group" aria-label="Color theme">
+      <button type="button" data-theme-choice="light" aria-pressed="false" aria-label="Light theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      <button type="button" data-theme-choice="dark" aria-pressed="false" aria-label="Dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      <button type="button" data-theme-choice="system" aria-pressed="false" aria-label="System theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></button>
+    </div>
+  </div>
+
+  <main id="main">
+    <section class="page-hero">
+      <canvas class="page-hero__starfield" data-starfield aria-hidden="true"></canvas>
+      <div class="page-hero__glow" aria-hidden="true"></div>
+      <div class="container">
+        <span class="eyebrow">Contact</span>
+        <h1>Request a briefing.</h1>
+        <p>Tell us a little about what draws you to the far point. A flight director will be in touch within one orbit — twenty-four hours.</p>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Contact aside -->
+          <aside class="contact-aside reveal">
+            <h3>Mission control.</h3>
+            <p>Prefer to reach us directly? Our flight desk is staffed during every active cycle window.</p>
+            <ul>
+              <li><div><div class="k">Email</div><div class="vv">flight@aphelion.space</div></div></li>
+              <li><div><div class="k">Flight desk</div><div class="vv">+1 (480) 555-0131</div></div></li>
+              <li><div><div class="k">Spaceport</div><div class="vv">Pad 7 · Sonoran Range, AZ</div></div></li>
+              <li><div><div class="k">Hours</div><div class="vv">Mon–Sat · 06:00–22:00 MST</div></div></li>
+            </ul>
+          </aside>
+
+          <!-- Contact form (presentational) -->
+          <form id="contact-form" class="card" style="padding:clamp(1.6rem,4vw,2.4rem)" novalidate aria-describedby="contact-status">
+            <span class="eyebrow">Tell us about you</span>
+            <h2 style="font-size:var(--step-2);margin:0.6rem 0 1.6rem">Start the conversation.</h2>
+
+            <div class="form-rows">
+              <div class="row-2">
+                <div class="field">
+                  <label for="cf-name">Full name</label>
+                  <input class="input" id="cf-name" name="name" type="text" data-required placeholder="Ada Lovelace" autocomplete="name" aria-describedby="msg-cf-name" />
+                  <span class="field-msg" id="msg-cf-name" data-msg-for="cf-name" role="alert" aria-live="polite"></span>
+                </div>
+                <div class="field">
+                  <label for="cf-email">Email</label>
+                  <input class="input" id="cf-email" name="email" type="email" inputmode="email" data-required placeholder="you@email.com" autocomplete="email" aria-describedby="msg-cf-email" />
+                  <span class="field-msg" id="msg-cf-email" data-msg-for="cf-email" role="alert" aria-live="polite"></span>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="cf-dest">Which destination calls to you? <span class="muted">(optional)</span></label>
+                <input class="input" id="cf-dest" name="destination" type="text" placeholder="e.g. Aphelion Station, Serenity Descent…" />
+              </div>
+
+              <div class="field">
+                <label for="cf-msg">Message</label>
+                <textarea class="input" id="cf-msg" name="message" data-required placeholder="What draws you to the far point?" aria-describedby="msg-cf-msg"></textarea>
+                <span class="field-msg" id="msg-cf-msg" data-msg-for="cf-msg" role="alert" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <div class="form-submit-row" style="margin-top:1.6rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+              <button class="btn btn--primary" type="submit">Request briefing</button>
+              <span class="muted" style="font-size:var(--step--1)">No commitment. We reply within 24 hours.</span>
+            </div>
+
+            <div id="contact-status" class="form-status" role="status" hidden></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter reused on contact too -->
+    <section class="section bleed newsletter" aria-labelledby="nl-h">
+      <div class="container newsletter__inner">
+        <span class="eyebrow" style="justify-content:center">Dispatches</span>
+        <h2 id="nl-h">Join the manifest.</h2>
+        <p>Mission notes, new destinations and quiet pre-sales — a few times a year, never more.</p>
+        <form id="newsletter-form" novalidate>
+          <div class="subscribe">
+            <input class="input" type="email" inputmode="email" placeholder="you@email.com" aria-label="Email address" aria-describedby="nl-msg" />
+            <button class="btn btn--primary" type="submit">Subscribe</button>
+          </div>
+          <p class="field-msg" id="nl-msg" role="alert" aria-live="polite" style="text-align:center;justify-content:center;margin-top:0.8rem"></p>
+        </form>
+        <div id="newsletter-status" class="form-status form-status--ok" role="status" hidden style="justify-content:center;margin-inline:auto;max-width:480px"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html" aria-label="Aphelion home"><svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="6.5" fill="var(--accent-500)" /><ellipse cx="16" cy="16" rx="14" ry="6" stroke="var(--accent-glow)" stroke-width="1.4" opacity="0.8" transform="rotate(-24 16 16)" /></svg>Aphelion</a>
+          <p>The far point of travel, made personal. Premium spaceflight for those who measure distance in wonder.</p>
+        </div>
+        <div class="footer-col"><h4>Explore</h4><ul><li><a href="destinations.html">Destinations</a></li><li><a href="experiences.html">Experiences</a></li><li><a href="about.html">About us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div class="footer-col"><h4>Programs</h4><ul><li><a href="experiences.html">Overview Dinner</a></li><li><a href="experiences.html">Untethered EVA</a></li><li><a href="destinations.html">Lunar Gateway</a></li><li><a href="destinations.html">Serenity Descent</a></li></ul></div>
+        <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">Our story</a></li><li><a href="about.html">Safety</a></li><li><a href="about.html">Sustainability</a></li><li><a href="contact.html">Press</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2031 Aphelion Spaceflight. All rights reserved. · A fictional brand.</span>
+        <div class="footer-social">
+          <a href="contact.html" aria-label="X / Twitter"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7.3 8.3L23 22h-6.6l-5-6.6L5.6 22H2.5l7.8-8.9L1.5 2h6.7l4.5 6 5.2-6zm-1.2 18h1.8L7.2 3.9H5.3z"/></svg></a>
+          <a href="contact.html" aria-label="Instagram"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="contact.html" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.5 8h4V24h-4zM8 8h3.8v2.2h.1c.5-1 1.8-2.2 3.8-2.2 4 0 4.8 2.6 4.8 6V24h-4v-7c0-1.7 0-3.8-2.3-3.8s-2.7 1.8-2.7 3.7V24H8z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="theme.js"></script>
+  <script src="site.js"></script>
+</body>
+</html>

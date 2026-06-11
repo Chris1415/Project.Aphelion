@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-theme-mode="system">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aphelion — Travel the Living Cosmos</title>
+  <meta name="description" content="Aphelion books premium commercial spaceflight to the most luminous destinations in the solar system and beyond." />
+
+  <!-- FOUC preflight: set resolved theme on <html> BEFORE first paint. -->
+  <script>
+    (function () {
+      try {
+        var KEY = 'aphelion-theme';
+        var mode = localStorage.getItem(KEY) || 'system';
+        var dark = mode === 'dark' ||
+          (mode === 'system' && window.matchMedia &&
+           window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme-mode', mode);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Clash Display is not on Google Fonts; styles.css falls back to Fraunces/Outfit cleanly. -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <a href="#main" class="sr-only">Skip to content</a>
+
+  <!-- ============================ HEADER ============================ -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="Aphelion home">
+        <span class="mark" aria-hidden="true"></span>
+        Aphelion
+      </a>
+
+      <nav class="nav-desktop" aria-label="Primary">
+        <a href="#destinations">Destinations</a>
+        <a href="#experiences">Experiences</a>
+        <a href="#about">About</a>
+        <a href="#newsletter">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Theme: System (click to change)">
+          <span data-theme-icon aria-hidden="true">◐</span>
+          <span data-theme-text>System</span>
+        </button>
+        <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+          <span aria-hidden="true">☰</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- mobile drawer -->
+  <div class="nav-scrim" data-nav-scrim></div>
+  <nav id="mobile-nav" class="mobile-nav" data-mobile-nav aria-label="Mobile">
+    <div class="mn-head">
+      <span class="brand"><span class="mark" aria-hidden="true"></span> Aphelion</span>
+      <button class="menu-toggle" type="button" data-menu-toggle aria-label="Close menu"><span aria-hidden="true">✕</span></button>
+    </div>
+    <a href="#destinations">Destinations</a>
+    <a href="#experiences">Experiences</a>
+    <a href="#about">About</a>
+    <a href="#newsletter">Contact</a>
+  </nav>
+
+  <main id="main">
+    <span id="top"></span>
+
+    <!-- ============================ HERO ============================ -->
+    <section class="hero band atmos">
+      <div class="mesh" aria-hidden="true"></div>
+      <div class="orb" aria-hidden="true"></div>
+      <svg class="stars" aria-hidden="true" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice">
+        <g fill="#ffffff">
+          <circle cx="120" cy="90" r="1.4"/><circle cx="380" cy="160" r="1"/><circle cx="640" cy="60" r="1.6"/>
+          <circle cx="900" cy="130" r="1"/><circle cx="1180" cy="80" r="1.3"/><circle cx="1320" cy="220" r="1"/>
+          <circle cx="220" cy="320" r="1"/><circle cx="520" cy="420" r="1.3"/><circle cx="760" cy="360" r="1"/>
+          <circle cx="1040" cy="440" r="1.5"/><circle cx="1260" cy="520" r="1"/><circle cx="80" cy="540" r="1.2"/>
+          <circle cx="440" cy="600" r="1"/><circle cx="980" cy="620" r="1.3"/><circle cx="700" cy="560" r="1"/>
+        </g>
+      </svg>
+
+      <div class="wrap hero-inner">
+        <p class="eyebrow">Commercial spaceflight · Est. 2031</p>
+        <h1><span class="kinetic">Travel the living cosmos.</span></h1>
+        <p class="lede">Aphelion charters luminous orbital journeys to the most extraordinary places light has ever touched — booked end to end, flown in absolute comfort.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#destinations">Browse destinations</a>
+          <a class="btn btn-ghost" href="#experiences">View experiences</a>
+        </div>
+        <div class="hero-meta">
+          <div><span class="v">31</span><div class="l">Successful missions</div></div>
+          <div><span class="v">6</span><div class="l">Signature destinations</div></div>
+          <div><span class="v">100%</span><div class="l">Safe-return record</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= VALUE PROPS ======================== -->
+    <section class="band" aria-labelledby="vp-h">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Why Aphelion</p>
+          <h2 id="vp-h">Wonder, engineered to feel effortless.</h2>
+        </div>
+        <div class="grid grid-3">
+          <article class="card" data-reveal>
+            <div class="glyph" aria-hidden="true">✦</div>
+            <h3>Window-seat universe</h3>
+            <p>Every cabin is built around the view — full-curvature glass, zero-glare lighting, and a horizon that never repeats.</p>
+          </article>
+          <article class="card" data-reveal>
+            <div class="glyph" aria-hidden="true">◈</div>
+            <h3>Flight-tested comfort</h3>
+            <p>Gimbaled seating and adaptive pressure keep your body calm through launch, transfer, and the long luminous drift home.</p>
+          </article>
+          <article class="card" data-reveal>
+            <div class="glyph" aria-hidden="true">❖</div>
+            <h3>One concierge, end to end</h3>
+            <p>From medical clearance to your post-flight debrief, a single mission lead handles every detail so you only have to look up.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== DESTINATIONS ======================== -->
+    <section id="destinations" class="band atmos" aria-labelledby="dest-h">
+      <div class="mesh" aria-hidden="true" style="opacity:.55"></div>
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">01 — Destinations</p>
+          <h2 id="dest-h">Six places that rewrite the night sky.</h2>
+          <p>Hand-scouted orbital and deep-system routes, each with its own light.</p>
+        </div>
+        <div class="grid grid-3">
+          <article class="card dest-card" data-reveal>
+            <div class="dest-media"><div class="sky" aria-hidden="true"></div></div>
+            <div class="dest-body">
+              <div class="dest-row"><h3>Halcyon Belt</h3><span class="dest-tag">Low orbit · 2 days</span></div>
+              <p>Drift through a sunlit ring of mirrored ice that turns dawn into a thousand small suns.</p>
+              <a class="dest-link" href="#newsletter">Plan this trip</a>
+            </div>
+          </article>
+          <article class="card dest-card" data-reveal>
+            <div class="dest-media"><div class="sky" aria-hidden="true"></div></div>
+            <div class="dest-body">
+              <div class="dest-row"><h3>Vesper Station</h3><span class="dest-tag">Lunar L2 · 4 days</span></div>
+              <p>Earthrise on one side, eternal dark on the other — the quietest balcony humanity has ever built.</p>
+              <a class="dest-link" href="#newsletter">Plan this trip</a>
+            </div>
+          </article>
+          <article class="card dest-card" data-reveal>
+            <div class="dest-media"><div class="sky" aria-hidden="true"></div></div>
+            <div class="dest-body">
+              <div class="dest-row"><h3>Cyanus Drift</h3><span class="dest-tag">High orbit · 3 days</span></div>
+              <p>A bioluminescent aurora corridor where charged plasma paints the cabin in cyan and rose.</p>
+              <a class="dest-link" href="#newsletter">Plan this trip</a>
+            </div>
+          </article>
+          <article class="card dest-card" data-reveal>
+            <div class="dest-media"><div class="sky" aria-hidden="true"></div></div>
+            <div class="dest-body">
+              <div class="dest-row"><h3>The Marrow</h3><span class="dest-tag">Deep system · 9 days</span></div>
+              <p>Skim the violet canyons of a long-dead comet, lit only by the slow burn of distant stars.</p>
+              <a class="dest-link" href="#newsletter">Plan this trip</a>
+            </div>
+          </article>
+          <article class="card dest-card" data-reveal>
+            <div class="dest-media"><div class="sky" aria-hidden="true"></div></div>
+            <div class="dest-body">
+              <div class="dest-row"><h3>Solstice Arc</h3><span class="dest-tag">Solar transit · 6 days</span></div>
+              <p>Ride the shielded sunward arc and watch the corona unfurl like liquid magenta overhead.</p>
+              <a class="dest-link" href="#newsletter">Plan this trip</a>
+            </div>
+          </article>
+          <article class="card dest-card" data-reveal>
+            <div class="dest-media"><div class="sky" aria-hidden="true"></div></div>
+            <div class="dest-body">
+              <div class="dest-row"><h3>Erevos Gate</h3><span class="dest-tag">Outer reach · 14 days</span></div>
+              <p>Our furthest charter — the threshold of the dark, where the sun is just one more bright star.</p>
+              <a class="dest-link" href="#newsletter">Plan this trip</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== EXPERIENCE SHOWCASE =================== -->
+    <section id="experiences" class="band" aria-labelledby="exp-h">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">02 — Experiences</p>
+          <h2 id="exp-h">What you do once you are up there.</h2>
+        </div>
+
+        <div class="exp-item" data-reveal>
+          <div class="exp-media"><div class="sky" aria-hidden="true"></div></div>
+          <div class="exp-copy">
+            <span class="dur">90 minutes</span>
+            <h3>The Drift Walk</h3>
+            <p>Tethered to the hull, you float free above the planet while a flight lead narrates the geography passing beneath your boots.</p>
+            <a class="btn btn-ghost" href="#newsletter">Reserve a slot</a>
+          </div>
+        </div>
+
+        <div class="exp-item" data-reveal>
+          <div class="exp-media"><div class="sky" aria-hidden="true"></div></div>
+          <div class="exp-copy">
+            <span class="dur">One full orbit</span>
+            <h3>Dinner at Apogee</h3>
+            <p>A seven-course tasting served at the farthest, slowest point of the arc — the moment the cabin hangs nearly still against the stars.</p>
+            <a class="btn btn-ghost" href="#newsletter">Reserve a slot</a>
+          </div>
+        </div>
+
+        <div class="exp-item" data-reveal>
+          <div class="exp-media"><div class="sky" aria-hidden="true"></div></div>
+          <div class="exp-copy">
+            <span class="dur">Every night aboard</span>
+            <h3>The Long Look</h3>
+            <p>Lights down, glass clear, no schedule. Just you, a heated berth, and the entire living cosmos drifting past the window.</p>
+            <a class="btn btn-ghost" href="#newsletter">Reserve a slot</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= STATS BAND ========================= -->
+    <section class="band stats-band atmos" aria-label="Aphelion by the numbers">
+      <div class="mesh" aria-hidden="true" style="opacity:.45"></div>
+      <div class="wrap">
+        <div class="stats-grid" data-reveal>
+          <div class="stat"><div class="v"><span class="kinetic">31</span></div><div class="l">Missions flown</div></div>
+          <div class="stat"><div class="v"><span class="kinetic">412</span></div><div class="l">Travellers carried</div></div>
+          <div class="stat"><div class="v"><span class="kinetic">1.2M</span></div><div class="l">Kilometres logged</div></div>
+          <div class="stat"><div class="v"><span class="kinetic">100%</span></div><div class="l">Safe returns</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== PROMO ============================ -->
+    <section class="band" aria-labelledby="promo-h">
+      <div class="wrap">
+        <div class="promo atmos" data-reveal>
+          <div class="mesh" aria-hidden="true" style="opacity:.5"></div>
+          <div class="promo-inner">
+            <p class="eyebrow">Next window opens soon</p>
+            <h2 id="promo-h"><span class="kinetic">Spring 2032 charters are now boarding.</span></h2>
+            <p>Seats on the Halcyon Belt and Vesper Station routes are released in small cohorts. Join the manifest before the launch window closes.</p>
+            <a class="btn btn-primary" href="#newsletter">Request your seat</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== TESTIMONIALS ======================== -->
+    <section id="about" class="band atmos" aria-labelledby="tm-h">
+      <div class="mesh" aria-hidden="true" style="opacity:.4"></div>
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Mission log</p>
+          <h2 id="tm-h">Travellers, in their own words.</h2>
+        </div>
+        <div class="grid grid-3">
+          <article class="card quote-card" data-reveal>
+            <blockquote>"I have stood on six continents. None of them prepared me for watching my own planet exhale at dawn."</blockquote>
+            <div class="quote-author">
+              <span class="quote-avatar" aria-hidden="true"></span>
+              <div><div class="name">Imani Okafor</div><div class="role">Halcyon Belt · Mission 24</div></div>
+            </div>
+          </article>
+          <article class="card quote-card" data-reveal>
+            <blockquote>"Dinner at Apogee ruined every restaurant on Earth for me. Worth it. Absolutely worth it."</blockquote>
+            <div class="quote-author">
+              <span class="quote-avatar" aria-hidden="true"></span>
+              <div><div class="name">Theo Lindqvist</div><div class="role">Vesper Station · Mission 28</div></div>
+            </div>
+          </article>
+          <article class="card quote-card" data-reveal>
+            <blockquote>"The crew felt less like staff and more like the only other people who understood what I was seeing."</blockquote>
+            <div class="quote-author">
+              <span class="quote-avatar" aria-hidden="true"></span>
+              <div><div class="name">Mara Velasquez</div><div class="role">Cyanus Drift · Mission 30</div></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== NEWSLETTER CTA ====================== -->
+    <section id="newsletter" class="band" aria-labelledby="nl-h">
+      <div class="wrap">
+        <div class="newsletter atmos">
+          <div class="mesh" aria-hidden="true" style="opacity:.55"></div>
+          <div style="position:relative">
+            <p class="eyebrow">Join the manifest</p>
+            <h2 id="nl-h">Be first when the next window opens.</h2>
+            <p>One message per launch cohort. No noise — only the night you have been waiting for.</p>
+
+            <form class="nl-form" data-newsletter novalidate>
+              <div class="nl-field">
+                <label class="sr-only" for="nl-email">Email address</label>
+                <input class="input" id="nl-email" name="email" type="email" inputmode="email"
+                       placeholder="you@orbit.com" required aria-required="true" />
+                <p class="field-error" id="nl-error" data-nl-error role="alert" hidden>Enter a valid email address.</p>
+              </div>
+              <button class="btn btn-primary" type="submit">Notify me</button>
+            </form>
+
+            <p class="nl-success" data-nl-success role="status" tabindex="-1" hidden>You are on the manifest. Watch your inbox.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <span class="brand"><span class="mark" aria-hidden="true"></span> Aphelion</span>
+          <p>Premium commercial spaceflight to the most luminous places light has ever touched.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="#destinations">Destinations</a>
+          <a href="#experiences">Experiences</a>
+          <a href="#about">Mission log</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#about">About</a>
+          <a href="#newsletter">Contact</a>
+          <a href="#main">Careers</a>
+        </div>
+        <div class="footer-col">
+          <h4>Follow</h4>
+          <a href="#main">Field notes</a>
+          <a href="#main">Instagram</a>
+          <a href="#main">YouTube</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2032 Aphelion Spaceflight. A fictional brand.</span>
+        <span>Privacy · Terms · Flight safety</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="theme.js"></script>
+</body>
+</html>

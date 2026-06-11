@@ -1,0 +1,477 @@
+{
+  "schema_version": 8,
+  "run_id": "20260609T150924Z",
+  "created_at": "2026-06-09T15:09:24Z",
+  "updated_at": "2026-06-09T17:30:00Z",
+  "product_slug": "aphelion",
+  "product_root": "products/head-application/aphelion",
+  "work_item_type": "prd",
+  "status": "shipped",
+  "prd_input_mode": "prompt_only",
+  "platform_target": "content-sdk",
+  "task_breakdown_style": "tdd",
+  "scope_dial": {
+    "rigor": "standard",
+    "track": "full",
+    "ui_variants": "2",
+    "docs_at_ship": "auto-lite",
+    "task_breakdown_review": "skip_gate"
+  },
+  "ui_design": {
+    "proposal_count": 5,
+    "divergence": "radical",
+    "variant_paths": [
+      "products/head-application/aphelion/project-planning/archive/ui-design/ui-design-20260609T150924Z-v1.md",
+      "products/head-application/aphelion/project-planning/archive/ui-design/ui-design-20260609T150924Z-v2.md",
+      "products/head-application/aphelion/project-planning/archive/ui-design/ui-design-20260609T150924Z-v3.md",
+      "products/head-application/aphelion/project-planning/archive/ui-design/ui-design-20260609T150924Z-v4.md",
+      "products/head-application/aphelion/project-planning/archive/ui-design/ui-design-20260609T150924Z-v5.md",
+      "products/head-application/aphelion/project-planning/archive/ui-design/ui-design-20260609T150924Z-v5a.md",
+      "products/head-application/aphelion/project-planning/archive/ui-design/ui-design-20260609T150924Z-v5b.md",
+      "products/head-application/aphelion/project-planning/archive/ui-design/ui-design-20260609T150924Z-v5c.md"
+    ],
+    "selected_variant_path": "products/head-application/aphelion/project-planning/archive/ui-design/ui-design-20260609T150924Z-v5b.md",
+    "selected_poc_path": "products/head-application/aphelion/project-planning/archive/pocs/poc-v5b-prd000/",
+    "chosen_direction_family": "v5 Nebula Drift (bioluminescent neon mesh-gradient)",
+    "note": "Operator requested extra high-polish directions beyond the scope-dial cap of 2. v1 Event Horizon, v2 Almanac, v3 Aurora, v4 Chromatica, v5 Nebula Drift. Operator chose v5 family, then requested 3 variations (v5a Lumen, v5b Flux, v5c Pulse) with real royalty-free imagery + richer effects/animation. v3-v5 + v5a-c POCs are Home-page pitches; winner fleshed to all 5 routes at /implement."
+  },
+  "source": {
+    "kind": "raw_idea",
+    "values": [
+      "Prompt-only dogfood request (2026-06-09): marketing-ready Content SDK head app themed cosmos/stellar/space; exercise the full pipeline and observe how it reacts."
+    ],
+    "analysis_mode": "greenfield",
+    "source_analysis_artifact": null,
+    "content_dump": null,
+    "assets_bundle": null
+  },
+  "canonical_artifacts": {
+    "brain_dump": null,
+    "prd": "products/head-application/aphelion/project-planning/PRD/prd-000.md",
+    "prd_minimal": "products/head-application/aphelion/project-planning/archive/PRD/prd-minimal-000.md",
+    "architecture": "products/head-application/aphelion/project-planning/archive/architecture/architecture-20260609T150924Z.md",
+    "baseline": null,
+    "task_breakdown": "products/head-application/aphelion/project-planning/archive/plans/task-breakdown-20260609T150924Z.md",
+    "task_breakdown_pre_qa": null,
+    "qa_report": null,
+    "content_model": "products/head-application/aphelion/project-planning/sitecore-content-model.md",
+    "content_examples": null,
+    "ship_report": "products/head-application/aphelion/project-planning/plans/ship-report-20260609T150924Z.md",
+    "friction_log": null,
+    "code_review": "products/head-application/aphelion/project-planning/archive/plans/code-review-20260609T150924Z.md",
+    "test_report": "products/head-application/aphelion/project-planning/archive/plans/test-report-20260609T150924Z.md",
+    "status_index": "products/head-application/aphelion/project-planning/STATUS.md"
+  },
+  "friction_log": {
+    "path": "products/head-application/aphelion/project-planning/workflow/friction-log-20260609T150924Z.md",
+    "min_severity": "medium",
+    "enabled": true
+  },
+  "stage_history": [
+    {
+      "stage": "discovery",
+      "agent": "02-product-manager",
+      "entered_at": "2026-06-09T15:00:00Z",
+      "exited_at": "2026-06-09T15:06:00Z",
+      "outcome": "completed",
+      "one_line": "Standard discovery; scope dial (rigor=std, ui=2, live tenant) + 3 scope questions (5 routes, no commerce, Vercel); content-sdk NEW site",
+      "deliverables": [],
+      "escalations": [],
+      "error": null,
+      "notes": "Sitecore-aware: NEW-site flow, live tenant, App Router. SITE_COLLECTION_NAME=cosmos, SITE_NAME=aphelion."
+    },
+    {
+      "stage": "discovery_summary",
+      "agent": "02-product-manager",
+      "entered_at": "2026-06-09T15:06:00Z",
+      "exited_at": "2026-06-09T15:08:00Z",
+      "outcome": "confirmed",
+      "one_line": "Operator confirmed recap + the two-PRD split (Acts 1-2 / Act 3) + presentational-only forms",
+      "deliverables": [],
+      "escalations": [],
+      "error": null,
+      "notes": null
+    },
+    {
+      "stage": "spec_ready",
+      "agent": "02-product-manager",
+      "entered_at": "2026-06-09T15:08:00Z",
+      "exited_at": "2026-06-09T15:12:00Z",
+      "outcome": "completed",
+      "one_line": "PRD-000 (Acts 1-2) written + standard critical review (6 findings, all resolved + folded) + prd-minimal + 5 ADRs",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/PRD/prd-000.md",
+        "products/head-application/aphelion/project-planning/PRD/prd-minimal-000.md",
+        "products/head-application/aphelion/project-planning/ADR/adr-0002-two-prd-split-acts-1-2-vs-act-3.md",
+        "products/head-application/aphelion/project-planning/ADR/adr-0003-static-app-first-build-ordering.md",
+        "products/head-application/aphelion/project-planning/ADR/adr-0004-theme-architecture-preflight-usesyncexternalstore.md",
+        "products/head-application/aphelion/project-planning/ADR/adr-0005-content-model-driven-component-boundary.md",
+        "products/head-application/aphelion/project-planning/ADR/adr-0006-presentational-only-forms-v1.md",
+        "products/head-application/aphelion/project-planning/STATUS.md"
+      ],
+      "escalations": [
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "Arrays map to folder-of-child-items datasource (SXA Children resolver), not multilist — load-bearing content-model decision (ADR-0005)",
+          "resolved_at": "2026-06-09T15:11:00Z"
+        },
+        {
+          "severity": "info",
+          "kind": "assumption",
+          "item": "Newsletter + Contact presentational-only in v1 (no backend) — ADR-0006",
+          "resolved_at": "2026-06-09T15:11:00Z"
+        }
+      ],
+      "error": null,
+      "notes": "Critical review standard level; operator answered YES to all six resolutions (build mode, fidelity threshold, array rule, missing rows, nav exception, Lighthouse soft-target)."
+    },
+    {
+      "stage": "architecture_ready",
+      "agent": "04-software-architect",
+      "entered_at": "2026-06-09T17:20:00Z",
+      "exited_at": "2026-06-09T17:30:00Z",
+      "outcome": "completed",
+      "one_line": "Feature-scoped architecture for Acts 1-2 (static app + content-model derivation); SDK-contract gate N/A (no live SDK), deferred to PRD-001; 2 new ADRs (0007 stack, 0008 test/fidelity)",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/architecture/architecture-20260609T150924Z.md",
+        "products/head-application/aphelion/project-planning/ADR/adr-0007-static-app-stack-scaffold-portable-layout.md",
+        "products/head-application/aphelion/project-planning/ADR/adr-0008-test-and-fidelity-gate-strategy.md"
+      ],
+      "escalations": [],
+      "error": null,
+      "notes": "2 new ADRs this run (< 5 density hard-stop). create-next-app static app (NOT create-content-sdk-app, that's PRD-001)."
+    },
+    {
+      "stage": "baseline_promoted",
+      "agent": "04-software-architect",
+      "entered_at": "2026-06-09T17:30:00Z",
+      "exited_at": "2026-06-09T17:30:00Z",
+      "outcome": "skipped",
+      "one_line": "Baseline-promotion gate met (8 total ADRs) but recommended skip: first PRD, no ADR has survived 2+ PRDs yet",
+      "deliverables": [],
+      "escalations": [],
+      "error": null,
+      "notes": "Re-evaluate promotion at PRD-001/002 once decisions have proven durable."
+    },
+    {
+      "stage": "ui_ready",
+      "agent": "05-ui-designer",
+      "entered_at": "2026-06-09T17:35:00Z",
+      "exited_at": "2026-06-10T00:00:00Z",
+      "outcome": "completed",
+      "one_line": "8 directions explored (v1-v5 + v5a/b/c variations, all radical, dark+light+system); operator chose v5b 'Flux' (Nebula Drift abstract-render edition)",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v1.md",
+        "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v2.md",
+        "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v3.md",
+        "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v4.md",
+        "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v5.md",
+        "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v5a.md",
+        "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v5b.md",
+        "products/head-application/aphelion/project-planning/ui-design/ui-design-20260609T150924Z-v5c.md",
+        "products/head-application/aphelion/pocs/poc-v5b-prd000/"
+      ],
+      "escalations": [
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "UI direction = v5b Flux (Nebula Drift abstract-render); winning POC poc-v5b-prd000 is visual source of truth",
+          "resolved_at": "2026-06-10T00:00:00Z"
+        },
+        {
+          "severity": "warn",
+          "kind": "concern",
+          "item": "v5b uses royalty-free Unsplash imagery (real images) + SVG #gooey filter; perf (NFR-1) + font self-host (Clash Display) to confirm at /implement",
+          "resolved_at": null
+        }
+      ],
+      "error": null,
+      "notes": "Operator requested 3 extra directions (v3/v4/v5) beyond cap, then 3 variations of chosen v5 (v5a/b/c). v3-v5 + v5a-c POCs are Home-only pitches; v5b fleshed to all 5 routes at /implement."
+    },
+    {
+      "stage": "plan_ready",
+      "agent": "06-lead-developer",
+      "entered_at": "2026-06-10T00:05:00Z",
+      "exited_at": "2026-06-10T00:20:00Z",
+      "outcome": "completed",
+      "one_line": "40-task breakdown (E1-E5: foundation/home/inner/fidelity/spec); theme-hydration probe gated first (T013); all 7 §4c filled (4c-6 N/A no-SDK); scaffold=create-next-app not create-content-sdk-app",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/plans/task-breakdown-20260609T150924Z.md"
+      ],
+      "escalations": [
+        {
+          "severity": "info",
+          "kind": "assumption",
+          "item": "POC is Home-only — inner routes (T030-T032) fidelity-verified against their own committed baselines, not POC frames (§4c-7)",
+          "resolved_at": null
+        }
+      ],
+      "error": null,
+      "notes": "task_breakdown_review=skip_gate → auto-continued to QA without operator stop."
+    },
+    {
+      "stage": "qa_ready",
+      "agent": "07-qa-specialist",
+      "entered_at": "2026-06-10T00:20:00Z",
+      "exited_at": "2026-06-10T00:32:00Z",
+      "outcome": "completed",
+      "one_line": "TDD enrichment in place (587→1027 lines): §9 contract + §10 per-task tests + 54 test cases (TC-01..54) + 3 RED→GREEN splits (T006/T023/T028) + runtime AA-contrast asserts; style=tdd",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/plans/task-breakdown-20260609T150924Z.md"
+      ],
+      "escalations": [],
+      "error": null,
+      "notes": "No standalone qa-report (enriched breakdown IS the test contract). No real-tenant smoke (no tenant in PRD-000); fidelity gate + axe a11y are the bar. SDK fixture rule N/A (no SDK calls) — deferred to PRD-001."
+    },
+    {
+      "stage": "implemented",
+      "agent": "08-developer",
+      "entered_at": "2026-06-10T00:35:00Z",
+      "exited_at": "2026-06-10T16:00:00Z",
+      "outcome": "completed",
+      "one_line": "40 tasks across E1-E5 (5 sequential Developer tranches); v5b Flux static app on 5 routes; T013 hydration + T038 fidelity gates PASS; content-model spec derived",
+      "deliverables": [
+        "products/head-application/aphelion/static/ (Next 16 App Router static app, 5 routes, ~60 source files)",
+        "products/head-application/aphelion/static/tests/ (100 Vitest + 85 Playwright, 20 screenshot baselines)",
+        "products/head-application/aphelion/project-planning/sitecore-content-model.md",
+        "products/head-application/aphelion/project-planning/plans/task-breakdown-20260609T150924Z.md"
+      ],
+      "escalations": [
+        {
+          "severity": "info",
+          "kind": "concern",
+          "item": "E4 found+fixed a real a11y bug (MobileNav aria-hidden-focus → inert when closed); no other escalations across 5 tranches",
+          "resolved_at": "2026-06-10T15:00:00Z"
+        },
+        {
+          "severity": "warn",
+          "kind": "decision",
+          "item": "Content-model spec flags 3 net-new operator decisions for Act-2/PRD-001: HeroMeta array (flatten to 6 fields?), ContactDetails rendering (inline in route, needs its own rendering+template), Marquee items sourcing (TBD)",
+          "resolved_at": null
+        }
+      ],
+      "error": null,
+      "notes": "Pre-completion gate green: lint + next build (5 routes) + tsc + 100 Vitest + 85 Playwright; git-status clean. Screenshot baselines are first-run (regression value); final Home visual fidelity vs POC is operator visual judgment."
+    },
+    {
+      "stage": "code_reviewed",
+      "agent": "08-developer",
+      "entered_at": "2026-06-10T16:05:00Z",
+      "exited_at": "2026-06-10T16:30:00Z",
+      "outcome": "completed",
+      "one_line": "PASS WITH ISSUES: 0 critical, 1 major fixed (dead WCAG-violating duplicate menu button in SiteHeader), 3 minor fixed; 1 minor (m-4 ContactForm aria) left for operator",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/plans/code-review-20260609T150924Z.md",
+        "products/head-application/aphelion/static/src/components/chrome/SiteHeader/index.tsx",
+        "products/head-application/aphelion/static/src/lib/motion/useMagnetic.ts",
+        "products/head-application/aphelion/static/src/ui/theme-provider.tsx",
+        "products/head-application/aphelion/static/src/content/about.ts"
+      ],
+      "escalations": [
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "Minor m-4 left for operator: ContactForm empty aria-describedby placeholders have contradictory role=alert + aria-hidden=true; safe fix = drop empty branches (axe passes either way)",
+          "resolved_at": null
+        }
+      ],
+      "error": null,
+      "notes": "Sitecore SDK-contract / component-map / editing-safe checks N/A (zero-SDK static app). Post-fix: lint+tsc+build+100 Vitest green."
+    },
+    {
+      "stage": "tested",
+      "agent": "07-qa-specialist",
+      "entered_at": "2026-06-10T16:35:00Z",
+      "exited_at": "2026-06-10T17:00:00Z",
+      "outcome": "completed",
+      "one_line": "PASS, release-ready: 100 Vitest + 85 Playwright green; 100% req coverage; zero h-scroll @375/768/1280; m-4 ARIA fixed + axe clean; no smoke required (no tenant)",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/plans/test-report-20260609T150924Z.md",
+        "products/head-application/aphelion/static/src/components/ContactForm/index.tsx"
+      ],
+      "escalations": [],
+      "error": null,
+      "notes": "No real-tenant smoke required (PRD-000 = zero-SDK static app); fidelity screenshot-diff + axe a11y are the bar, both green. Content SDK editor/preview verification N/A. smoke_outcomes left empty → status = tested (NOT tested_pending_smoke)."
+    },
+    {
+      "stage": "shipped",
+      "agent": "02-product-manager",
+      "entered_at": "2026-06-10T17:05:00Z",
+      "exited_at": "2026-06-10T17:15:00Z",
+      "outcome": "completed",
+      "one_line": "PRD-000 (Acts 1-2) SHIPPED: all 5 user stories + §12 gates delivered; no smoke required; v5b Flux static app + content-model spec; PR opened",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/plans/ship-report-20260609T150924Z.md"
+      ],
+      "escalations": [],
+      "error": null,
+      "notes": "Clean ship (no caveats): smoke_outcomes empty = no smoke required; all requirements delivered. Act 3 = future PRD-001."
+    },
+    {
+      "stage": "documented",
+      "agent": "02-product-manager",
+      "entered_at": "2026-06-10T17:15:00Z",
+      "exited_at": "2026-06-10T17:16:00Z",
+      "outcome": "completed",
+      "one_line": "Auto-lite docs emission from /ship: README.md + CHANGELOG.md",
+      "deliverables": [
+        "products/head-application/aphelion/README.md",
+        "products/head-application/aphelion/CHANGELOG.md"
+      ],
+      "escalations": [],
+      "error": null,
+      "notes": "auto-lite emission from /ship (Doc Writer 09 not invoked; scope_dial.docs_at_ship=auto-lite)."
+    },
+    {
+      "stage": "archived",
+      "agent": "02-product-manager",
+      "entered_at": "2026-06-10T17:16:00Z",
+      "exited_at": "2026-06-10T17:18:00Z",
+      "outcome": "partial",
+      "one_line": "Post-ship sweep: moved scaffolding (minimal, architecture, task-breakdown, code-review, test-report, 8 ui-design specs, 7/8 POCs incl. winner v5b) to archive/; durable record kept",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/archive/PRD/prd-minimal-000.md",
+        "products/head-application/aphelion/project-planning/archive/architecture/architecture-20260609T150924Z.md",
+        "products/head-application/aphelion/project-planning/archive/plans/task-breakdown-20260609T150924Z.md",
+        "products/head-application/aphelion/project-planning/archive/plans/code-review-20260609T150924Z.md",
+        "products/head-application/aphelion/project-planning/archive/plans/test-report-20260609T150924Z.md",
+        "products/head-application/aphelion/project-planning/archive/ui-design/",
+        "products/head-application/aphelion/project-planning/archive/pocs/"
+      ],
+      "escalations": [],
+      "error": null,
+      "notes": "POC sweep partial: pocs/poc-v2-prd000 (a losing variant) stayed put due to a Windows file lock (Permission denied); winner poc-v5b moved. Durable kept in canonical folders: prd-000.md, ADRs, ship-report, STATUS.md, sitecore-content-model.md, manifests."
+    },
+    {
+      "stage": "post_ship_fix",
+      "agent": "08-developer",
+      "entered_at": "2026-06-10T17:40:00Z",
+      "exited_at": "2026-06-10T18:30:00Z",
+      "outcome": "completed",
+      "one_line": "Operator-found CRITICAL post-ship bug: reveal-on-scroll never fired → all content below hero invisible. Root cause CSS specificity inversion; fixed + regression test added; 99 Playwright + 100 Vitest green",
+      "deliverables": [
+        "products/head-application/aphelion/static/src/ui/reveal-controller.tsx",
+        "products/head-application/aphelion/static/src/app/globals.css",
+        "products/head-application/aphelion/static/public/theme-init.js",
+        "products/head-application/aphelion/static/src/app/layout.tsx",
+        "products/head-application/aphelion/static/tests/e2e/reveal.spec.ts",
+        "products/head-application/aphelion/static/tests/e2e/fidelity.spec.ts"
+      ],
+      "escalations": [
+        {
+          "severity": "warn",
+          "kind": "concern",
+          "item": "Framework gap: fidelity screenshot gate runs prefers-reduced-motion (force-shows content via opacity:1!important), so it was BLIND to a motion-on reveal-never-fires bug. The gate gave false-green. New reveal.spec.ts (motion-ON) is the guard. Fold back into QA/test contract for any reveal-on-scroll design.",
+          "resolved_at": null
+        }
+      ],
+      "error": null,
+      "notes": "Also exposed: the prior fix sub-agent reported 'all green' while Playwright silently reused a STALE :3000 dev server (reuseExistingServer). Verify against a fresh prod build, never a leftover dev server. commit 78bb7e1."
+    }
+  ],
+  "implementation": {
+    "mode": "pipeline",
+    "target_directory": "static",
+    "branch_name": "prd-000",
+    "remote_url": "https://github.com/Chris1415/Project.Aphelion.git",
+    "status": "completed",
+    "resumed_from_stage": null
+  },
+  "smoke_outcomes": {},
+  "operator_attention": [
+    {
+      "stage": "create-prd",
+      "severity": "info",
+      "kind": "decision",
+      "item": "NEW-site build split into PRD-000 (Acts 1-2, no tenant) + later PRD-001 (Act 3, live tenant) — ADR-0002",
+      "raised_at": "2026-06-09T15:08:00Z",
+      "resolved_at": null,
+      "references": "project-planning/ADR/adr-0002-two-prd-split-acts-1-2-vs-act-3.md"
+    },
+    {
+      "stage": "create-prd",
+      "severity": "warn",
+      "kind": "assumption",
+      "item": "Newsletter + Contact are presentational-only in v1 (no submit backend) — Assumption A1 / ADR-0006",
+      "raised_at": "2026-06-09T15:11:00Z",
+      "resolved_at": null,
+      "references": "project-planning/ADR/adr-0006-presentational-only-forms-v1.md"
+    },
+    {
+      "stage": "create-prd",
+      "severity": "info",
+      "kind": "question",
+      "item": "Typography pairing + accent hue (OQ-1) and final destination/experience content set (OQ-2) deferred to /architect (UI Designer proposes 2 variants)",
+      "raised_at": "2026-06-09T15:11:00Z",
+      "resolved_at": "2026-06-10T00:00:00Z",
+      "references": "project-planning/PRD/prd-000.md#14-open-questions"
+    },
+    {
+      "stage": "architect",
+      "severity": "info",
+      "kind": "decision",
+      "item": "UI direction locked = v5b 'Flux' (Nebula Drift abstract-render edition); poc-v5b-prd000 is visual source of truth. Resolves OQ-1/OQ-2.",
+      "raised_at": "2026-06-10T00:00:00Z",
+      "resolved_at": "2026-06-10T00:00:00Z",
+      "references": "project-planning/ui-design/ui-design-20260609T150924Z-v5b.md"
+    },
+    {
+      "stage": "architect",
+      "severity": "warn",
+      "kind": "concern",
+      "item": "v5b carry-forward to /implement: self-host Clash Display (Fontshare) or ship Outfit-as-display; guard SVG #gooey filter perf (NFR-1) with reduced-motion freeze; flesh Home-only POC to all 5 routes; real Unsplash imagery is royalty-free (PRD-compliant) but needs network.",
+      "raised_at": "2026-06-10T00:00:00Z",
+      "resolved_at": null,
+      "references": "project-planning/ui-design/ui-design-20260609T150924Z-v5b.md#7-open-questions-handoff-image-sources"
+    },
+    {
+      "stage": "task-breakdown",
+      "severity": "info",
+      "kind": "assumption",
+      "item": "§4c-6 marked N/A (no backend/live SDK in PRD-000) — intentional; SDK-contract + real-tenant smoke deferred to PRD-001. Validate this is acceptable.",
+      "raised_at": "2026-06-10T00:32:00Z",
+      "resolved_at": null,
+      "references": "project-planning/plans/task-breakdown-20260609T150924Z.md"
+    },
+    {
+      "stage": "task-breakdown",
+      "severity": "info",
+      "kind": "assumption",
+      "item": "POC is Home-only — inner routes (Destinations/Experiences/About/Contact, T030-T032) fidelity-verified against their own committed Playwright baselines, not a POC frame. Your fidelity review of inner routes is judgment, not POC-diff.",
+      "raised_at": "2026-06-10T00:32:00Z",
+      "resolved_at": null,
+      "references": "project-planning/plans/task-breakdown-20260609T150924Z.md"
+    },
+    {
+      "stage": "implement",
+      "severity": "info",
+      "kind": "concern",
+      "item": "Screenshot-diff baselines are FIRST-RUN (20 PNGs) — they catch future regressions but final Home visual fidelity vs the v5b POC is YOUR visual judgment. Recommend opening the running app + the POC side by side at /code-review or /test.",
+      "raised_at": "2026-06-10T16:00:00Z",
+      "resolved_at": null,
+      "references": "products/head-application/aphelion/static/tests/e2e/fidelity.spec.ts-snapshots/"
+    },
+    {
+      "stage": "implement",
+      "severity": "warn",
+      "kind": "decision",
+      "item": "sitecore-content-model.md flags 3 net-new operator decisions for Act-2 (PRD-001): (1) HeroMeta array → flatten to 6 fields? (2) ContactDetails is inline in the route → needs its own rendering + datasource template; (3) Marquee items sourcing TBD. Resolve at PRD-001 kickoff, not now.",
+      "raised_at": "2026-06-10T16:00:00Z",
+      "resolved_at": null,
+      "references": "project-planning/sitecore-content-model.md"
+    }
+  ],
+  "archive": {},
+  "notes": {
+    "base_branch": "main",
+    "stacked_on": null,
+    "sdk_surface_split": "n/a",
+    "discovery_level": "standard",
+    "discovery_summary": "confirmed",
+    "critical_review": "completed",
+    "critical_review_level": "standard",
+    "scope_dial": "asked",
+    "lineage": "PRD-000 = Acts 1-2 of Content SDK NEW-site flow (static app + content-model spec). PRD-001 (future) = Act 3 (head-app port + deploy). Dogfood of custom_content-sdk-website-build-flow."
+  }
+}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Destinations — Aphelion</title>
+  <meta name="description" content="The Aphelion destination register — orbital terraces, lunar surveys, and Lagrange overlooks, each with its operating window.">
+  <script>
+    (function () {
+      try {
+        var p = localStorage.getItem("aphelion-theme") || "system";
+        var dark = p === "dark" || (p === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        if (dark) document.documentElement.classList.add("dark");
+      } catch (e) {}
+      document.documentElement.classList.add("js");
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="shell">
+      <input type="checkbox" id="nav-toggle" aria-hidden="true">
+      <div class="header-bar">
+        <a class="brand" href="index.html" aria-label="Aphelion home">
+          <svg class="mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10.5" stroke="currentColor"></circle>
+            <ellipse cx="12" cy="12" rx="10.5" ry="4" stroke="currentColor" opacity="0.5"></ellipse>
+            <circle cx="20" cy="9" r="2" fill="var(--accent-500)"></circle>
+          </svg>
+          Aphelion<span class="tld">001</span>
+        </a>
+        <nav class="primary-nav" aria-label="Primary">
+          <a class="nav-link" href="destinations.html" aria-current="page">Destinations</a>
+          <a class="nav-link" href="experiences.html">Experiences</a>
+          <a class="nav-link" href="about.html">About</a>
+          <a class="nav-link" href="contact.html">Contact</a>
+        </nav>
+        <div class="header-actions">
+          <div class="theme-toggle" role="group" aria-label="Color theme">
+            <button type="button" data-theme="light" aria-pressed="false" title="Light" aria-label="Light theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"></path></svg></button>
+            <button type="button" data-theme="dark" aria-pressed="false" title="Dark" aria-label="Dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg></button>
+            <button type="button" data-theme="system" aria-pressed="false" title="System" aria-label="System theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="1"></rect><path d="M8 21h8M12 17v4"></path></svg></button>
+          </div>
+          <label class="hamburger" for="nav-toggle" tabindex="0" role="button" aria-label="Toggle menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg></label>
+        </div>
+      </div>
+      <nav class="mobile-nav" aria-label="Mobile">
+        <a href="destinations.html" aria-current="page"><span>Destinations</span><span class="n">01</span></a>
+        <a href="experiences.html"><span>Experiences</span><span class="n">02</span></a>
+        <a href="about.html"><span>About</span><span class="n">03</span></a>
+        <a href="contact.html"><span>Contact</span><span class="n">04</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+      <div class="shell">
+        <div class="crumb"><a class="link" href="index.html">Home</a><span class="sep" aria-hidden="true">/</span><span>Destinations</span></div>
+        <div class="grid12">
+          <div class="page-hero__title">
+            <span class="eyebrow" style="display:block;margin-bottom:var(--s-5)">01 — The register</span>
+            <h1 class="display">Where we are<br>cleared to fly.</h1>
+            <p class="lead" style="margin-top:var(--s-5);max-width:48ch">Six destinations, each with a certified flight profile and an honest operating window. We list none we cannot fly.</p>
+          </div>
+          <div class="page-hero__meta">
+            <div class="big tnum">06</div>
+            <div class="lbl">Active destinations</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESTINATION INDEX — hairline table-card hybrid -->
+    <section class="section--tight">
+      <div class="shell">
+        <div class="idx">
+          <span class="idx__no">↳</span><span class="idx__dash">—</span>
+          <span class="idx__title">Sorted by departure window</span>
+          <span class="idx__meta">Distance · Duration · Window</span>
+        </div>
+
+        <div class="dest-index" role="list">
+          <!-- row 1 -->
+          <a class="dest-row reveal" role="listitem" href="contact.html" aria-label="Lagrange Terrace — request briefing">
+            <span class="dest-no tnum">01</span>
+            <span class="dest-name">Lagrange Terrace<span class="tag">Earth–Moon L2 overlook · Boarding now</span></span>
+            <span class="dest-cell"><span class="ck">Distance</span><span class="cv tnum">448,900 km</span></span>
+            <span class="dest-cell"><span class="ck">Duration</span><span class="cv tnum">6 days</span></span>
+            <span class="dest-cell"><span class="ck">Window</span><span class="cv">Apr — Sep</span></span>
+            <span class="dest-go">Brief <span class="arrow" aria-hidden="true">→</span></span>
+          </a>
+          <!-- row 2 -->
+          <a class="dest-row reveal" role="listitem" href="contact.html" aria-label="Aurora Station — request briefing">
+            <span class="dest-no tnum">02</span>
+            <span class="dest-name">Aurora Station<span class="tag">Polar low-orbit habitat · Q3 2027</span></span>
+            <span class="dest-cell"><span class="ck">Altitude</span><span class="cv tnum">420 km</span></span>
+            <span class="dest-cell"><span class="ck">Duration</span><span class="cv tnum">11 days</span></span>
+            <span class="dest-cell"><span class="ck">Window</span><span class="cv">Year-round</span></span>
+            <span class="dest-go">Brief <span class="arrow" aria-hidden="true">→</span></span>
+          </a>
+          <!-- row 3 -->
+          <a class="dest-row reveal" role="listitem" href="contact.html" aria-label="Marius Hills — request briefing">
+            <span class="dest-no tnum">03</span>
+            <span class="dest-name">Marius Hills<span class="tag">Lunar volcanic survey flyover · Survey</span></span>
+            <span class="dest-cell"><span class="ck">Distance</span><span class="cv tnum">384,400 km</span></span>
+            <span class="dest-cell"><span class="ck">Duration</span><span class="cv tnum">9 days</span></span>
+            <span class="dest-cell"><span class="ck">Window</span><span class="cv">Feb, Oct</span></span>
+            <span class="dest-go">Brief <span class="arrow" aria-hidden="true">→</span></span>
+          </a>
+          <!-- row 4 -->
+          <a class="dest-row reveal" role="listitem" href="contact.html" aria-label="Meridian Arc — request briefing">
+            <span class="dest-no tnum">04</span>
+            <span class="dest-name">Meridian Arc<span class="tag">Equatorial sunrise-chase orbit · 2028</span></span>
+            <span class="dest-cell"><span class="ck">Altitude</span><span class="cv tnum">390 km</span></span>
+            <span class="dest-cell"><span class="ck">Duration</span><span class="cv tnum">5 days</span></span>
+            <span class="dest-cell"><span class="ck">Window</span><span class="cv">Mar — Nov</span></span>
+            <span class="dest-go">Brief <span class="arrow" aria-hidden="true">→</span></span>
+          </a>
+          <!-- row 5 -->
+          <a class="dest-row reveal" role="listitem" href="contact.html" aria-label="Perihelion Deck — request briefing">
+            <span class="dest-no tnum">05</span>
+            <span class="dest-name">Perihelion Deck<span class="tag">High-inclination night-side transit · Limited</span></span>
+            <span class="dest-cell"><span class="ck">Altitude</span><span class="cv tnum">540 km</span></span>
+            <span class="dest-cell"><span class="ck">Duration</span><span class="cv tnum">8 days</span></span>
+            <span class="dest-cell"><span class="ck">Window</span><span class="cv">Jun — Aug</span></span>
+            <span class="dest-go">Brief <span class="arrow" aria-hidden="true">→</span></span>
+          </a>
+          <!-- row 6 -->
+          <a class="dest-row reveal" role="listitem" href="contact.html" aria-label="Sea of Serenity — request briefing">
+            <span class="dest-no tnum">06</span>
+            <span class="dest-name">Sea of Serenity<span class="tag">Lunar nearside descent · Application only</span></span>
+            <span class="dest-cell"><span class="ck">Distance</span><span class="cv tnum">384,400 km</span></span>
+            <span class="dest-cell"><span class="ck">Duration</span><span class="cv tnum">12 days</span></span>
+            <span class="dest-cell"><span class="ck">Window</span><span class="cv">By invitation</span></span>
+            <span class="dest-go">Brief <span class="arrow" aria-hidden="true">→</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED PLATE CARDS -->
+    <section class="section">
+      <div class="shell">
+        <div class="idx">
+          <span class="idx__no">02</span><span class="idx__dash">—</span>
+          <span class="idx__title">Open this season</span>
+          <span class="idx__meta">Boarding &amp; near-term windows</span>
+        </div>
+        <div class="grid12 dest-cards">
+          <article class="dest-card reveal">
+            <div class="plate-wrap"><span class="badge badge--live">Boarding</span><div class="plate" aria-hidden="true"></div></div>
+            <div class="dest-card__body">
+              <h4>Lagrange Terrace</h4>
+              <p class="muted">The planet, held perfectly still. Our longest-running and most requested overlook.</p>
+              <div class="mini-sheet"><dl><dt>Distance</dt><dd>448,900 km</dd><dt>Duration</dt><dd>6 days</dd><dt>Window</dt><dd>Apr — Sep</dd></dl></div>
+            </div>
+          </article>
+          <article class="dest-card reveal">
+            <div class="plate-wrap"><span class="badge">Survey</span><div class="plate" aria-hidden="true"></div></div>
+            <div class="dest-card__body">
+              <h4>Marius Hills</h4>
+              <p class="muted">A low, slow pass over the Moon's volcanic skylights with a planetary geologist aboard.</p>
+              <div class="mini-sheet"><dl><dt>Distance</dt><dd>384,400 km</dd><dt>Duration</dt><dd>9 days</dd><dt>Window</dt><dd>Feb, Oct</dd></dl></div>
+            </div>
+          </article>
+          <article class="dest-card reveal">
+            <div class="plate-wrap"><span class="badge badge--live">Limited</span><div class="plate" aria-hidden="true"></div></div>
+            <div class="dest-card__body">
+              <h4>Perihelion Deck</h4>
+              <p class="muted">Night-side transits timed to meteor streams. Eight seats per window, and they do not last.</p>
+              <div class="mini-sheet"><dl><dt>Altitude</dt><dd>540 km</dd><dt>Duration</dt><dd>8 days</dd><dt>Window</dt><dd>Jun — Aug</dd></dl></div>
+            </div>
+          </article>
+        </div>
+        <div style="margin-top:var(--s-7)"><a class="btn btn--accent" href="contact.html">Reserve a window <span class="arrow" aria-hidden="true">→</span></a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="grid12 footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html"><svg class="mark" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10.5" stroke="currentColor"></circle><ellipse cx="12" cy="12" rx="10.5" ry="4" stroke="currentColor" opacity="0.5"></ellipse><circle cx="20" cy="9" r="2" fill="var(--accent-500)"></circle></svg>Aphelion<span class="tld">001</span></a>
+          <p class="blurb">Human spaceflight, engineered with the patience of an instrument. Aphelion is a fictional brand built as a design reference.</p>
+        </div>
+        <div class="footer-col"><h5>Flight</h5><ul><li><a href="destinations.html">Destinations</a></li><li><a href="experiences.html">Experiences</a></li><li><a href="index.html#stats">Fleet</a></li></ul></div>
+        <div class="footer-col"><h5>Program</h5><ul><li><a href="about.html">About</a></li><li><a href="about.html#principles">Principles</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div class="footer-col"><h5>Signal</h5><ul><li><a href="contact.html">Apsis Circle</a></li><li><a href="index.html#news">Dispatch</a></li><li><a href="contact.html">Press</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span class="meta">© <span data-year>2026</span> Aphelion Flight Program · Fictional brand</span>
+        <span class="meta tnum">Lat 28.5729° N · Lon 80.6490° W · Pad 39B</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="theme.js"></script>
+</body>
+</html>

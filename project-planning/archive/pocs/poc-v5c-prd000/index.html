@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aphelion — Commercial Spaceflight &amp; Cosmos Living | "Pulse" (v5c)</title>
+<meta name="description" content="Aphelion — premium commercial spaceflight. Book orbital stays, lunar arcs and deep-field expeditions. (Design POC v5c 'Pulse'.)" />
+
+<!-- =======================================================================
+     IMAGE SOURCES — all royalty-free under the Unsplash License
+     (https://unsplash.com/license — free to use, no attribution required,
+     no copyrighted/branded assets). Hotlinked at w=1200&q=80 via the stable
+     images.unsplash.com CDN. Every <img> also has a CSS mesh-gradient
+     fallback (.portal-fallback / --img-fallback) so the page renders fully
+     offline. PRD-000 compliance: §6 imagery royalty-free/placeholder only.
+
+       hero (Earth limb from orbit)  photo-1614728263952-84ea256f9679
+       hero-sm (astronaut EVA)        photo-1517976487492-5750f3195933
+       Orbital Reef (Earth/night)     photo-1451187580459-43490279c0fa
+       Lunar Gateway (the Moon)       photo-1522030299830-16b8d3d049fe
+       Mars Verge (red planet)        photo-1614642264762-d0a3b8bf3700
+       Saturn Skiff (ringed planet)   photo-1614313913007-2b4ae8ce32d6
+       Aurora Belt (nebula)           photo-1462331940025-496dfbfc7564
+       Deep Field (galaxy)            photo-1543722530-d2c3201371e7
+       exp Zero-G Atelier (astronaut) photo-1454789548928-9efd52dc4031
+       exp Aurora Drift (aurora)      photo-1419242902214-272b3f66ee7a
+       exp Deep-Field (stars)         photo-1502134249126-9f3755a50d78
+       promo (Earth from space)       photo-1446776811953-b23d57bd21aa
+======================================================================= -->
+
+<!-- FOUC preflight: set theme before first paint (no flash on hard reload). -->
+<script>
+(function () {
+  try {
+    var k = 'aphelion-theme', p = localStorage.getItem(k) || 'system';
+    var dark = p === 'dark' || (p === 'system' &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+})();
+</script>
+
+<link rel="stylesheet" href="styles.css" />
+<script src="theme.js" defer></script>
+</head>
+<body>
+
+<!-- scroll-progress aurora -->
+<div class="scroll-aurora" aria-hidden="true"></div>
+
+<!-- ============================ HEADER ============================ -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="Aphelion home">
+      <span class="mark" aria-hidden="true"></span> Aphelion
+    </a>
+    <nav class="nav-desktop" aria-label="Primary">
+      <a href="#destinations">Destinations</a>
+      <a href="#experiences">Experiences</a>
+      <a href="#about">About</a>
+      <a href="#mission-log">Mission Log</a>
+      <a href="#newsletter">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">
+        <span data-theme-icon aria-hidden="true">◐</span>
+        <span data-theme-text>System</span>
+      </button>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span aria-hidden="true">☰</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- mobile drawer -->
+<div class="nav-scrim" aria-hidden="true"></div>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile" aria-hidden="true">
+  <div class="mn-head">
+    <span class="brand"><span class="mark" aria-hidden="true"></span> Aphelion</span>
+    <button class="menu-toggle mn-close" type="button" aria-label="Close menu" style="display:inline-flex">✕</button>
+  </div>
+  <a href="#destinations">Destinations</a>
+  <a href="#experiences">Experiences</a>
+  <a href="#about">About</a>
+  <a href="#mission-log">Mission Log</a>
+  <a href="#newsletter">Contact</a>
+</nav>
+
+<main id="top">
+
+  <!-- ============================ HERO ============================ -->
+  <section class="hero band atmos">
+    <div class="mesh" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="orb" aria-hidden="true"></div>
+    <svg class="stars" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 100">
+      <g fill="#fff">
+        <circle cx="12" cy="18" r="0.25"/><circle cx="28" cy="62" r="0.3"/><circle cx="44" cy="12" r="0.2"/>
+        <circle cx="63" cy="44" r="0.28"/><circle cx="81" cy="26" r="0.22"/><circle cx="91" cy="71" r="0.3"/>
+        <circle cx="7" cy="83" r="0.24"/><circle cx="36" cy="88" r="0.2"/><circle cx="55" cy="77" r="0.26"/>
+        <circle cx="72" cy="9" r="0.22"/><circle cx="19" cy="40" r="0.2"/><circle cx="48" cy="33" r="0.24"/>
+      </g>
+    </svg>
+
+    <div class="wrap hero-grid">
+      <div class="hero-copy" data-reveal>
+        <span class="eyebrow">Commercial spaceflight · Est. 2031</span>
+        <h1><span class="kinetic">Live where the&nbsp;sky&nbsp;ends.</span></h1>
+        <p class="lede">Aphelion runs scheduled passenger flights to orbit and beyond — orbital
+          residences, lunar arcs and deep-field expeditions, flown with quiet luxury and
+          a perfect safety record.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#destinations">Browse destinations</a>
+          <a class="btn btn-glow" href="#experiences">View experiences</a>
+        </div>
+        <div class="hero-meta">
+          <div><div class="v kinetic">214</div><div class="l">Crewed launches</div></div>
+          <div><div class="v kinetic">9</div><div class="l">Active destinations</div></div>
+          <div><div class="v kinetic">100%</div><div class="l">Safe-return record</div></div>
+        </div>
+      </div>
+
+      <div class="hero-portal-stage tilt" data-reveal>
+        <div class="portal hero-portal lift">
+          <img loading="eager" alt="Earth's curved horizon glowing against the black of space"
+               src="https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=1200&q=80" />
+          <span class="portal-fallback" aria-hidden="true"></span>
+        </div>
+        <div class="portal hero-portal-sm lift-sm">
+          <img loading="lazy" alt="Astronaut on a spacewalk above Earth"
+               src="https://images.unsplash.com/photo-1517976487492-5750f3195933?w=1200&q=80" />
+          <span class="portal-fallback" aria-hidden="true"></span>
+        </div>
+        <div class="badge"><span>Next departure</span><strong>T‑minus 38 days</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ VALUE PROPS ============================ -->
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Why Aphelion</span>
+        <h2>Spaceflight, finally worth the window seat.</h2>
+        <p>Three decades of flight heritage, distilled into journeys that feel less like a
+          mission and more like an arrival.</p>
+      </div>
+      <div class="grid grid-3">
+        <article class="card" data-reveal>
+          <div class="glyph" aria-hidden="true">⤢</div>
+          <h3>Quiet luxury, in orbit</h3>
+          <p>Private cabins, panoramic cupolas and a crew-to-guest ratio that keeps every
+            moment unhurried — 400&nbsp;km above the noise.</p>
+        </article>
+        <article class="card" data-reveal>
+          <div class="glyph" aria-hidden="true">◇</div>
+          <h3>A perfect record</h3>
+          <p>214 crewed launches, every crew home safe. Triple-redundant systems and
+            ex-agency flight directors on every mission.</p>
+        </article>
+        <article class="card" data-reveal>
+          <div class="glyph" aria-hidden="true">✶</div>
+          <h3>Trained, not rushed</h3>
+          <p>A four-day acclimation program at our coastal launch campus means you arrive
+            in orbit ready — not reeling.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ DESTINATIONS ============================ -->
+  <section class="band atmos" id="destinations">
+    <div class="mesh" aria-hidden="true" style="opacity:.5"></div>
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Destinations</span>
+        <h2>Six ways to leave the planet.</h2>
+        <p>From a weekend in low orbit to a month at the edge of the deep field — each
+          flight is hand-flown by an Aphelion crew.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <!-- 1 -->
+        <article class="card dest-card tilt" data-reveal>
+          <div class="portal dest-portal lift">
+            <img loading="lazy" alt="Earth's city lights at night seen from orbit"
+                 src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80" />
+            <span class="portal-fallback" aria-hidden="true"></span>
+          </div>
+          <div class="dest-body">
+            <div class="dest-row"><h3>Orbital Reef</h3><span class="dest-tag">Low orbit</span></div>
+            <p class="dest-desc">A three-night stay aboard our flagship station, 410&nbsp;km up,
+              with sixteen sunrises a day.</p>
+            <a class="dest-link" href="#">Plan this flight</a>
+          </div>
+        </article>
+        <!-- 2 -->
+        <article class="card dest-card tilt" data-reveal>
+          <div class="portal dest-portal lift">
+            <img loading="lazy" alt="The Moon's cratered surface in sharp detail"
+                 src="https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=1200&q=80" />
+            <span class="portal-fallback" aria-hidden="true"></span>
+          </div>
+          <div class="dest-body">
+            <div class="dest-row"><h3>Lunar Gateway</h3><span class="dest-tag">Cislunar</span></div>
+            <p class="dest-desc">A free-return arc around the far side of the Moon — the original
+              view that started it all.</p>
+            <a class="dest-link" href="#">Plan this flight</a>
+          </div>
+        </article>
+        <!-- 3 -->
+        <article class="card dest-card tilt" data-reveal>
+          <div class="portal dest-portal lift">
+            <img loading="lazy" alt="The red planet Mars against deep space"
+                 src="https://images.unsplash.com/photo-1614642264762-d0a3b8bf3700?w=1200&q=80" />
+            <span class="portal-fallback" aria-hidden="true"></span>
+          </div>
+          <div class="dest-body">
+            <div class="dest-row"><h3>Mars Verge</h3><span class="dest-tag">Interplanetary</span></div>
+            <p class="dest-desc">Our long-haul flagship: a slow flyby of the red planet aboard the
+              cycler <em>Meridian</em>.</p>
+            <a class="dest-link" href="#">Join the waitlist</a>
+          </div>
+        </article>
+        <!-- 4 -->
+        <article class="card dest-card tilt" data-reveal>
+          <div class="portal dest-portal lift">
+            <img loading="lazy" alt="Saturn and its rings"
+                 src="https://images.unsplash.com/photo-1614313913007-2b4ae8ce32d6?w=1200&q=80" />
+            <span class="portal-fallback" aria-hidden="true"></span>
+          </div>
+          <div class="dest-body">
+            <div class="dest-row"><h3>Saturn Skiff</h3><span class="dest-tag">Outer system</span></div>
+            <p class="dest-desc">A charter expedition to the ringed giant for those who measure
+              travel in years, not nights.</p>
+            <a class="dest-link" href="#">Enquire</a>
+          </div>
+        </article>
+        <!-- 5 -->
+        <article class="card dest-card tilt" data-reveal>
+          <div class="portal dest-portal lift">
+            <img loading="lazy" alt="A glowing pink and blue nebula"
+                 src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1200&q=80" />
+            <span class="portal-fallback" aria-hidden="true"></span>
+          </div>
+          <div class="dest-body">
+            <div class="dest-row"><h3>Aurora Belt</h3><span class="dest-tag">High orbit</span></div>
+            <p class="dest-desc">A polar-orbit flight timed to the solar maximum — the auroras,
+              seen from above the storm.</p>
+            <a class="dest-link" href="#">Plan this flight</a>
+          </div>
+        </article>
+        <!-- 6 -->
+        <article class="card dest-card tilt" data-reveal>
+          <div class="portal dest-portal lift">
+            <img loading="lazy" alt="A distant spiral galaxy in deep space"
+                 src="https://images.unsplash.com/photo-1543722530-d2c3201371e7?w=1200&q=80" />
+            <span class="portal-fallback" aria-hidden="true"></span>
+          </div>
+          <div class="dest-body">
+            <div class="dest-row"><h3>Deep Field</h3><span class="dest-tag">Expedition</span></div>
+            <p class="dest-desc">A month at our deep-space observatory platform, beyond the
+              shine of the inner planets.</p>
+            <a class="dest-link" href="#">Join the waitlist</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ EXPERIENCES ============================ -->
+  <section class="band" id="experiences">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Experiences</span>
+        <h2>What you do once you&apos;re up there.</h2>
+        <p>Every flight includes a curated program — designed by people who have actually
+          flown the route.</p>
+      </div>
+
+      <div class="exp-item" data-reveal>
+        <div class="exp-media">
+          <div class="portal arch exp-portal">
+            <img loading="lazy" alt="Astronaut floating in zero gravity"
+                 src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?w=1200&q=80" />
+            <span class="portal-fallback" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="exp-copy">
+          <span class="dur">Half-day · in-orbit</span>
+          <h3>The Zero‑G Atelier</h3>
+          <p>Paint, pour and play with liquid in microgravity alongside a resident artist.
+            Whatever you make, you keep — sealed and flown home with you.</p>
+          <a class="btn btn-ghost" href="#">See the program</a>
+        </div>
+      </div>
+
+      <div class="exp-item" data-reveal>
+        <div class="exp-media">
+          <div class="portal arch exp-portal">
+            <img loading="lazy" alt="Green aurora over a dark sky"
+                 src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1200&q=80" />
+            <span class="portal-fallback" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="exp-copy">
+          <span class="dur">Timed window · cupola</span>
+          <h3>Aurora Drift Dining</h3>
+          <p>A seven-course tasting served in the observation cupola, timed to a pass over
+            the southern lights. The longest dinner reservation of your life.</p>
+          <a class="btn btn-ghost" href="#">See the program</a>
+        </div>
+      </div>
+
+      <div class="exp-item" data-reveal>
+        <div class="exp-media">
+          <div class="portal arch exp-portal">
+            <img loading="lazy" alt="A dense field of stars in the night sky"
+                 src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=1200&q=80" />
+            <span class="portal-fallback" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="exp-copy">
+          <span class="dur">Overnight · observatory</span>
+          <h3>Deep‑Field Observing</h3>
+          <p>Take the controls of a half-metre telescope clear of every atmosphere, guided
+            by an on-board astronomer. Name a star — we&apos;ll log it on the flight.</p>
+          <a class="btn btn-ghost" href="#">See the program</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ STATS ============================ -->
+  <section class="band atmos stats-band">
+    <div class="mesh" aria-hidden="true" style="opacity:.45"></div>
+    <div class="wrap">
+      <div class="stats-grid">
+        <div class="stat" data-reveal><div class="v kinetic">214</div><div class="l">Crewed launches</div></div>
+        <div class="stat" data-reveal><div class="v kinetic">11,640</div><div class="l">Guests flown</div></div>
+        <div class="stat" data-reveal><div class="v kinetic">409 km</div><div class="l">Flagship altitude</div></div>
+        <div class="stat" data-reveal><div class="v kinetic">100%</div><div class="l">Safe-return record</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ PROMO ============================ -->
+  <section class="band" id="about">
+    <div class="wrap">
+      <div class="promo" data-reveal>
+        <div class="mesh" aria-hidden="true" style="opacity:.3"></div>
+        <div class="promo-inner">
+          <span class="eyebrow">The 2032 season is open</span>
+          <h2>Reserve a seat on the next flight out.</h2>
+          <p>Spring departures to Orbital Reef and the Lunar Gateway are now booking. Hold a
+            seat with a refundable deposit and begin your flight-readiness program this month.</p>
+          <a class="btn btn-primary" href="#newsletter">Hold a seat</a>
+        </div>
+        <div class="portal arch promo-portal tilt lift">
+          <img loading="lazy" alt="Earth seen from space with the Sun rising over the limb"
+               src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1200&q=80" />
+          <span class="portal-fallback" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ TESTIMONIALS ============================ -->
+  <section class="band atmos" id="mission-log">
+    <div class="mesh" aria-hidden="true" style="opacity:.45"></div>
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Mission Log</span>
+        <h2>From the people who&apos;ve flown.</h2>
+      </div>
+      <div class="grid grid-3">
+        <article class="card quote-card" data-reveal>
+          <blockquote>&ldquo;I expected a thrill. I got a place that felt like home with the
+            whole Earth in the window.&rdquo;</blockquote>
+          <div class="quote-author">
+            <span class="quote-avatar" aria-hidden="true"></span>
+            <div><div class="name">Dr. Lena Okafor</div><div class="role">Orbital Reef · Flight 188</div></div>
+          </div>
+        </article>
+        <article class="card quote-card" data-reveal>
+          <blockquote>&ldquo;The far side of the Moon in silence. Three days later I&apos;m still
+            not sure I&apos;ve fully come back.&rdquo;</blockquote>
+          <div class="quote-author">
+            <span class="quote-avatar" aria-hidden="true"></span>
+            <div><div class="name">Marco Vance</div><div class="role">Lunar Gateway · Flight 201</div></div>
+          </div>
+        </article>
+        <article class="card quote-card" data-reveal>
+          <blockquote>&ldquo;The crew never once made it feel like a stunt. It felt like the most
+            natural journey in the world.&rdquo;</blockquote>
+          <div class="quote-author">
+            <span class="quote-avatar" aria-hidden="true"></span>
+            <div><div class="name">Priya Anand</div><div class="role">Aurora Belt · Flight 176</div></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ NEWSLETTER ============================ -->
+  <section class="band" id="newsletter">
+    <div class="wrap">
+      <div class="newsletter" data-reveal>
+        <div class="mesh" aria-hidden="true" style="opacity:.3"></div>
+        <span class="eyebrow">Flight manifest</span>
+        <h2>Get the manifest before launch.</h2>
+        <p>New destinations, departure windows and member-only charters — a few times a year,
+          never more.</p>
+        <form class="nl-form" novalidate>
+          <div class="nl-field">
+            <label class="sr-only" for="nl-email">Email address</label>
+            <input class="input" id="nl-email" name="email" type="email" inputmode="email"
+                   placeholder="you@orbit.example" autocomplete="email"
+                   aria-describedby="nl-error" aria-invalid="false" />
+          </div>
+          <button class="btn btn-primary" type="submit">Request the manifest</button>
+        </form>
+        <p class="field-error is-hidden" id="nl-error" role="alert"></p>
+        <p class="nl-success is-hidden" role="status">You&apos;re on the manifest. Watch your inbox.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="site-footer">
+  <div class="mesh" aria-hidden="true" style="opacity:.25"></div>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <span class="brand"><span class="mark" aria-hidden="true"></span> Aphelion</span>
+        <p>Scheduled commercial spaceflight and cosmos living. Flown with quiet luxury since 2031.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Destinations</h4>
+        <a href="#destinations">Orbital Reef</a>
+        <a href="#destinations">Lunar Gateway</a>
+        <a href="#destinations">Mars Verge</a>
+        <a href="#destinations">Deep Field</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#about">About</a>
+        <a href="#experiences">Experiences</a>
+        <a href="#mission-log">Mission Log</a>
+        <a href="#newsletter">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Fly safe</h4>
+        <a href="#">Safety record</a>
+        <a href="#">Flight readiness</a>
+        <a href="#">Press</a>
+        <a href="#">Careers</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2032 Aphelion Spaceflight. A fictional brand for design purposes.</span>
+      <span>Privacy · Terms · Flight conditions</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
