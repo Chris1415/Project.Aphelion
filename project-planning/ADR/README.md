@@ -18,7 +18,9 @@ This directory holds ADRs for this product workspace.
 | ADR-0010 | A single authoritative componentName registry is the port contract | Accepted |
 | ADR-0011 | Navigation via the component-level navigation pattern (server L1 + lazy L2 Route Handler) | Accepted |
 | ADR-0012 | Home route is a hard verify-gate tranche before the inner routes | Accepted |
+| ADR-0013 | Component-map server/client split keyed to the static `'use client'` boundary | Accepted |
+| ADR-0014 | Editing-safe rendering via stock App-Router draftMode() + getPreview/getDesignLibraryData | Accepted |
 
 ## Next number
 
-Use the next free four-digit id after the highest existing `adr-*.md` (next: ADR-0013).
+Use the next free four-digit id after the highest existing `adr-*.md` (next: ADR-0015).

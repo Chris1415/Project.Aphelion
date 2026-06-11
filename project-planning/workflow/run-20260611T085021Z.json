@@ -6,7 +6,7 @@
   "product_slug": "aphelion",
   "product_root": "products/head-application/aphelion",
   "work_item_type": "prd",
-  "status": "spec_ready",
+  "status": "architecture_ready",
   "prd_input_mode": "prompt_only",
   "platform_target": "content-sdk",
   "task_breakdown_style": "standard",
@@ -39,7 +39,7 @@
     "brain_dump": null,
     "prd": "products/head-application/aphelion/project-planning/PRD/prd-001.md",
     "prd_minimal": "products/head-application/aphelion/project-planning/PRD/prd-minimal-001.md",
-    "architecture": null,
+    "architecture": "products/head-application/aphelion/project-planning/architecture/architecture-20260611T085021Z.md",
     "baseline": null,
     "task_breakdown": null,
     "task_breakdown_pre_qa": null,
@@ -106,6 +106,53 @@
       ],
       "error": null,
       "notes": "Critical review standard; operator answered YES to all six resolutions. SDK-contract gate applies this run (unlike PRD-000)."
+    },
+    {
+      "stage": "architecture_ready",
+      "agent": "04-software-architect",
+      "entered_at": "2026-06-11T09:10:00Z",
+      "exited_at": "2026-06-11T09:25:00Z",
+      "outcome": "completed",
+      "one_line": "Act-3 architecture delta (403 lines): canonical componentName table (13); component-map split (4 client/9 server); port mapping; nav; editing-safe; SDK shapes cited from real .d.ts (getPage single-unwrap); 2 new ADRs (0013/0014)",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/architecture/architecture-20260611T085021Z.md",
+        "products/head-application/aphelion/project-planning/ADR/adr-0013-component-map-server-client-split.md",
+        "products/head-application/aphelion/project-planning/ADR/adr-0014-editing-safe-rendering-stock-draftmode.md"
+      ],
+      "escalations": [
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "SDK-contract gate SATISFIED — field shapes cited from real installed Content SDK .d.ts (playgrounds/training); getPage() = single page.layout unwrap, NOT Marketplace double .data.data. Verify identical at T-scaffold.",
+          "resolved_at": "2026-06-11T09:25:00Z"
+        }
+      ],
+      "error": null,
+      "notes": "2 new ADRs this /architect run (< 5 density hard-stop). UI skipped (design locked). OQ-A env vars scaffold-pinned (read at T-scaffold); OQ-B Marquee delivery resolved by probing Home layout at T-home."
+    },
+    {
+      "stage": "ui_ready",
+      "agent": "05-ui-designer",
+      "entered_at": "2026-06-11T09:25:00Z",
+      "exited_at": "2026-06-11T09:25:00Z",
+      "outcome": "skipped",
+      "one_line": "UI design SKIPPED (scope_dial.ui_variants=skip) — design locked = v5b Flux from PRD-000; static app + poc-v5b are the visual oracle",
+      "deliverables": [],
+      "escalations": [],
+      "error": null,
+      "notes": "Act 3 is a port, not a redesign. No UI Designer / clickdummy this run."
+    },
+    {
+      "stage": "baseline_promoted",
+      "agent": "04-software-architect",
+      "entered_at": "2026-06-11T09:25:00Z",
+      "exited_at": "2026-06-11T09:25:00Z",
+      "outcome": "skipped",
+      "one_line": "Baseline gate met (14 ADRs) but recommended skip: PRD-001 not yet shipped; re-evaluate baseline promotion at PRD-001 ship (ADRs 0001-0008 will have spanned 2 shipped PRDs)",
+      "deliverables": [],
+      "escalations": [],
+      "error": null,
+      "notes": null
     }
   ],
   "implementation": {
