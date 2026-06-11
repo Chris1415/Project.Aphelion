@@ -116,3 +116,57 @@ test('reveal: without html.js class → [data-reveal] content is visible (no-JS 
   // Without html.js class, the hide rule doesn't apply → content visible
   expect(hiddenCount).toBe(0);
 });
+
+// ── Client-side navigation: reveal MUST re-run on App Router soft navigation ──
+// The layout (and RevealController) stays mounted across client-side nav, so the
+// reveal effect must re-run on pathname change — otherwise any page reached by
+// CLICKING a nav link (not a full reload) keeps its content hidden. The goto-based
+// tests above do NOT catch this; only a real link click does. This guards the
+// "home fine, every other page broken" regression.
+
+test('reveal: client-side nav (clicking nav links) reveals every route', async ({ page }) => {
+  const countHidden = () =>
+    page.evaluate(() => {
+      let hidden = 0;
+      document.querySelectorAll('[data-reveal]').forEach((el) => {
+        if (window.getComputedStyle(el).opacity === '0') hidden++;
+      });
+      return hidden;
+    });
+
+  // Clicks the real nav link via soft navigation — desktop nav when visible,
+  // otherwise open the mobile drawer first (so this works on both projects).
+  async function navClick(route: string) {
+    const menuBtn = page.locator('button[data-menu-open]');
+    if (await menuBtn.isVisible()) {
+      await menuBtn.click();
+      await page.locator(`.mobile-nav a[href="${route}"]`).first().click();
+    } else {
+      await page.locator(`.nav-desktop a[href="${route}"]`).first().click();
+    }
+    await page.waitForURL(`**${route}`);
+    await page.waitForLoadState('networkidle');
+  }
+
+  await page.goto('/');
+  await page.waitForLoadState('networkidle');
+
+  for (const route of ['/destinations', '/experiences', '/about', '/contact'] as const) {
+    await navClick(route);
+
+    const total = await page.evaluate(
+      () => document.querySelectorAll('[data-reveal]').length
+    );
+    expect(total, `[data-reveal] present after soft-nav to ${route}`).toBeGreaterThan(0);
+
+    await scrollFullPage(page);
+    // Wait past the controller's reveal safety-net (1.5s after the page settles) so this
+    // asserts the GUARANTEED end-state: content reached by client-side nav is never left
+    // permanently hidden. (The goto-based tests above cover the on-scroll IO timing.)
+    await page.waitForTimeout(1800);
+
+    expect(await countHidden(), `all [data-reveal] revealed after client-side nav to ${route}`).toBe(
+      0
+    );
+  }
+});
