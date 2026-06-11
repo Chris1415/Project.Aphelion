@@ -6,7 +6,7 @@
   "product_slug": "aphelion",
   "product_root": "products/head-application/aphelion",
   "work_item_type": "prd",
-  "status": "architecture_ready",
+  "status": "qa_ready",
   "prd_input_mode": "prompt_only",
   "platform_target": "content-sdk",
   "task_breakdown_style": "standard",
@@ -41,7 +41,7 @@
     "prd_minimal": "products/head-application/aphelion/project-planning/PRD/prd-minimal-001.md",
     "architecture": "products/head-application/aphelion/project-planning/architecture/architecture-20260611T085021Z.md",
     "baseline": null,
-    "task_breakdown": null,
+    "task_breakdown": "products/head-application/aphelion/project-planning/plans/task-breakdown-20260611T085021Z.md",
     "task_breakdown_pre_qa": null,
     "qa_report": null,
     "content_model": "products/head-application/aphelion/project-planning/sitecore-content-model.md",
@@ -153,6 +153,48 @@
       "escalations": [],
       "error": null,
       "notes": null
+    },
+    {
+      "stage": "plan_ready",
+      "agent": "06-lead-developer",
+      "entered_at": "2026-06-11T09:30:00Z",
+      "exited_at": "2026-06-11T09:40:00Z",
+      "outcome": "completed",
+      "one_line": "32-task port breakdown (T000 operator-tenant prereq + T001-T031); E1 scaffold / E2 Home verify gate / E3 inner / E4 smoke / E5 deploy; all 7 §4c filled; scaffold=create-content-sdk-app",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/plans/task-breakdown-20260611T085021Z.md"
+      ],
+      "escalations": [
+        {
+          "severity": "info",
+          "kind": "assumption",
+          "item": "T000 = operator builds full tenant + publishes (hard prereq before T-scaffold, build-flow Phase 5.5). Not a Developer task; the head app cannot boot/probe until done.",
+          "resolved_at": null
+        }
+      ],
+      "error": null,
+      "notes": "task_breakdown_review=skip_gate → auto-continued to QA (no pre-QA snapshot). task_breakdown_style left unset for QA (Lead Dev recommends standard+smoke, not pure TDD — live-Edge port)."
+    },
+    {
+      "stage": "qa_ready",
+      "agent": "07-qa-specialist",
+      "entered_at": "2026-06-11T09:40:00Z",
+      "exited_at": "2026-06-11T09:55:00Z",
+      "outcome": "completed",
+      "one_line": "TDD-lite enrichment (617→1126 lines): §9 standard+smoke; §10 32 specs (~150 checks); 13-item Home gate; 3 RED-first helpers; motion-ON+client-nav gates (PRD-000 regression); 7 smoke entries seeded",
+      "deliverables": [
+        "products/head-application/aphelion/project-planning/plans/task-breakdown-20260611T085021Z.md"
+      ],
+      "escalations": [
+        {
+          "severity": "warn",
+          "kind": "decision",
+          "item": "7 smoke_outcomes seeded pending (5 routes + operator visual walk + prod domain) → status will be tested_pending_smoke at /test until operator records them. Real-tenant verification is not optional for Act 3.",
+          "resolved_at": null
+        }
+      ],
+      "error": null,
+      "notes": "task_breakdown_style=standard (live-Edge port; gates = Playwright smoke + structural diff + editing-safe, not pure unit-TDD). Framework hardened gates (motion-ON, client-nav, fresh-build, operator visual walk) authored into §10/§8."
     }
   ],
   "implementation": {
@@ -163,7 +205,15 @@
     "status": "not_started",
     "resumed_from_stage": null
   },
-  "smoke_outcomes": {},
+  "smoke_outcomes": {
+    "smoke_home": { "required_by": "PRD-001 § 12 Home verify gate", "description": "Home (/) live-tenant smoke: 0 <MissingComponent>, every rendering shows expected content, nav works no-flicker, editor/preview safe", "outcome": "pending", "recorded_at": null, "evidence": null, "notes": "Home is the hard verify gate before inner routes", "category": "live_walkthrough" },
+    "smoke_destinations": { "required_by": "PRD-001 § 12", "description": "/destinations live-tenant smoke", "outcome": "pending", "recorded_at": null, "evidence": null, "notes": null, "category": "live_walkthrough" },
+    "smoke_experiences": { "required_by": "PRD-001 § 12", "description": "/experiences live-tenant smoke", "outcome": "pending", "recorded_at": null, "evidence": null, "notes": null, "category": "live_walkthrough" },
+    "smoke_about": { "required_by": "PRD-001 § 12", "description": "/about live-tenant smoke", "outcome": "pending", "recorded_at": null, "evidence": null, "notes": null, "category": "live_walkthrough" },
+    "smoke_contact": { "required_by": "PRD-001 § 12", "description": "/contact live-tenant smoke", "outcome": "pending", "recorded_at": null, "evidence": null, "notes": null, "category": "live_walkthrough" },
+    "smoke_operator_visual_walk": { "required_by": "framework /test § 1d-ii.5b + 07-qa content-sdk gate", "description": "Operator visual walk — all 5 routes, motion ON, click-nav (not reload), both themes; no empty bands / stuck content / blank pages", "outcome": "pending", "recorded_at": null, "evidence": null, "notes": "Mandatory human-eyeball gate (the PRD-000 lesson)", "category": "live_walkthrough" },
+    "smoke_prod_domain": { "required_by": "PRD-001 § 12 T-deploy", "description": "Final smoke on the deployed Vercel prod domain", "outcome": "pending", "recorded_at": null, "evidence": null, "notes": null, "category": "deploy" }
+  },
   "operator_attention": [
     {
       "stage": "create-prd",
@@ -191,6 +241,15 @@
       "raised_at": "2026-06-11T09:00:00Z",
       "resolved_at": null,
       "references": "project-planning/PRD/prd-001.md#14-open-questions"
+    },
+    {
+      "stage": "task-breakdown",
+      "severity": "warn",
+      "kind": "concern",
+      "item": "7 real-tenant smoke gates seeded pending (home/destinations/experiences/about/contact + operator visual walk + prod domain). Status will be tested_pending_smoke at /test; PRD-001 cannot reach clean `shipped` until you walk + record them. Real-tenant verification is the load-bearing Act-3 gate.",
+      "raised_at": "2026-06-11T09:55:00Z",
+      "resolved_at": null,
+      "references": "project-planning/plans/task-breakdown-20260611T085021Z.md"
     }
   ],
   "archive": {},
