@@ -34,17 +34,11 @@ SITE_NAME            = aphelion
   folder, but a content-model entity derived from the `ContactDetailsProps` interface in
   `contact.ts`. Flagged with NET-NEW note below.
 
-**Net-new flags:**
+**Net-new flags — ALL RESOLVED 2026-06-11 (PRD-001 kickoff):**
 
-- `HeroMeta[]` array on `Hero`: the static app passes `meta: HeroMeta[]` (up to 3
-  `{value, label}` items). This is a list → folder-of-children pattern, but it is
-  embedded inside the Hero leaf. **NET-NEW decision required**: either (a) create a
-  separate `HeroMetaFolder` datasource and a second Children-resolver sub-placement
-  inside the Hero rendering, or (b) flatten into three pairs of Single-Line Text fields
-  on the Hero datasource template (`metaValue1`, `metaLabel1` … `metaValue3`,
-  `metaLabel3`). Recommendation: **option (b) — flatten to 3×2 fields** — avoids a
-  nested resolver and keeps the Hero datasource self-contained. Operator decides before
-  building the template.
+- `HeroMeta[]` array on `Hero`: **RESOLVED → option (b): flatten to 3×2 Single-Line Text
+  fields** (`MetaValue1`/`MetaLabel1` … `MetaValue3`/`MetaLabel3`) on the `Hero`
+  datasource template. Already reflected in § 3-A. No `HeroMetaFolder` is created.
 
 - `headingAccent` optional prop on container components (ValueProps, DestinationsGrid,
   ExperienceShowcase, Testimonials): in the static app this is a `string` scalar that
@@ -372,13 +366,12 @@ in the head app.**
 | `"ContactDetails"` | `/sitecore/layout/Renderings/Project/cosmos/ContactDetails` | `ContactDetailsFolder` | `{2F5C334E-5615-423C-8281-9FC180191302}` Children resolver | NET-NEW rendering; inline in contact/page.tsx in static app |
 | `"Marquee"` | `/sitecore/layout/Renderings/Project/cosmos/Marquee` | none (no content datasource) | none | See Marquee note below |
 
-**Marquee note:** `MarqueeProps { items: string[] }` is an array of plain destination
-name strings. In the static app these are the 6 destination names from `home.ts`. In the
-head app the `items` list can be sourced as a rendering parameter (comma-separated string
-`"Halcyon Belt,Vela Drift,…"`) or derived from the DestinationsGrid content items at
-render time. **NET-NEW decision required**: operator chooses the sourcing strategy for
-Act 3. For PRD-000, no datasource template is needed; the rendering item exists so
-component-map registration works. Record the chosen strategy in PRD-001.
+**Marquee note — RESOLVED 2026-06-11:** sourcing strategy = **derived from the published
+`Destination` child items at render time** (all of them, **Sitecore source order**, the
+**`Name`** field only, no truncation). **No marquee datasource template; no marquee
+content item.** The `"Marquee"` rendering item still exists (Step 5) so component-map
+registration works and it can be placed on Home; at render the head app reads the
+`Destinations` folder's children. Operator builds nothing extra for the marquee.
 
 ---
 
