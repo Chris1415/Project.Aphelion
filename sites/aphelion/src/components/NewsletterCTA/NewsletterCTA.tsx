@@ -16,7 +16,7 @@
  */
 
 import { JSX, useState, useRef } from 'react';
-import { Text } from '@sitecore-content-sdk/nextjs';
+import { Text, useSitecore } from '@sitecore-content-sdk/nextjs';
 import type { TextField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentRendering, ComponentParams } from '@sitecore-content-sdk/nextjs';
 import { useMagnetic } from 'lib/motion';
@@ -46,6 +46,11 @@ const NewsletterCTA = ({ fields }: NewsletterCTAProps): JSX.Element => {
   const inputRef = useRef<HTMLInputElement>(null);
   const successRef = useRef<HTMLParagraphElement>(null);
   const { ref: btnRef } = useMagnetic<HTMLButtonElement>(0.3);
+
+  // In Pages editing, render every field (even empty) so the SDK field helper shows
+  // its editable placeholder; published view stays clean when empty.
+  const { page } = useSitecore();
+  const isEditing = page.mode.isEditing;
 
   // Derive plain string for placeholder attribute (SDK TextField → string)
   const placeholderText = String(fields?.Placeholder?.value ?? '');
@@ -104,7 +109,7 @@ const NewsletterCTA = ({ fields }: NewsletterCTAProps): JSX.Element => {
           <span className="eyebrow">Join the manifest</span>
           <h2 id="nl-h" data-reveal="">
             <Text field={fields?.Heading} />
-            {fields?.HeadingAccent?.value && (
+            {fields?.HeadingAccent && (isEditing || fields.HeadingAccent.value) && (
               <>
                 {' '}
                 <span className="kinetic">

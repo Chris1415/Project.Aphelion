@@ -30,15 +30,20 @@ export interface PageHeroProps {
 }
 
 const PageHero = ({ fields }: PageHeroProps): JSX.Element => {
+  // Server component (no useSitecore hook): derive editing mode from field metadata,
+  // which Sitecore only emits in Pages edit/preview. In editing we render the art frame
+  // even when HeroImage is empty so the SDK shows its editable image placeholder.
+  const isEditing = !!fields?.Title?.metadata;
   // Defensive: only render art frame when HeroImage has a src value
   const hasImage = !!(fields?.HeroImage?.value?.src);
+  const showArt = !!fields?.HeroImage && (isEditing || hasImage);
 
   return (
     <section className="page-hero band" aria-labelledby="page-hero-h">
       <div className="wrap">
         <div className="page-hero-inner">
           {/* Optional art frame */}
-          {hasImage ? (
+          {showArt ? (
             <div className="hero-art page-hero-art" aria-hidden="true">
               <div className="art-mesh" aria-hidden="true" />
               <Image

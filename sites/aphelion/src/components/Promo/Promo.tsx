@@ -18,7 +18,7 @@
  */
 
 import { JSX } from 'react';
-import { Text, Image, Link } from '@sitecore-content-sdk/nextjs';
+import { Text, Image, Link, useSitecore } from '@sitecore-content-sdk/nextjs';
 import type { TextField, ImageField, LinkField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentRendering, ComponentParams } from '@sitecore-content-sdk/nextjs';
 import { useMagnetic } from 'lib/motion';
@@ -49,16 +49,25 @@ const Promo = ({ fields }: PromoProps): JSX.Element => {
   const { ref: primaryRef } = useMagnetic<HTMLAnchorElement>(0.35);
   const { ref: secondaryRef } = useMagnetic<HTMLAnchorElement>(0.25);
 
+  // In Pages editing, render every field (even empty) so the SDK field helper shows
+  // its editable placeholder; published view stays clean (helper renders null when empty).
+  const { page } = useSitecore();
+  const isEditing = page.mode.isEditing;
+
   // Defensive empty-state for Link fields (renders nothing when href is empty)
   const primaryHref = fields?.PrimaryCta?.value?.href;
   const secondaryHref = fields?.SecondaryCta?.value?.href;
 
-  // Build meta rows from flat MetaValue1-3 / MetaLabel1-3 fields
-  const metaPairs = [
+  // Build meta rows from flat MetaValue1-3 / MetaLabel1-3 fields.
+  // In editing keep all three rows so empty Value/Label render editable placeholders.
+  const allMetaPairs = [
     { value: fields?.MetaValue1, label: fields?.MetaLabel1 },
     { value: fields?.MetaValue2, label: fields?.MetaLabel2 },
     { value: fields?.MetaValue3, label: fields?.MetaLabel3 },
-  ].filter(({ value }) => value?.value);
+  ];
+  const metaPairs = isEditing
+    ? allMetaPairs
+    : allMetaPairs.filter(({ value }) => value?.value);
 
   return (
     <section className="hero" aria-labelledby="hero-h">
@@ -107,18 +116,18 @@ const Promo = ({ fields }: PromoProps): JSX.Element => {
             <Text field={fields?.Lede} />
           </p>
           <div className="hero-cta">
-            {primaryHref && (
+            {fields?.PrimaryCta && (isEditing || primaryHref) && (
               <Link
                 ref={primaryRef}
-                field={fields!.PrimaryCta!}
+                field={fields.PrimaryCta}
                 className="btn btn-primary"
                 data-magnetic="0.35"
               />
             )}
-            {secondaryHref && (
+            {fields?.SecondaryCta && (isEditing || secondaryHref) && (
               <Link
                 ref={secondaryRef}
-                field={fields!.SecondaryCta!}
+                field={fields.SecondaryCta}
                 className="btn btn-ghost"
                 data-magnetic="0.25"
               />

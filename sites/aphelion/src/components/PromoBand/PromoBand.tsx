@@ -17,7 +17,7 @@
  */
 
 import { JSX } from 'react';
-import { Text, Link, Image } from '@sitecore-content-sdk/nextjs';
+import { Text, Link, Image, useSitecore } from '@sitecore-content-sdk/nextjs';
 import type { TextField, LinkField, ImageField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentRendering, ComponentParams } from '@sitecore-content-sdk/nextjs';
 import { useMagnetic } from 'lib/motion';
@@ -40,6 +40,11 @@ export interface PromoBandProps {
 const PromoBand = ({ fields }: PromoBandProps): JSX.Element => {
   const { ref: ctaRef } = useMagnetic<HTMLAnchorElement>(0.35);
 
+  // In Pages editing, render every field (even empty) so the SDK field helper shows
+  // its editable placeholder; published view stays clean (helper renders null when empty).
+  const { page } = useSitecore();
+  const isEditing = page.mode.isEditing;
+
   // Defensive: only render CTA link when href is populated
   const ctaHref = fields?.Cta?.value?.href;
   // Defensive: only render image when src is populated
@@ -50,9 +55,9 @@ const PromoBand = ({ fields }: PromoBandProps): JSX.Element => {
       <div className="wrap">
         <div className="promo" data-reveal="">
           <div className="art-mesh" aria-hidden="true" />
-          {hasImage && (
+          {fields?.PromoImage && (isEditing || hasImage) && (
             <Image
-              field={fields!.PromoImage!}
+              field={fields.PromoImage}
               className="promo-image"
               loading="lazy"
             />
@@ -63,7 +68,7 @@ const PromoBand = ({ fields }: PromoBandProps): JSX.Element => {
             </span>
             <h2 id="promo-h">
               <Text field={fields?.Heading} />
-              {fields?.HeadingAccent?.value && (
+              {fields?.HeadingAccent && (isEditing || fields.HeadingAccent.value) && (
                 <>
                   {' '}
                   <span className="kinetic">
@@ -75,10 +80,10 @@ const PromoBand = ({ fields }: PromoBandProps): JSX.Element => {
             <p>
               <Text field={fields?.Body} />
             </p>
-            {ctaHref && (
+            {fields?.Cta && (isEditing || ctaHref) && (
               <Link
                 ref={ctaRef}
-                field={fields!.Cta!}
+                field={fields.Cta}
                 className="btn btn-primary"
                 data-magnetic="0.35"
               />
