@@ -4,8 +4,8 @@ import { BYOCClientWrapper, NextjsContentSdkComponent, FEaaSClientWrapper } from
 import { Form } from '@sitecore-content-sdk/nextjs';
 
 import * as PromoBand from 'src/components/PromoBand/PromoBand';
+import * as Promo from 'src/components/Promo/Promo';
 import * as NewsletterCTA from 'src/components/NewsletterCTA/NewsletterCTA';
-import * as Hero from 'src/components/Hero/Hero';
 import * as ContactForm from 'src/components/ContactForm/ContactForm';
 
 export const componentMap = new Map<string, NextjsContentSdkComponent>([
@@ -13,8 +13,8 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['FEaaSWrapper', FEaaSClientWrapper],
   ['Form', Form],
   ['PromoBand', { ...PromoBand }],
+  ['Promo', { ...Promo }],
   ['NewsletterCTA', { ...NewsletterCTA }],
-  ['Hero', { ...Hero }],
   ['ContactForm', { ...ContactForm }],
 ]);
 

@@ -1,11 +1,11 @@
 'use client';
 
 /**
- * Hero — SDK field-driven leaf component (Client map — gooey/magnetic require client).
+ * Promo — (renamed from Hero to match Sitecore rendering) SDK field-driven leaf component (Client map — gooey/magnetic require client).
  * ADR-0005 Shape A: flat datasource fields.
  * Field names: Eyebrow, Title, TitleAccent, Lede, PrimaryCta, SecondaryCta,
  *              HeroImage, MetaValue1-3, MetaLabel1-3.
- * componentName: "Hero" (verbatim, ADR-0010).
+ * componentName: "Promo" (verbatim, ADR-0010).
  *
  * Markup/CSS ported verbatim from static/src/components/Hero/index.tsx.
  * Plain props replaced with SDK field components per port transform (§ 4c).
@@ -23,7 +23,7 @@ import type { TextField, ImageField, LinkField } from '@sitecore-content-sdk/nex
 import type { ComponentRendering, ComponentParams } from '@sitecore-content-sdk/nextjs';
 import { useMagnetic } from 'lib/motion';
 
-export interface HeroFields {
+export interface PromoFields {
   Eyebrow?: TextField;
   Title?: TextField;
   TitleAccent?: TextField;
@@ -39,13 +39,13 @@ export interface HeroFields {
   MetaLabel3?: TextField;
 }
 
-export interface HeroProps {
-  rendering: ComponentRendering & { fields?: HeroFields };
-  fields?: HeroFields;
+export interface PromoProps {
+  rendering: ComponentRendering & { fields?: PromoFields };
+  fields?: PromoFields;
   params?: ComponentParams;
 }
 
-const Hero = ({ fields }: HeroProps): JSX.Element => {
+const Promo = ({ fields }: PromoProps): JSX.Element => {
   const { ref: primaryRef } = useMagnetic<HTMLAnchorElement>(0.35);
   const { ref: secondaryRef } = useMagnetic<HTMLAnchorElement>(0.25);
 
@@ -155,4 +155,4 @@ const Hero = ({ fields }: HeroProps): JSX.Element => {
   );
 };
 
-export default Hero;
+export default Promo;
