@@ -16,7 +16,7 @@
  */
 
 import { JSX, useState, useRef } from 'react';
-import { Text } from '@sitecore-content-sdk/nextjs';
+import { Text, useSitecore } from '@sitecore-content-sdk/nextjs';
 import type { TextField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentRendering, ComponentParams } from '@sitecore-content-sdk/nextjs';
 
@@ -51,6 +51,11 @@ const ContactForm = ({ fields }: ContactFormProps): JSX.Element => {
   const msgRef = useRef<HTMLTextAreaElement>(null);
   const successRef = useRef<HTMLParagraphElement>(null);
 
+  // In Pages editing the form is inert (see handleSubmit) so authors can select the
+  // label/button fields without triggering validation.
+  const { page } = useSitecore();
+  const isEditing = page.mode.isEditing;
+
   // Derive plain strings for validation error messages (use field value strings)
   const nameLabelText = String(fields?.NameLabel?.value ?? 'Name');
   const emailLabelText = String(fields?.EmailLabel?.value ?? 'Email');
@@ -59,6 +64,9 @@ const ContactForm = ({ fields }: ContactFormProps): JSX.Element => {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     // NEVER fetch — ADR-0006
     e.preventDefault();
+    // In Pages editing the form is inert: clicking the submit button is how the author
+    // selects the ButtonLabel field to edit it — running validation would fight that.
+    if (isEditing) return;
 
     const nameVal = (nameRef.current?.value ?? '').trim();
     const emailVal = (emailRef.current?.value ?? '').trim();
@@ -213,7 +221,7 @@ const ContactForm = ({ fields }: ContactFormProps): JSX.Element => {
               )}
             </div>
 
-            <button className="btn btn-primary" type="submit">
+            <button className="btn btn-primary" type={isEditing ? 'button' : 'submit'}>
               <Text field={fields?.ButtonLabel} />
             </button>
           </form>

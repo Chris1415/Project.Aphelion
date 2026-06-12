@@ -58,6 +58,9 @@ const NewsletterCTA = ({ fields }: NewsletterCTAProps): JSX.Element => {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     // NEVER fetch — ADR-0006
     e.preventDefault();
+    // In Pages editing the form is inert: clicking the submit button is how the author
+    // selects the ButtonLabel field to edit it — running validation would fight that.
+    if (isEditing) return;
     const val = (inputRef.current?.value ?? '').trim();
     const valid = EMAIL_REGEX.test(val);
 
@@ -159,7 +162,7 @@ const NewsletterCTA = ({ fields }: NewsletterCTAProps): JSX.Element => {
               ref={btnRef}
               className="btn btn-primary"
               data-magnetic="0.3"
-              type="submit"
+              type={isEditing ? 'button' : 'submit'}
             >
               <Text field={fields?.ButtonLabel} />
             </button>
