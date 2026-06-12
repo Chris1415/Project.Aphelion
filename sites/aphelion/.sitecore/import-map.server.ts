@@ -7,8 +7,9 @@ import {
 } from '@sitecore-content-sdk/nextjs/codegen';
 // end of built-in imports
 
-import { jsx, jsxs } from 'react/jsx-runtime';
-import { Text, RichText, Image } from '@sitecore-content-sdk/nextjs';
+import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
+import { Text, AppPlaceholder, RichText, Image } from '@sitecore-content-sdk/nextjs';
+import componentMap from '.sitecore/component-map';
 
 const importMap = [
   {
@@ -16,14 +17,22 @@ const importMap = [
     exports: [
       { name: 'jsx', value: jsx },
       { name: 'jsxs', value: jsxs },
+      { name: 'Fragment', value: Fragment },
     ]
   },
   {
     module: '@sitecore-content-sdk/nextjs',
     exports: [
       { name: 'Text', value: Text },
+      { name: 'AppPlaceholder', value: AppPlaceholder },
       { name: 'RichText', value: RichText },
       { name: 'Image', value: Image },
+    ]
+  },
+  {
+    module: '.sitecore/component-map',
+    exports: [
+      { name: 'default', value: componentMap },
     ]
   }
 ] as ImportEntry[];

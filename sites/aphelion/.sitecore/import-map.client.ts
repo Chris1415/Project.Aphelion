@@ -8,9 +8,9 @@ import {
 } from '@sitecore-content-sdk/nextjs/codegen';
 // end of built-in imports
 
-import { jsx, Fragment, jsxs } from 'react/jsx-runtime';
-import { Text, Link, Image, CdpHelper, useSitecore } from '@sitecore-content-sdk/nextjs';
-import { useMagnetic } from 'lib/motion';
+import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
+import { useSitecore, Text, Link, Image, CdpHelper } from '@sitecore-content-sdk/nextjs';
+import { useCountUp, useMagnetic } from 'lib/motion';
 import { useState, useRef, useEffect } from 'react';
 import client from 'src/lib/sitecore-client';
 import { pageView } from '@sitecore-content-sdk/events';
@@ -21,23 +21,24 @@ const importMap = [
     module: 'react/jsx-runtime',
     exports: [
       { name: 'jsx', value: jsx },
-      { name: 'Fragment', value: Fragment },
       { name: 'jsxs', value: jsxs },
+      { name: 'Fragment', value: Fragment },
     ]
   },
   {
     module: '@sitecore-content-sdk/nextjs',
     exports: [
+      { name: 'useSitecore', value: useSitecore },
       { name: 'Text', value: Text },
       { name: 'Link', value: Link },
       { name: 'Image', value: Image },
       { name: 'CdpHelper', value: CdpHelper },
-      { name: 'useSitecore', value: useSitecore },
     ]
   },
   {
     module: 'lib/motion',
     exports: [
+      { name: 'useCountUp', value: useCountUp },
       { name: 'useMagnetic', value: useMagnetic },
     ]
   },

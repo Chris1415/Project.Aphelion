@@ -661,3 +661,8 @@ a.contact-detail-value:hover { color: var(--accent-500); }
 .component.row-splitter:empty,
 .component.column-splitter:empty,
 .container-default .row:empty { min-height: 48px; }
+
+/* Empty AppPlaceholder drop zones span their full container width in the editor.
+   Inside a flex .row the SDK's empty-placeholder div shrinks to the "+" button; force
+   it to fill the row (in a Column Splitter this fills the COLUMN, which is what we want). */
+.sc-jss-empty-placeholder { flex: 1 0 100%; width: 100%; min-height: 48px; }
