@@ -1,51 +1,61 @@
 /**
- * RowSplitter — compositional layout primitive (AppPlaceholder host). NO datasource.
- * componentName: "RowSplitter" (verbatim, ADR-0010).
+ * RowSplitter — STANDARD SXA layout component, taken over from the official xmcloud-starter-js
+ * (examples/kit-nextjs-article-starter/src/components/sxa/RowSplitter.tsx, Content SDK v2 /
+ * App Router). componentName: "RowSplitter". `page?` added locally (Aphelion's ComponentProps
+ * doesn't carry it) — the only deviation from upstream.
  *
- * Renders N nested row placeholders that authors fill with registered renderings in Pages.
- * Follows the Container.tsx splitter pattern exactly (build-trap #7):
- *   MUST be a SERVER component — forwards injected `page` + SERVER `componentMap` into
- *   each <AppPlaceholder> so children resolve against the server map, not the client map.
- *
- * Param `Rows` (default 2): number of row placeholders to render (row-1, row-2, ...).
- *
- * SDK shapes (verified against sites/aphelion/node_modules):
- *   AppPlaceholderProps react/types/components/Placeholder/models.d.ts:103
+ * Binds to the standard SXA `RowSplitter` rendering already in the tenant — no custom build.
+ * Standard params: EnabledPlaceholders ("1,2,…"), per-row Styles{N}. Placeholder key per row:
+ * `row-${n}-{*}` (dynamic). Server component: imports the SERVER componentMap and forwards the
+ * injected `page` (build-trap #7).
  */
 
 import { JSX } from 'react';
 import { AppPlaceholder } from '@sitecore-content-sdk/nextjs';
-import type {
-  ComponentRendering,
-  ComponentParams,
-  Page,
-  ComponentMap,
-} from '@sitecore-content-sdk/nextjs';
+import type { ComponentRendering, Page } from '@sitecore-content-sdk/nextjs';
+import { ComponentProps } from 'lib/component-props';
+import componentMap from '.sitecore/component-map';
 
-export interface RowSplitterProps {
+/** Up to 8 rows. */
+type RowNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+
+/** Per-row styles: Styles1 … Styles8. */
+type RowStyles = {
+  [K in `Styles${RowNumber}`]?: string;
+};
+
+interface RowSplitterProps extends ComponentProps {
   rendering: ComponentRendering;
-  params?: ComponentParams;
-  /** Injected by the parent AppPlaceholder for server children (build-trap #7). */
   page?: Page;
-  componentMap?: ComponentMap;
+  params: ComponentProps['params'] & RowStyles;
 }
 
-const RowSplitter = ({ rendering, params, page, componentMap }: RowSplitterProps): JSX.Element => {
-  const count = parseInt(String(params?.Rows ?? '2'), 10) || 2;
+export const Default = ({ params, rendering, page }: RowSplitterProps): JSX.Element => {
+  const enabledPlaceholders = params.EnabledPlaceholders?.split(',') ?? [];
+  const id = params.RenderingIdentifier;
 
   return (
-    <div className="row-splitter">
-      {Array.from({ length: count }).map((_, i) => (
-        <AppPlaceholder
-          key={i}
-          name={`row-${i + 1}`}
-          rendering={rendering}
-          page={page as Page}
-          componentMap={componentMap as ComponentMap}
-        />
-      ))}
+    <div className={`component row-splitter ${params.styles ?? ''}`} id={id}>
+      {enabledPlaceholders.map((ph, index) => {
+        const num = Number(ph) as RowNumber;
+        const placeholderKey = `row-${num}-{*}`;
+        const rowStyles = `${params[`Styles${num}`] ?? ''}`.trimEnd();
+
+        return (
+          <div key={index} className={`container-fluid ${rowStyles}`.trimEnd()}>
+            <div>
+              <div className="row">
+                <AppPlaceholder
+                  name={placeholderKey}
+                  rendering={rendering}
+                  page={page as Page}
+                  componentMap={componentMap}
+                />
+              </div>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
-
-export default RowSplitter;

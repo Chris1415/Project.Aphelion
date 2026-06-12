@@ -1,57 +1,64 @@
 /**
- * ColumnSplitter — compositional layout primitive (AppPlaceholder host). NO datasource.
- * componentName: "ColumnSplitter" (verbatim, ADR-0010).
+ * ColumnSplitter — STANDARD SXA layout component, taken over from the official xmcloud-starter-js
+ * (examples/kit-nextjs-article-starter/src/components/sxa/ColumnSplitter.tsx, Content SDK v2 /
+ * App Router). componentName: "ColumnSplitter". `page?` added locally (Aphelion's ComponentProps
+ * doesn't carry it) — the only deviation from upstream.
  *
- * Renders N column divs each hosting an <AppPlaceholder> that authors fill in Pages.
- * Follows the Container.tsx splitter pattern exactly (build-trap #7):
- *   MUST be a SERVER component — forwards injected `page` + SERVER `componentMap` into
- *   each <AppPlaceholder> so children resolve against the server map, not the client map.
- *
- * Param `Columns` (default 2): number of column placeholders to render (column-1, column-2, ...).
- *
- * SDK shapes (verified against sites/aphelion/node_modules):
- *   AppPlaceholderProps react/types/components/Placeholder/models.d.ts:103
+ * Binds to the standard SXA `ColumnSplitter` rendering already in the tenant — no custom build.
+ * Standard params: EnabledPlaceholders ("1,2,…"), per-column ColumnWidth{N} + Styles{N}.
+ * Placeholder key per column: `column-${n}-{*}` (dynamic). Server component: imports the SERVER
+ * componentMap and forwards the injected `page` (build-trap #7).
  */
 
 import { JSX } from 'react';
 import { AppPlaceholder } from '@sitecore-content-sdk/nextjs';
-import type {
-  ComponentRendering,
-  ComponentParams,
-  Page,
-  ComponentMap,
-} from '@sitecore-content-sdk/nextjs';
+import type { Page } from '@sitecore-content-sdk/nextjs';
+import { ComponentProps } from 'lib/component-props';
+import componentMap from '.sitecore/component-map';
 
-export interface ColumnSplitterProps {
-  rendering: ComponentRendering;
-  params?: ComponentParams;
-  /** Injected by the parent AppPlaceholder for server children (build-trap #7). */
+/** Up to 8 columns. */
+type ColumnNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+
+/** Per-column width: ColumnWidth1 … ColumnWidth8. */
+type ColumnWidths = {
+  [K in ColumnNumber as `ColumnWidth${K}`]?: string;
+};
+
+/** Per-column styles: Styles1 … Styles8. */
+type ColumnStyles = {
+  [K in ColumnNumber as `Styles${K}`]?: string;
+};
+
+interface ColumnSplitterProps extends ComponentProps {
   page?: Page;
-  componentMap?: ComponentMap;
+  params: ComponentProps['params'] & ColumnWidths & ColumnStyles;
 }
 
-const ColumnSplitter = ({
-  rendering,
-  params,
-  page,
-  componentMap,
-}: ColumnSplitterProps): JSX.Element => {
-  const count = parseInt(String(params?.Columns ?? '2'), 10) || 2;
+export const Default = ({ params, rendering, page }: ColumnSplitterProps): JSX.Element => {
+  const { EnabledPlaceholders, RenderingIdentifier: id, styles } = params;
+  const enabledColumns = EnabledPlaceholders?.split(',') ?? [];
 
   return (
-    <div className="split-cols">
-      {Array.from({ length: count }).map((_, i) => (
-        <div key={i} className="col">
-          <AppPlaceholder
-            name={`column-${i + 1}`}
-            rendering={rendering}
-            page={page as Page}
-            componentMap={componentMap as ComponentMap}
-          />
-        </div>
-      ))}
+    <div className={`row component column-splitter ${styles ?? ''}`} id={id}>
+      {enabledColumns.map((columnNum, index) => {
+        const num = Number(columnNum) as ColumnNumber;
+        const columnWidth = params[`ColumnWidth${num}`] ?? '';
+        const columnStyle = params[`Styles${num}`] ?? '';
+        const columnClassNames = `${columnWidth} ${columnStyle}`.trim();
+
+        return (
+          <div key={index} className={columnClassNames}>
+            <div className="row">
+              <AppPlaceholder
+                name={`column-${columnNum}-{*}`}
+                rendering={rendering}
+                page={page as Page}
+                componentMap={componentMap}
+              />
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
-
-export default ColumnSplitter;
