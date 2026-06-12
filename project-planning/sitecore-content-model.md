@@ -447,7 +447,7 @@ from the table in Step 5 to the Renderings field.
 
 ### 9-A. Page templates and placeholder
 
-All 5 pages share the same placeholder: `aphelion-main`
+All 5 pages share the same placeholder: `headless-main`
 (the head-app catch-all renders `{children}` inside `<main id="main">`; in the CMS this
 maps to a single named placeholder per page item).
 
@@ -463,7 +463,7 @@ Create page items under `/sitecore/content/cosmos/aphelion/home/`:
 
 ### 9-B. Home page (/) — rendering placements
 
-Placeholder: `aphelion-main`
+Placeholder: `headless-main`
 
 | Order | componentName | Datasource item | Parameters |
 |-------|---------------|-----------------|------------|
