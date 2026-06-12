@@ -155,7 +155,9 @@ const ContactForm = ({ fields }: ContactFormProps): JSX.Element => {
           >
             {/* Name field */}
             <div className="nl-field">
-              <label htmlFor="cf-name" className="field-label">
+              {/* htmlFor dropped in editing so clicking the label selects the
+                  NameLabel field for authoring instead of focusing the input */}
+              <label htmlFor={isEditing ? undefined : 'cf-name'} className="field-label">
                 <Text field={fields?.NameLabel} />
               </label>
               <input
@@ -178,7 +180,7 @@ const ContactForm = ({ fields }: ContactFormProps): JSX.Element => {
 
             {/* Email field */}
             <div className="nl-field">
-              <label htmlFor="cf-email" className="field-label">
+              <label htmlFor={isEditing ? undefined : 'cf-email'} className="field-label">
                 <Text field={fields?.EmailLabel} />
               </label>
               <input
@@ -201,7 +203,7 @@ const ContactForm = ({ fields }: ContactFormProps): JSX.Element => {
 
             {/* Message field */}
             <div className="nl-field">
-              <label htmlFor="cf-message" className="field-label">
+              <label htmlFor={isEditing ? undefined : 'cf-message'} className="field-label">
                 <Text field={fields?.MessageLabel} />
               </label>
               <textarea
