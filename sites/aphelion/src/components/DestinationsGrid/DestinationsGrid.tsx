@@ -105,11 +105,15 @@ function DestinationCard({
   );
 }
 
-const DestinationsGrid = ({ fields }: DestinationsGridProps): JSX.Element => {
+const DestinationsGrid = ({ fields, params }: DestinationsGridProps): JSX.Element => {
   const ds = fields?.data?.datasource;
   // Edit mode: jsonValue carries metadata only in Pages edit/preview.
   const isEditing = !!ds?.heading?.jsonValue?.metadata;
-  const cards = ds?.children?.results ?? [];
+  const all = ds?.children?.results ?? [];
+  // GridLimit rendering parameter: 0/absent = all; N = first N (e.g. 3 on Home preview).
+  // Show all in editing so every card stays authorable.
+  const limit = parseInt(String(params?.GridLimit ?? '0'), 10) || 0;
+  const cards = !isEditing && limit > 0 ? all.slice(0, limit) : all;
 
   return (
     <section className="band atmos" id="destinations" aria-labelledby="dest-h">
