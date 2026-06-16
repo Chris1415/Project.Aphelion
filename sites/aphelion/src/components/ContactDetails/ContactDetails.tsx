@@ -1,45 +1,54 @@
 /**
- * ContactDetails — CONTAINER component (ADR-0005 Shape B: Children resolver).
+ * ContactDetails — CONTAINER via INTEGRATED GRAPHQL (resolver-patterns Pattern 3, Shape C).
  * componentName: "ContactDetails" (verbatim, ADR-0010).
  *
- * Datasource = `ContactDetailsFolder` (scalar field SectionHeading — required)
- * whose children are `ContactDetailItem` items. The Children Rendering Contents Resolver
- * delivers the children as `fields.items` — Shape B per custom_content-sdk-resolver-patterns.
+ * The rendering carries an Integrated GraphQL query (the rendering's "GraphQL Query" /
+ * ComponentQuery field) that returns the folder's OWN scalar field AND its ContactDetailItem
+ * children, each field as `jsonValue`. `jsonValue` carries the field's editing metadata, so in
+ * XM Cloud Pages metadata-edit-mode BOTH the section heading AND every item field render
+ * INLINE-EDITABLE through the SDK field helpers — without making each item a placed rendering.
  *
- * Per resolver-patterns rule, each `items[i].fields` is read MANUALLY (`.value`).
- * SectionHeading is a required scalar → always rendered via SDK <Text>.
+ * IMPORTANT (resolver-patterns): a Rendering Contents Resolver WINS over the ComponentQuery when
+ * both are set. The Children resolver must be CLEARED on this rendering for the query to run.
  *
- * Server component (no hooks): editing mode derived from the SectionHeading field's metadata.
+ * Payload (Shape C — mirrors the query aliases):
+ *   fields.data.datasource.{sectionHeading}.jsonValue                           (scalar)
+ *   fields.data.datasource.children.results[]
+ *      .{detailLabel,detailValue,detailLink}.jsonValue                          (per item)
+ *
+ * Server component. Editing derived from sectionHeading.jsonValue.metadata (present only in
+ * edit mode).
  *
  * SDK shapes (verified against sites/aphelion/node_modules):
- *   TextField  react/types/components/Text.d.ts:8
- *   LinkField  react/types/components/Link.d.ts:24   (value.href)
+ *   TextField  react/types/components/Text.d.ts:8   (extends FieldMetadata → .metadata)
+ *   LinkField  react/types/components/Link.d.ts:24
  */
 
 import { JSX } from 'react';
-import { Text } from '@sitecore-content-sdk/nextjs';
+import { Text, Link } from '@sitecore-content-sdk/nextjs';
 import type { TextField, LinkField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentRendering, ComponentParams } from '@sitecore-content-sdk/nextjs';
 
-/** Per-child field hash — ContactDetailItem template */
-interface ContactDetailItemFields {
-  DetailLabel?: TextField;
-  DetailValue?: TextField;
-  DetailLink?: LinkField;
+/** `field(name:"X") { jsonValue }` → { jsonValue: <field object> } */
+interface Gql<T> {
+  jsonValue?: T;
 }
 
-/** Children-resolver item wrapper (Shape B) */
-interface ChildItem {
-  id: string;
-  url?: string;
+interface ContactDetailItemResult {
+  id?: string;
   name?: string;
-  fields: ContactDetailItemFields;
+  detailLabel?: Gql<TextField>;
+  detailValue?: Gql<TextField>;
+  detailLink?: Gql<LinkField>;
 }
 
-/** ContactDetailsFolder scalar fields + resolver-injected `items` */
+interface ContactDetailsDatasource {
+  sectionHeading?: Gql<TextField>;
+  children?: { results?: ContactDetailItemResult[] };
+}
+
 export interface ContactDetailsFields {
-  SectionHeading?: TextField;
-  items?: ChildItem[];
+  data?: { datasource?: ContactDetailsDatasource };
 }
 
 export interface ContactDetailsProps {
@@ -48,42 +57,48 @@ export interface ContactDetailsProps {
   params?: ComponentParams;
 }
 
-/** Local presentational list item — NOT a registered rendering (inlined to dodge generate-map). */
-function ContactDetailItem({ item }: { item: ChildItem }): JSX.Element {
-  const f = item.fields;
-  const href = f.DetailLink?.value?.href;
+/** Inline list item — fields rendered via SDK helpers off jsonValue → inline-editable in Pages. */
+function ContactDetailItem({
+  item,
+  isEditing,
+}: {
+  item: ContactDetailItemResult;
+  isEditing: boolean;
+}): JSX.Element {
+  const link = item.detailLink?.jsonValue;
+  const hasLink = !!link?.value?.href;
 
   return (
     <li className="contact-detail-item">
-      <span className="contact-detail-label">{f.DetailLabel?.value as string}</span>
-      {href ? (
-        <a href={href} className="contact-detail-value dest-link">
-          {f.DetailValue?.value as string}
-        </a>
+      <span className="contact-detail-label">
+        <Text field={item.detailLabel?.jsonValue} />
+      </span>
+      {(isEditing || hasLink) && link ? (
+        <Link field={link} className="contact-detail-value dest-link" />
       ) : (
-        <span className="contact-detail-value">{f.DetailValue?.value as string}</span>
+        <span className="contact-detail-value">
+          <Text field={item.detailValue?.jsonValue} />
+        </span>
       )}
     </li>
   );
 }
 
 const ContactDetails = ({ fields }: ContactDetailsProps): JSX.Element => {
-  // SectionHeading is required (always rendered) and the per-item DetailLink is read
-  // manually, so no editing-mode gate is needed here.
-  const items = fields?.items ?? [];
+  const ds = fields?.data?.datasource;
+  // Edit mode: jsonValue carries metadata only in Pages edit/preview.
+  const isEditing = !!ds?.sectionHeading?.jsonValue?.metadata;
+  const items = ds?.children?.results ?? [];
 
   return (
     <section className="band contact-details-band" aria-labelledby="cd-h">
       <div className="wrap">
         <h2 id="cd-h" className="contact-details-heading" data-reveal="">
-          <Text field={fields?.SectionHeading} />
+          <Text field={ds?.sectionHeading?.jsonValue} />
         </h2>
         <ul className="contact-details-list" data-reveal="" data-delay="1">
-          {items.map((item) => (
-            <ContactDetailItem
-              key={item.id || (item.fields.DetailLabel?.value as string)}
-              item={item}
-            />
+          {items.map((item, i) => (
+            <ContactDetailItem key={item.id || i} item={item} isEditing={isEditing} />
           ))}
         </ul>
       </div>

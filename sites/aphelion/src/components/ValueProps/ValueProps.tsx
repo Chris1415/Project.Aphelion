@@ -1,20 +1,25 @@
 /**
- * ValueProps — CONTAINER component (ADR-0005 Shape B: Children resolver).
+ * ValueProps — CONTAINER via INTEGRATED GRAPHQL (resolver-patterns Pattern 3, Shape C).
  * componentName: "ValueProps" (verbatim, ADR-0010).
  *
- * Datasource = `ValuePropsFolder` (scalar fields Heading/Eyebrow/HeadingAccent)
- * whose children are `ValueCard` items. The Children Rendering Contents Resolver
- * delivers the children as `fields.items` — Shape B per custom_content-sdk-resolver-patterns:
- *   fields.items: Array<{ id, url, name, fields: <ValueCardFields> }>
+ * The rendering carries an Integrated GraphQL query (the rendering's "GraphQL Query" /
+ * ComponentQuery field) that returns the folder's OWN scalar fields AND its ValueCard children,
+ * each field as `jsonValue`. `jsonValue` carries the field's editing metadata, so in XM Cloud
+ * Pages metadata-edit-mode BOTH the section heading AND every card field render INLINE-EDITABLE
+ * through the SDK field helpers — without making each card a placed rendering.
  *
- * Per resolver-patterns rule, each `items[i].fields` is read MANUALLY (`.value`) — the
- * SDK field components target placed renderings, not resolver-injected child data.
- * The section-head SCALAR fields are the rendering's OWN datasource fields → SDK <Text>.
+ * IMPORTANT (resolver-patterns): a Rendering Contents Resolver WINS over the ComponentQuery when
+ * both are set. The Children resolver must be CLEARED on this rendering for the query to run.
  *
- * Server component (no hooks): editing mode derived from the Heading field's metadata.
+ * Payload (Shape C — mirrors the query aliases):
+ *   fields.data.datasource.{heading,eyebrow,headingAccent}.jsonValue            (scalars)
+ *   fields.data.datasource.children.results[]
+ *      .{icon,cardTitle,body}.jsonValue                                          (per card)
+ *
+ * Server component. Editing derived from heading.jsonValue.metadata (present only in edit mode).
  *
  * SDK shapes (verified against sites/aphelion/node_modules):
- *   TextField  react/types/components/Text.d.ts:8
+ *   TextField  react/types/components/Text.d.ts:8   (extends FieldMetadata → .metadata)
  */
 
 import { JSX } from 'react';
@@ -22,27 +27,28 @@ import { Text } from '@sitecore-content-sdk/nextjs';
 import type { TextField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentRendering, ComponentParams } from '@sitecore-content-sdk/nextjs';
 
-/** Per-child field hash — ValueCard template */
-interface ValueCardFields {
-  Icon?: TextField;
-  CardTitle?: TextField;
-  Body?: TextField;
+/** `field(name:"X") { jsonValue }` → { jsonValue: <field object> } */
+interface Gql<T> {
+  jsonValue?: T;
 }
 
-/** Children-resolver item wrapper (Shape B) */
-interface ChildItem {
-  id: string;
-  url?: string;
+interface ValueCardResult {
+  id?: string;
   name?: string;
-  fields: ValueCardFields;
+  icon?: Gql<TextField>;
+  cardTitle?: Gql<TextField>;
+  body?: Gql<TextField>;
 }
 
-/** ValuePropsFolder scalar fields + resolver-injected `items` */
+interface ValuePropsDatasource {
+  heading?: Gql<TextField>;
+  eyebrow?: Gql<TextField>;
+  headingAccent?: Gql<TextField>;
+  children?: { results?: ValueCardResult[] };
+}
+
 export interface ValuePropsFields {
-  Heading?: TextField;
-  Eyebrow?: TextField;
-  HeadingAccent?: TextField;
-  items?: ChildItem[];
+  data?: { datasource?: ValuePropsDatasource };
 }
 
 export interface ValuePropsProps {
@@ -51,52 +57,59 @@ export interface ValuePropsProps {
   params?: ComponentParams;
 }
 
-/** Local presentational card — NOT a registered rendering (inlined to dodge generate-map). */
-function ValueCard({ item }: { item: ChildItem }): JSX.Element {
-  const f = item.fields;
-
+/** Inline card — fields rendered via SDK helpers off jsonValue → inline-editable in Pages. */
+function ValueCard({
+  item,
+}: {
+  item: ValueCardResult;
+  isEditing: boolean;
+}): JSX.Element {
   return (
     <article className="card flowborder" data-magnetic="0.18" data-reveal="">
       <div className="glyph" aria-hidden="true">
-        {f.Icon?.value as string}
+        <Text field={item.icon?.jsonValue} />
       </div>
-      <h3>{f.CardTitle?.value as string}</h3>
-      <p>{f.Body?.value as string}</p>
+      <h3>
+        <Text field={item.cardTitle?.jsonValue} />
+      </h3>
+      <p>
+        <Text field={item.body?.jsonValue} />
+      </p>
     </article>
   );
 }
 
 const ValueProps = ({ fields }: ValuePropsProps): JSX.Element => {
-  // Server component editing signal: scalar fields carry metadata only in edit/preview.
-  const isEditing = !!fields?.Heading?.metadata;
-
-  const items = fields?.items ?? [];
+  const ds = fields?.data?.datasource;
+  // Edit mode: jsonValue carries metadata only in Pages edit/preview.
+  const isEditing = !!ds?.heading?.jsonValue?.metadata;
+  const cards = ds?.children?.results ?? [];
 
   return (
     <section className="band atmos" aria-labelledby="vp-h">
       <div className="mesh" aria-hidden="true" />
       <div className="wrap">
         <div className="section-head" data-reveal="">
-          {(isEditing || fields?.Eyebrow?.value) && (
+          {(isEditing || ds?.eyebrow?.jsonValue?.value) && (
             <span className="eyebrow">
-              <Text field={fields?.Eyebrow} />
+              <Text field={ds?.eyebrow?.jsonValue} />
             </span>
           )}
           <h2 id="vp-h">
-            <Text field={fields?.Heading} />
-            {(isEditing || fields?.HeadingAccent?.value) && (
+            <Text field={ds?.heading?.jsonValue} />
+            {(isEditing || ds?.headingAccent?.jsonValue?.value) && (
               <>
                 {' '}
                 <span className="kinetic">
-                  <Text field={fields?.HeadingAccent} />
+                  <Text field={ds?.headingAccent?.jsonValue} />
                 </span>
               </>
             )}
           </h2>
         </div>
         <div className="grid grid-3">
-          {items.map((card) => (
-            <ValueCard key={card.id || (card.fields.CardTitle?.value as string)} item={card} />
+          {cards.map((card, i) => (
+            <ValueCard key={card.id || i} item={card} isEditing={isEditing} />
           ))}
         </div>
       </div>

@@ -1,15 +1,20 @@
 /**
- * Marquee — CONTAINER component (ADR-0005 Shape B: Children resolver).
+ * Marquee — CONTAINER via INTEGRATED GRAPHQL (resolver-patterns Pattern 3, Shape C).
  * componentName: "Marquee" (verbatim, ADR-0010).
  *
- * Datasource = `DestinationsFolder` (Children resolver, reads only `Name` per child).
- * The Children Rendering Contents Resolver delivers the children as `fields.items` —
- * Shape B per custom_content-sdk-resolver-patterns.
+ * The rendering carries an Integrated GraphQL query (the rendering's "GraphQL Query" /
+ * ComponentQuery field) that returns the Destinations folder's children, each with a
+ * `destName` alias for the Name field as `jsonValue`.
  *
- * Per resolver-patterns rule, each `items[i].fields` is read MANUALLY (`.value`).
- * No scalar fields, no editing logic. Names duplicated for continuous scroll illusion.
+ * IMPORTANT (resolver-patterns): a Rendering Contents Resolver WINS over the ComponentQuery when
+ * both are set. The Children resolver must be CLEARED on this rendering for the query to run.
  *
- * Server component (no hooks). aria-hidden="true" — purely decorative.
+ * Payload (Shape C — mirrors the query aliases):
+ *   fields.data.datasource.children.results[].{destName}.jsonValue              (per child)
+ *
+ * Server component (no hooks). aria-hidden="true" — purely decorative. No editing chrome needed.
+ *
+ * The `destName` alias avoids the reserved `name` GraphQL field on items.
  *
  * SDK shapes (verified against sites/aphelion/node_modules):
  *   TextField  react/types/components/Text.d.ts:8
@@ -19,22 +24,23 @@ import { JSX } from 'react';
 import type { TextField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentRendering, ComponentParams } from '@sitecore-content-sdk/nextjs';
 
-/** Per-child field hash — reads only the Name field */
-interface MarqueeItemFields {
-  Name?: TextField;
+/** `field(name:"X") { jsonValue }` → { jsonValue: <field object> } */
+interface Gql<T> {
+  jsonValue?: T;
 }
 
-/** Children-resolver item wrapper (Shape B) */
-interface ChildItem {
-  id: string;
-  url?: string;
+interface MarqueeItemResult {
+  id?: string;
   name?: string;
-  fields: MarqueeItemFields;
+  destName?: Gql<TextField>;
 }
 
-/** Resolver-injected `items` only — no scalar fields */
+interface MarqueeDatasource {
+  children?: { results?: MarqueeItemResult[] };
+}
+
 export interface MarqueeFields {
-  items?: ChildItem[];
+  data?: { datasource?: MarqueeDatasource };
 }
 
 export interface MarqueeProps {
@@ -44,8 +50,9 @@ export interface MarqueeProps {
 }
 
 const Marquee = ({ fields }: MarqueeProps): JSX.Element => {
-  const names = (fields?.items ?? [])
-    .map((i) => i.fields.Name?.value as string)
+  const ds = fields?.data?.datasource;
+  const names = (ds?.children?.results ?? [])
+    .map((r) => r.destName?.jsonValue?.value as string)
     .filter(Boolean);
   // Duplicate for continuous scroll loop
   const all = [...names, ...names];
@@ -53,9 +60,9 @@ const Marquee = ({ fields }: MarqueeProps): JSX.Element => {
   return (
     <div className="marquee" aria-hidden="true">
       <div className="marquee-track">
-        {all.map((name, idx) => (
-          <span key={`marquee-${idx}`} className="marquee-item">
-            {name}
+        {all.map((n, i) => (
+          <span key={`marquee-${i}`} className="marquee-item">
+            {n}
           </span>
         ))}
       </div>

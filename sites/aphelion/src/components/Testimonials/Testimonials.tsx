@@ -1,48 +1,56 @@
 /**
- * Testimonials — CONTAINER component (ADR-0005 Shape B: Children resolver).
+ * Testimonials — CONTAINER via INTEGRATED GRAPHQL (resolver-patterns Pattern 3, Shape C).
  * componentName: "Testimonials" (verbatim, ADR-0010).
  *
- * Datasource = `TestimonialsFolder` (scalar fields Heading/Eyebrow/HeadingAccent)
- * whose children are `TestimonialCard` items. The Children Rendering Contents Resolver
- * delivers the children as `fields.items` — Shape B per custom_content-sdk-resolver-patterns.
+ * The rendering carries an Integrated GraphQL query (the rendering's "GraphQL Query" /
+ * ComponentQuery field) that returns the folder's OWN scalar fields AND its TestimonialCard
+ * children, each field as `jsonValue`. `jsonValue` carries the field's editing metadata, so in
+ * XM Cloud Pages metadata-edit-mode BOTH the section heading AND every card field render
+ * INLINE-EDITABLE through the SDK field helpers — without making each card a placed rendering.
  *
- * Per resolver-patterns rule, each `items[i].fields` is read MANUALLY (`.value`).
- * The section-head SCALAR fields use SDK <Text> (editing-safe gating on optional ones).
+ * IMPORTANT (resolver-patterns): a Rendering Contents Resolver WINS over the ComponentQuery when
+ * both are set. The Children resolver must be CLEARED on this rendering for the query to run.
  *
- * Server component (no hooks): editing mode derived from the Heading field's metadata.
+ * Payload (Shape C — mirrors the query aliases):
+ *   fields.data.datasource.{heading,eyebrow,headingAccent}.jsonValue            (scalars)
+ *   fields.data.datasource.children.results[]
+ *      .{quote,author,role,avatar}.jsonValue                                    (per card)
+ *
+ * Server component. Editing derived from heading.jsonValue.metadata (present only in edit mode).
  *
  * SDK shapes (verified against sites/aphelion/node_modules):
- *   TextField  react/types/components/Text.d.ts:8
- *   ImageField react/types/components/Image.d.ts:17  (value.src / value.alt)
+ *   TextField  react/types/components/Text.d.ts:8   (extends FieldMetadata → .metadata)
+ *   ImageField react/types/components/Image.d.ts:17
  */
 
 import { JSX } from 'react';
-import { Text } from '@sitecore-content-sdk/nextjs';
+import { Text, Image } from '@sitecore-content-sdk/nextjs';
 import type { TextField, ImageField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentRendering, ComponentParams } from '@sitecore-content-sdk/nextjs';
 
-/** Per-child field hash — TestimonialCard template */
-interface TestimonialCardFields {
-  Quote?: TextField;
-  Author?: TextField;
-  Role?: TextField;
-  Avatar?: ImageField;
+/** `field(name:"X") { jsonValue }` → { jsonValue: <field object> } */
+interface Gql<T> {
+  jsonValue?: T;
 }
 
-/** Children-resolver item wrapper (Shape B) */
-interface ChildItem {
-  id: string;
-  url?: string;
+interface TestimonialCardResult {
+  id?: string;
   name?: string;
-  fields: TestimonialCardFields;
+  quote?: Gql<TextField>;
+  author?: Gql<TextField>;
+  role?: Gql<TextField>;
+  avatar?: Gql<ImageField>;
 }
 
-/** TestimonialsFolder scalar fields + resolver-injected `items` */
+interface TestimonialsDatasource {
+  heading?: Gql<TextField>;
+  eyebrow?: Gql<TextField>;
+  headingAccent?: Gql<TextField>;
+  children?: { results?: TestimonialCardResult[] };
+}
+
 export interface TestimonialsFields {
-  Heading?: TextField;
-  Eyebrow?: TextField;
-  HeadingAccent?: TextField;
-  items?: ChildItem[];
+  data?: { datasource?: TestimonialsDatasource };
 }
 
 export interface TestimonialsProps {
@@ -51,30 +59,35 @@ export interface TestimonialsProps {
   params?: ComponentParams;
 }
 
-/** Local presentational card — NOT a registered rendering (inlined to dodge generate-map). */
-function TestimonialCard({ item }: { item: ChildItem }): JSX.Element {
-  const f = item.fields;
-  const avatarSrc = f.Avatar?.value?.src as string | undefined;
-  const avatarAlt = (f.Avatar?.value?.alt as string | undefined) ?? '';
+/** Inline card — fields rendered via SDK helpers off jsonValue → inline-editable in Pages. */
+function TestimonialCard({
+  item,
+  isEditing,
+}: {
+  item: TestimonialCardResult;
+  isEditing: boolean;
+}): JSX.Element {
+  const avatar = item.avatar?.jsonValue;
+  const hasImage = !!avatar?.value?.src;
 
   return (
     <article className="card quote-card" data-reveal="">
-      <blockquote>{f.Quote?.value as string}</blockquote>
+      <blockquote>
+        <Text field={item.quote?.jsonValue} />
+      </blockquote>
       <div className="quote-author">
-        {avatarSrc ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            className="quote-avatar"
-            src={avatarSrc}
-            alt={avatarAlt}
-            aria-hidden="true"
-          />
+        {(isEditing || hasImage) && avatar ? (
+          <Image field={avatar} className="quote-avatar" aria-hidden="true" />
         ) : (
           <span className="quote-avatar" aria-hidden="true" />
         )}
         <div>
-          <div className="name">{f.Author?.value as string}</div>
-          <div className="role">{f.Role?.value as string}</div>
+          <div className="name">
+            <Text field={item.author?.jsonValue} />
+          </div>
+          <div className="role">
+            <Text field={item.role?.jsonValue} />
+          </div>
         </div>
       </div>
     </article>
@@ -82,35 +95,35 @@ function TestimonialCard({ item }: { item: ChildItem }): JSX.Element {
 }
 
 const Testimonials = ({ fields }: TestimonialsProps): JSX.Element => {
-  // Server component editing signal: scalar fields carry metadata only in edit/preview.
-  const isEditing = !!fields?.Heading?.metadata;
-
-  const items = fields?.items ?? [];
+  const ds = fields?.data?.datasource;
+  // Edit mode: jsonValue carries metadata only in Pages edit/preview.
+  const isEditing = !!ds?.heading?.jsonValue?.metadata;
+  const cards = ds?.children?.results ?? [];
 
   return (
     <section className="band atmos" aria-labelledby="test-h">
       <div className="wrap">
         <div className="section-head" data-reveal="">
-          {(isEditing || fields?.Eyebrow?.value) && (
+          {(isEditing || ds?.eyebrow?.jsonValue?.value) && (
             <span className="eyebrow">
-              <Text field={fields?.Eyebrow} />
+              <Text field={ds?.eyebrow?.jsonValue} />
             </span>
           )}
           <h2 id="test-h">
-            <Text field={fields?.Heading} />
-            {(isEditing || fields?.HeadingAccent?.value) && (
+            <Text field={ds?.heading?.jsonValue} />
+            {(isEditing || ds?.headingAccent?.jsonValue?.value) && (
               <>
                 {' '}
                 <span className="kinetic">
-                  <Text field={fields?.HeadingAccent} />
+                  <Text field={ds?.headingAccent?.jsonValue} />
                 </span>
               </>
             )}
           </h2>
         </div>
         <div className="grid grid-3">
-          {items.map((card) => (
-            <TestimonialCard key={card.id || (card.fields.Author?.value as string)} item={card} />
+          {cards.map((card, i) => (
+            <TestimonialCard key={card.id || i} item={card} isEditing={isEditing} />
           ))}
         </div>
       </div>

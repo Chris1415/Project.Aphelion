@@ -1,50 +1,59 @@
 'use client';
 
 /**
- * StatsBand — CLIENT component (ADR-0005 Shape B: Children resolver).
+ * StatsBand — CLIENT component via INTEGRATED GRAPHQL (resolver-patterns Pattern 3, Shape C).
  * componentName: "StatsBand" (verbatim, ADR-0010).
  * Client because of the count-up animation (useCountUp + useSitecore hook).
  *
- * Datasource = `StatsBandFolder` (optional scalar BandHeading) whose children are `Stat`
- * items. The Children Rendering Contents Resolver delivers them as `fields.items` (Shape B).
+ * The rendering carries an Integrated GraphQL query (the rendering's "GraphQL Query" /
+ * ComponentQuery field) that returns the folder's OWN scalar field AND its Stat children,
+ * each field as `jsonValue`. `jsonValue` carries the field's editing metadata, so in XM Cloud
+ * Pages metadata-edit-mode BOTH the section heading AND every stat field render INLINE-EDITABLE
+ * through the SDK field helpers — without making each stat a placed rendering.
+ *
+ * IMPORTANT (resolver-patterns): a Rendering Contents Resolver WINS over the ComponentQuery when
+ * both are set. The Children resolver must be CLEARED on this rendering for the query to run.
+ *
+ * Payload (Shape C — mirrors the query aliases):
+ *   fields.data.datasource.{bandHeading}.jsonValue                              (scalar)
+ *   fields.data.datasource.children.results[]
+ *      .{statValue,statLabel}.jsonValue                                         (per stat)
+ *
+ * Client component. Editing derived from useSitecore().page.mode.isEditing.
  *
  * StatValue is SELF-DESCRIBING: the displayed value carries its own suffix/decimals, e.g.
  * "1240+", "100%", "4.9", "7". We parse the leading number to animate to, the trailing
- * non-numeric chars as the suffix, and decimals from the number. This avoids band-level
- * suffix/decimals params (which can't represent heterogeneous stats) — so NO StatsBandParams
- * template is needed.
- *
- * Editing mode from useSitecore().page.mode.isEditing — the client-safe path (shows the raw
- * value instead of animating from 0).
+ * non-numeric chars as the suffix, and decimals from the number.
  *
  * SDK shapes (verified against sites/aphelion/node_modules):
  *   TextField  react/types/components/Text.d.ts:8
  */
 
 import { JSX } from 'react';
-import { useSitecore } from '@sitecore-content-sdk/nextjs';
+import { Text, useSitecore } from '@sitecore-content-sdk/nextjs';
 import type { TextField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentRendering, ComponentParams } from '@sitecore-content-sdk/nextjs';
 import { useCountUp } from 'lib/motion';
 
-/** Per-child field hash — Stat template */
-interface StatFields {
-  StatValue?: TextField;
-  StatLabel?: TextField;
+/** `field(name:"X") { jsonValue }` → { jsonValue: <field object> } */
+interface Gql<T> {
+  jsonValue?: T;
 }
 
-/** Children-resolver item wrapper (Shape B) */
-interface ChildItem {
-  id: string;
-  url?: string;
+interface StatResult {
+  id?: string;
   name?: string;
-  fields: StatFields;
+  statValue?: Gql<TextField>;
+  statLabel?: Gql<TextField>;
 }
 
-/** StatsBandFolder scalar field + resolver-injected `items` */
+interface StatsBandDatasource {
+  bandHeading?: Gql<TextField>;
+  children?: { results?: StatResult[] };
+}
+
 export interface StatsBandFields {
-  BandHeading?: TextField;
-  items?: ChildItem[];
+  data?: { datasource?: StatsBandDatasource };
 }
 
 export interface StatsBandProps {
@@ -64,9 +73,8 @@ function parseStat(raw: string): { countTo: number; suffix: string; decimals: nu
 }
 
 /** Local client sub-component — NOT a registered rendering (inlined to dodge generate-map). */
-function StatItem({ item, isEditing }: { item: ChildItem; isEditing: boolean }): JSX.Element {
-  const f = item.fields;
-  const raw = String(f.StatValue?.value ?? '');
+function StatItem({ item, isEditing }: { item: StatResult; isEditing: boolean }): JSX.Element {
+  const raw = String(item.statValue?.jsonValue?.value ?? '');
   const { countTo, suffix, decimals } = parseStat(raw);
   const { ref, displayValue } = useCountUp(countTo, { decimals, suffix });
 
@@ -74,10 +82,16 @@ function StatItem({ item, isEditing }: { item: ChildItem; isEditing: boolean }):
     <div className="stat" data-reveal="">
       <div className="v">
         <span className="kinetic" ref={ref} data-countup={String(countTo)}>
-          {isEditing ? raw : displayValue}
+          {isEditing ? (
+            <Text field={item.statValue?.jsonValue} />
+          ) : (
+            displayValue
+          )}
         </span>
       </div>
-      <div className="l">{f.StatLabel?.value as string}</div>
+      <div className="l">
+        <Text field={item.statLabel?.jsonValue} />
+      </div>
     </div>
   );
 }
@@ -85,22 +99,23 @@ function StatItem({ item, isEditing }: { item: ChildItem; isEditing: boolean }):
 const StatsBand = ({ fields }: StatsBandProps): JSX.Element => {
   const { page } = useSitecore();
   const isEditing = page.mode.isEditing;
-  const items = fields?.items ?? [];
+  const ds = fields?.data?.datasource;
+  const items = ds?.children?.results ?? [];
 
   return (
     <section className="band stats-band atmos" aria-labelledby="stats-h">
       <div className="mesh" aria-hidden="true" />
       <h2 id="stats-h" className="sr-only">
-        {(fields?.BandHeading?.value as string) || 'Aphelion by the numbers'}
+        {ds?.bandHeading?.jsonValue?.value ? (
+          <Text field={ds.bandHeading.jsonValue} />
+        ) : (
+          'Aphelion by the numbers'
+        )}
       </h2>
       <div className="wrap">
         <div className="stats-grid">
-          {items.map((item) => (
-            <StatItem
-              key={item.id || (item.fields.StatValue?.value as string)}
-              item={item}
-              isEditing={isEditing}
-            />
+          {items.map((item, i) => (
+            <StatItem key={item.id || i} item={item} isEditing={isEditing} />
           ))}
         </div>
       </div>

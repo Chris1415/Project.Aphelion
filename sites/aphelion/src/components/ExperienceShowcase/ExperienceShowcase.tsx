@@ -1,50 +1,58 @@
 /**
- * ExperienceShowcase — CONTAINER component (ADR-0005 Shape B: Children resolver).
+ * ExperienceShowcase — CONTAINER via INTEGRATED GRAPHQL (resolver-patterns Pattern 3, Shape C).
  * componentName: "ExperienceShowcase" (verbatim, ADR-0010).
  *
- * Datasource = `ExperienceShowcaseFolder` (scalar fields Heading/Eyebrow/HeadingAccent)
- * whose children are `ExperienceItem` items. The Children Rendering Contents Resolver
- * delivers the children as `fields.items` — Shape B per custom_content-sdk-resolver-patterns.
+ * The rendering carries an Integrated GraphQL query (the rendering's "GraphQL Query" /
+ * ComponentQuery field) that returns the folder's OWN scalar fields AND its ExperienceItem
+ * children, each field as `jsonValue`. `jsonValue` carries the field's editing metadata, so in
+ * XM Cloud Pages metadata-edit-mode BOTH the section heading AND every item field render
+ * INLINE-EDITABLE through the SDK field helpers — without making each item a placed rendering.
  *
- * Per resolver-patterns rule, each `items[i].fields` is read MANUALLY (`.value`).
- * The section-head SCALAR fields use SDK <Text> (editing-safe gating on optional ones).
+ * IMPORTANT (resolver-patterns): a Rendering Contents Resolver WINS over the ComponentQuery when
+ * both are set. The Children resolver must be CLEARED on this rendering for the query to run.
  *
- * Server component (no hooks): editing mode derived from the Heading field's metadata.
+ * Payload (Shape C — mirrors the query aliases):
+ *   fields.data.datasource.{heading,eyebrow,headingAccent}.jsonValue            (scalars)
+ *   fields.data.datasource.children.results[]
+ *      .{itemTitle,summary,itemImage,duration,cta}.jsonValue                    (per item)
+ *
+ * Server component. Editing derived from heading.jsonValue.metadata (present only in edit mode).
  *
  * SDK shapes (verified against sites/aphelion/node_modules):
- *   TextField  react/types/components/Text.d.ts:8
- *   ImageField react/types/components/Image.d.ts:17  (value.src / value.alt)
- *   LinkField  react/types/components/Link.d.ts:24   (value.href / value.text)
+ *   TextField  react/types/components/Text.d.ts:8   (extends FieldMetadata → .metadata)
+ *   ImageField react/types/components/Image.d.ts:17
+ *   LinkField  react/types/components/Link.d.ts:24
  */
 
 import { JSX } from 'react';
-import { Text } from '@sitecore-content-sdk/nextjs';
+import { Text, Image, Link } from '@sitecore-content-sdk/nextjs';
 import type { TextField, ImageField, LinkField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentRendering, ComponentParams } from '@sitecore-content-sdk/nextjs';
 
-/** Per-child field hash — ExperienceItem template */
-interface ExperienceItemFields {
-  ItemTitle?: TextField;
-  Summary?: TextField;
-  ItemImage?: ImageField;
-  Duration?: TextField;
-  Cta?: LinkField;
+/** `field(name:"X") { jsonValue }` → { jsonValue: <field object> } */
+interface Gql<T> {
+  jsonValue?: T;
 }
 
-/** Children-resolver item wrapper (Shape B) */
-interface ChildItem {
-  id: string;
-  url?: string;
+interface ExperienceItemResult {
+  id?: string;
   name?: string;
-  fields: ExperienceItemFields;
+  itemTitle?: Gql<TextField>;
+  summary?: Gql<TextField>;
+  itemImage?: Gql<ImageField>;
+  duration?: Gql<TextField>;
+  cta?: Gql<LinkField>;
 }
 
-/** ExperienceShowcaseFolder scalar fields + resolver-injected `items` */
+interface ExperienceShowcaseDatasource {
+  heading?: Gql<TextField>;
+  eyebrow?: Gql<TextField>;
+  headingAccent?: Gql<TextField>;
+  children?: { results?: ExperienceItemResult[] };
+}
+
 export interface ExperienceShowcaseFields {
-  Heading?: TextField;
-  Eyebrow?: TextField;
-  HeadingAccent?: TextField;
-  items?: ChildItem[];
+  data?: { datasource?: ExperienceShowcaseDatasource };
 }
 
 export interface ExperienceShowcaseProps {
@@ -53,66 +61,73 @@ export interface ExperienceShowcaseProps {
   params?: ComponentParams;
 }
 
-/** Local presentational item — NOT a registered rendering (inlined to dodge generate-map). */
-function ExperienceItem({ item }: { item: ChildItem }): JSX.Element {
-  const f = item.fields;
-  const src = f.ItemImage?.value?.src as string | undefined;
-  const alt = (f.ItemImage?.value?.alt as string | undefined) ?? '';
-  const href = f.Cta?.value?.href;
+/** Inline item — fields rendered via SDK helpers off jsonValue → inline-editable in Pages. */
+function ExperienceItem({
+  item,
+  isEditing,
+}: {
+  item: ExperienceItemResult;
+  isEditing: boolean;
+}): JSX.Element {
+  const image = item.itemImage?.jsonValue;
+  const hasImage = !!image?.value?.src;
+  const link = item.cta?.jsonValue;
+  const hasLink = !!link?.value?.href;
 
   return (
     <div className="exp-item" data-reveal="">
       <div className="exp-media">
         <div className="sky" aria-hidden="true" />
-        {src && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img data-fallback="" loading="lazy" src={src} alt={alt} />
+        {(isEditing || hasImage) && image && (
+          <Image field={image} data-fallback="" loading="lazy" />
         )}
       </div>
       <div className="exp-copy">
-        <span className="dur">{f.Duration?.value as string}</span>
-        <h3>{f.ItemTitle?.value as string}</h3>
-        <p>{f.Summary?.value as string}</p>
-        {href && (
-          <a className="dest-link" href={href}>
-            {(f.Cta?.value?.text as string) || 'Learn more'}
-          </a>
-        )}
+        <span className="dur">
+          <Text field={item.duration?.jsonValue} />
+        </span>
+        <h3>
+          <Text field={item.itemTitle?.jsonValue} />
+        </h3>
+        <p>
+          <Text field={item.summary?.jsonValue} />
+        </p>
+        {(isEditing || hasLink) && link && <Link field={link} className="dest-link" />}
       </div>
     </div>
   );
 }
 
 const ExperienceShowcase = ({ fields }: ExperienceShowcaseProps): JSX.Element => {
-  // Server component editing signal: scalar fields carry metadata only in edit/preview.
-  const isEditing = !!fields?.Heading?.metadata;
-
-  const items = fields?.items ?? [];
+  const ds = fields?.data?.datasource;
+  // Edit mode: jsonValue carries metadata only in Pages edit/preview.
+  const isEditing = !!ds?.heading?.jsonValue?.metadata;
+  const items = ds?.children?.results ?? [];
 
   return (
     <section className="band atmos" id="experiences" aria-labelledby="exp-h">
       <div className="mesh" aria-hidden="true" />
       <div className="wrap">
         <div className="section-head" data-reveal="">
-          {(isEditing || fields?.Eyebrow?.value) && (
+          {(isEditing || ds?.eyebrow?.jsonValue?.value) && (
             <span className="eyebrow">
-              <Text field={fields?.Eyebrow} />
+              <Text field={ds?.eyebrow?.jsonValue} />
             </span>
           )}
           <h2 id="exp-h">
-            <Text field={fields?.Heading} />
-            {(isEditing || fields?.HeadingAccent?.value) && (
+            <Text field={ds?.heading?.jsonValue} />
+            {(isEditing || ds?.headingAccent?.jsonValue?.value) && (
               <>
                 {' '}
                 <span className="kinetic">
-                  <Text field={fields?.HeadingAccent} />
+                  <Text field={ds?.headingAccent?.jsonValue} />
                 </span>
               </>
             )}
           </h2>
         </div>
-        {items.map((item) => (
-          <ExperienceItem key={item.id || (item.fields.ItemTitle?.value as string)} item={item} />
+        {items.map((item, i) => (
+          <ExperienceItem key={item.id || i} item={item} isEditing={isEditing} />
         ))}
       </div>
     </section>
