@@ -34,6 +34,7 @@ import { Text, useSitecore } from '@sitecore-content-sdk/nextjs';
 import type { TextField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentRendering, ComponentParams } from '@sitecore-content-sdk/nextjs';
 import { useCountUp } from 'lib/motion';
+import { EditingEmpty } from 'lib/editing-empty';
 
 /** `field(name:"X") { jsonValue }` → { jsonValue: <field object> } */
 interface Gql<T> {
@@ -113,11 +114,15 @@ const StatsBand = ({ fields }: StatsBandProps): JSX.Element => {
         )}
       </h2>
       <div className="wrap">
-        <div className="stats-grid">
-          {items.map((item, i) => (
-            <StatItem key={item.id || i} item={item} isEditing={isEditing} />
-          ))}
-        </div>
+        {isEditing && items.length === 0 ? (
+          <EditingEmpty component="StatsBand" child="Stat" />
+        ) : (
+          <div className="stats-grid">
+            {items.map((item, i) => (
+              <StatItem key={item.id || i} item={item} isEditing={isEditing} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

@@ -26,6 +26,7 @@ import { JSX } from 'react';
 import { Text } from '@sitecore-content-sdk/nextjs';
 import type { TextField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentRendering, ComponentParams } from '@sitecore-content-sdk/nextjs';
+import { EditingEmpty } from 'lib/editing-empty';
 
 /** `field(name:"X") { jsonValue }` → { jsonValue: <field object> } */
 interface Gql<T> {
@@ -110,11 +111,15 @@ const ValueProps = ({ fields }: ValuePropsProps): JSX.Element => {
             )}
           </h2>
         </div>
-        <div className="grid grid-3">
-          {cards.map((card, i) => (
-            <ValueCard key={card.id || i} item={card} isEditing={isEditing} />
-          ))}
-        </div>
+        {isEditing && cards.length === 0 ? (
+          <EditingEmpty component="ValueProps" child="ValueCard" />
+        ) : (
+          <div className="grid grid-3">
+            {cards.map((card, i) => (
+              <ValueCard key={card.id || i} item={card} isEditing={isEditing} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

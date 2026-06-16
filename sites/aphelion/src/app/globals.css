@@ -680,3 +680,12 @@ a.contact-detail-value:hover { color: var(--accent-500); }
 .editing-mode .card:focus-within { transform: none !important; }
 /* let the empty-field placeholder breathe in the small glyph badge */
 .editing-mode .glyph { overflow: visible; min-height: 48px; height: auto; font-size: 0.85rem; }
+
+/* Empty Integrated-GraphQL container — visible, selectable affordance in edit mode. */
+.editing-empty {
+  min-height: 96px; display: grid; place-items: center; text-align: center;
+  padding: 1.5rem; border: 1px dashed var(--line); border-radius: var(--radius);
+  color: var(--fg-muted); font-size: var(--step--1);
+  background: color-mix(in oklch, var(--surface) 60%, transparent);
+}
+.editing-empty strong { color: var(--fg); }

@@ -11,6 +11,7 @@ import {
 import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
 import { Text, useSitecore, Link, Image, CdpHelper } from '@sitecore-content-sdk/nextjs';
 import { useCountUp, useMagnetic } from 'lib/motion';
+import { EditingEmpty } from 'lib/editing-empty';
 import { useState, useRef, useEffect } from 'react';
 import client from 'src/lib/sitecore-client';
 import { pageView } from '@sitecore-content-sdk/events';
@@ -40,6 +41,12 @@ const importMap = [
     exports: [
       { name: 'useCountUp', value: useCountUp },
       { name: 'useMagnetic', value: useMagnetic },
+    ]
+  },
+  {
+    module: 'lib/editing-empty',
+    exports: [
+      { name: 'EditingEmpty', value: EditingEmpty },
     ]
   },
   {

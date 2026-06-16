@@ -28,6 +28,7 @@ import { JSX } from 'react';
 import { Text, Image, Link } from '@sitecore-content-sdk/nextjs';
 import type { TextField, ImageField, LinkField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentRendering, ComponentParams } from '@sitecore-content-sdk/nextjs';
+import { EditingEmpty } from 'lib/editing-empty';
 
 /** `field(name:"X") { jsonValue }` → { jsonValue: <field object> } */
 interface Gql<T> {
@@ -141,11 +142,15 @@ const DestinationsGrid = ({ fields, params }: DestinationsGridProps): JSX.Elemen
             </p>
           )}
         </div>
-        <div className="grid grid-3">
-          {cards.map((item, i) => (
-            <DestinationCard key={item.id || i} item={item} isEditing={isEditing} />
-          ))}
-        </div>
+        {isEditing && cards.length === 0 ? (
+          <EditingEmpty component="DestinationsGrid" child="DestinationCard" />
+        ) : (
+          <div className="grid grid-3">
+            {cards.map((item, i) => (
+              <DestinationCard key={item.id || i} item={item} isEditing={isEditing} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

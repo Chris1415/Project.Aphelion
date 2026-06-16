@@ -9,6 +9,7 @@ import {
 
 import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
 import { Text, Image, AppPlaceholder, RichText, Link as Link_8a80e63291fea86e0744df19113dc44bec187216 } from '@sitecore-content-sdk/nextjs';
+import { EditingEmpty } from 'lib/editing-empty';
 import componentMap from '.sitecore/component-map';
 import Link from 'next/link';
 import { ThemeToggle } from 'src/ui/theme-toggle';
@@ -32,6 +33,12 @@ const importMap = [
       { name: 'AppPlaceholder', value: AppPlaceholder },
       { name: 'RichText', value: RichText },
       { name: 'Link', value: Link_8a80e63291fea86e0744df19113dc44bec187216 },
+    ]
+  },
+  {
+    module: 'lib/editing-empty',
+    exports: [
+      { name: 'EditingEmpty', value: EditingEmpty },
     ]
   },
   {

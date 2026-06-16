@@ -28,6 +28,7 @@ import { JSX } from 'react';
 import { Text, Image, Link } from '@sitecore-content-sdk/nextjs';
 import type { TextField, ImageField, LinkField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentRendering, ComponentParams } from '@sitecore-content-sdk/nextjs';
+import { EditingEmpty } from 'lib/editing-empty';
 
 /** `field(name:"X") { jsonValue }` → { jsonValue: <field object> } */
 interface Gql<T> {
@@ -126,9 +127,13 @@ const ExperienceShowcase = ({ fields }: ExperienceShowcaseProps): JSX.Element =>
             )}
           </h2>
         </div>
-        {items.map((item, i) => (
-          <ExperienceItem key={item.id || i} item={item} isEditing={isEditing} />
-        ))}
+        {isEditing && items.length === 0 ? (
+          <EditingEmpty component="ExperienceShowcase" child="ExperienceItem" />
+        ) : (
+          items.map((item, i) => (
+            <ExperienceItem key={item.id || i} item={item} isEditing={isEditing} />
+          ))
+        )}
       </div>
     </section>
   );

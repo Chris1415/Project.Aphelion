@@ -28,6 +28,7 @@ import { JSX } from 'react';
 import { Text, Link } from '@sitecore-content-sdk/nextjs';
 import type { TextField, LinkField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentRendering, ComponentParams } from '@sitecore-content-sdk/nextjs';
+import { EditingEmpty } from 'lib/editing-empty';
 
 /** `field(name:"X") { jsonValue }` → { jsonValue: <field object> } */
 interface Gql<T> {
@@ -96,11 +97,15 @@ const ContactDetails = ({ fields }: ContactDetailsProps): JSX.Element => {
         <h2 id="cd-h" className="contact-details-heading" data-reveal="">
           <Text field={ds?.sectionHeading?.jsonValue} />
         </h2>
-        <ul className="contact-details-list" data-reveal="" data-delay="1">
-          {items.map((item, i) => (
-            <ContactDetailItem key={item.id || i} item={item} isEditing={isEditing} />
-          ))}
-        </ul>
+        {isEditing && items.length === 0 ? (
+          <EditingEmpty component="ContactDetails" child="ContactDetailItem" />
+        ) : (
+          <ul className="contact-details-list" data-reveal="" data-delay="1">
+            {items.map((item, i) => (
+              <ContactDetailItem key={item.id || i} item={item} isEditing={isEditing} />
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   );

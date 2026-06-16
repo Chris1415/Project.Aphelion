@@ -27,6 +27,7 @@ import { JSX } from 'react';
 import { Text, Image } from '@sitecore-content-sdk/nextjs';
 import type { TextField, ImageField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentRendering, ComponentParams } from '@sitecore-content-sdk/nextjs';
+import { EditingEmpty } from 'lib/editing-empty';
 
 /** `field(name:"X") { jsonValue }` → { jsonValue: <field object> } */
 interface Gql<T> {
@@ -121,11 +122,15 @@ const Testimonials = ({ fields }: TestimonialsProps): JSX.Element => {
             )}
           </h2>
         </div>
-        <div className="grid grid-3">
-          {cards.map((card, i) => (
-            <TestimonialCard key={card.id || i} item={card} isEditing={isEditing} />
-          ))}
-        </div>
+        {isEditing && cards.length === 0 ? (
+          <EditingEmpty component="Testimonials" child="TestimonialCard" />
+        ) : (
+          <div className="grid grid-3">
+            {cards.map((card, i) => (
+              <TestimonialCard key={card.id || i} item={card} isEditing={isEditing} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
