@@ -11,6 +11,7 @@ import * as RowSplitter from 'src/components/RowSplitter/RowSplitter';
 import * as RichTextSection from 'src/components/RichTextSection/RichTextSection';
 import * as PromoBand from 'src/components/PromoBand/PromoBand';
 import * as Promo from 'src/components/Promo/Promo';
+import * as PartialDesignDynamicPlaceholder from 'src/components/PartialDesignDynamicPlaceholder/PartialDesignDynamicPlaceholder';
 import * as PageHero from 'src/components/PageHero/PageHero';
 import * as NewsletterCTA from 'src/components/NewsletterCTA/NewsletterCTA';
 import * as Marquee from 'src/components/Marquee/Marquee';
@@ -34,6 +35,7 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['RichTextSection', { ...RichTextSection }],
   ['PromoBand', { ...PromoBand, componentType: 'client' }],
   ['Promo', { ...Promo, componentType: 'client' }],
+  ['PartialDesignDynamicPlaceholder', { ...PartialDesignDynamicPlaceholder }],
   ['PageHero', { ...PageHero }],
   ['NewsletterCTA', { ...NewsletterCTA, componentType: 'client' }],
   ['Marquee', { ...Marquee }],
