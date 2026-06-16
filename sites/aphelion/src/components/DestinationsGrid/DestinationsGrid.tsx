@@ -1,59 +1,60 @@
 /**
- * DestinationsGrid — CONTAINER component (ADR-0005 Shape B: Children resolver).
+ * DestinationsGrid — CONTAINER via INTEGRATED GRAPHQL (resolver-patterns Pattern 3, Shape C).
  * componentName: "DestinationsGrid" (verbatim, ADR-0010).
  *
- * Datasource = `DestinationsGridFolder` (scalar fields Heading/Eyebrow/HeadingAccent/Intro)
- * whose children are `DestinationCard` items. The Children Rendering Contents Resolver
- * ({2F5C334E-5615-423C-8281-9FC180191302}) delivers the children as `fields.items` —
- * Shape B per custom_content-sdk-resolver-patterns:
- *   fields.items: Array<{ id, url, name, displayName, fields: <DestinationCardFields> }>
+ * The rendering carries an Integrated GraphQL query (the rendering's "GraphQL Query" /
+ * ComponentQuery field) that returns the folder's OWN fields AND its DestinationCard children,
+ * each field as `jsonValue`. `jsonValue` carries the field's editing metadata, so in XM Cloud
+ * Pages metadata-edit-mode BOTH the section heading AND every card field render INLINE-EDITABLE
+ * through the SDK field helpers — without making each card a placed rendering.
  *
- * Per resolver-patterns rule, each `items[i].fields` is read MANUALLY (`.value`) — the
- * SDK field components target placed renderings, not resolver-injected child data.
- * The section-head SCALAR fields are the rendering's OWN datasource fields, so they use
- * the SDK <Text> helper (editing-safe gating applied to the optional ones).
+ * IMPORTANT (resolver-patterns): a Rendering Contents Resolver WINS over the ComponentQuery when
+ * both are set. The Children resolver must be CLEARED on this rendering for the query to run.
  *
- * Server component (no hooks): editing mode derived from the Heading field's metadata.
+ * Payload (Shape C — mirrors the query aliases):
+ *   fields.data.datasource.{heading,eyebrow,headingAccent,intro}.jsonValue            (scalars)
+ *   fields.data.datasource.children.results[]
+ *      .{cardName,tagline,distance,detail,cardImage,cardLink}.jsonValue                (per card)
  *
- * GridLimit (rendering parameter, DestinationsGridParams): 0/absent = all; N = first N.
+ * Server component. Editing derived from heading.jsonValue.metadata (present only in edit mode).
  *
  * SDK shapes (verified against sites/aphelion/node_modules):
- *   TextField  react/types/components/Text.d.ts:8
- *   ImageField react/types/components/Image.d.ts:17  (value.src / value.alt)
- *   LinkField  react/types/components/Link.d.ts:24   (value.href / value.text)
+ *   TextField  react/types/components/Text.d.ts:8   (extends FieldMetadata → .metadata)
+ *   ImageField react/types/components/Image.d.ts:17
+ *   LinkField  react/types/components/Link.d.ts:24
  */
 
 import { JSX } from 'react';
-import { Text } from '@sitecore-content-sdk/nextjs';
+import { Text, Image, Link } from '@sitecore-content-sdk/nextjs';
 import type { TextField, ImageField, LinkField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentRendering, ComponentParams } from '@sitecore-content-sdk/nextjs';
 
-/** Per-child field hash (Shape A inside each Shape-B item) — DestinationCard template */
-interface DestinationCardFields {
-  Name?: TextField;
-  Tagline?: TextField;
-  CardImage?: ImageField;
-  Distance?: TextField;
-  Detail?: TextField;
-  CardLink?: LinkField;
+/** `field(name:"X") { jsonValue }` → { jsonValue: <field object> } */
+interface Gql<T> {
+  jsonValue?: T;
 }
 
-/** Children-resolver item wrapper (Shape B) */
-interface ChildItem {
-  id: string;
-  url?: string;
+interface DestinationCardResult {
+  id?: string;
   name?: string;
-  displayName?: string;
-  fields: DestinationCardFields;
+  cardName?: Gql<TextField>;
+  tagline?: Gql<TextField>;
+  distance?: Gql<TextField>;
+  detail?: Gql<TextField>;
+  cardImage?: Gql<ImageField>;
+  cardLink?: Gql<LinkField>;
 }
 
-/** DestinationsGridFolder scalar fields + resolver-injected `items` */
+interface DestinationsGridDatasource {
+  heading?: Gql<TextField>;
+  eyebrow?: Gql<TextField>;
+  headingAccent?: Gql<TextField>;
+  intro?: Gql<TextField>;
+  children?: { results?: DestinationCardResult[] };
+}
+
 export interface DestinationsGridFields {
-  Heading?: TextField;
-  Eyebrow?: TextField;
-  HeadingAccent?: TextField;
-  Intro?: TextField;
-  items?: ChildItem[];
+  data?: { datasource?: DestinationsGridDatasource };
 }
 
 export interface DestinationsGridProps {
@@ -62,78 +63,83 @@ export interface DestinationsGridProps {
   params?: ComponentParams;
 }
 
-/** Local presentational card — NOT a registered rendering (inlined to dodge generate-map). */
-function DestinationCard({ item }: { item: ChildItem }): JSX.Element {
-  const f = item.fields;
-  const src = f.CardImage?.value?.src as string | undefined;
-  const alt = (f.CardImage?.value?.alt as string | undefined) ?? '';
-  const href = f.CardLink?.value?.href;
-  const linkText = f.CardLink?.value?.text || 'Plan this voyage';
+/** Inline card — fields rendered via SDK helpers off jsonValue → inline-editable in Pages. */
+function DestinationCard({
+  item,
+  isEditing,
+}: {
+  item: DestinationCardResult;
+  isEditing: boolean;
+}): JSX.Element {
+  const image = item.cardImage?.jsonValue;
+  const hasImage = !!image?.value?.src;
+  const link = item.cardLink?.jsonValue;
+  const hasLink = !!link?.value?.href;
+  const hasDistance = !!item.distance?.jsonValue?.value;
 
   return (
     <article className="card dest-card" data-reveal="">
       <div className="dest-media">
         <div className="sky" aria-hidden="true" />
-        {src && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img data-fallback="" loading="lazy" src={src} alt={alt} />
+        {(isEditing || hasImage) && image && (
+          <Image field={image} data-fallback="" loading="lazy" />
         )}
       </div>
       <div className="dest-body">
         <div className="dest-row">
-          <h3>{f.Name?.value as string}</h3>
-          {f.Distance?.value && <span className="dest-tag">{f.Distance.value as string}</span>}
+          <h3>
+            <Text field={item.cardName?.jsonValue} />
+          </h3>
+          {(isEditing || hasDistance) && (
+            <span className="dest-tag">
+              <Text field={item.distance?.jsonValue} />
+            </span>
+          )}
         </div>
-        {f.Detail?.value && <p>{f.Detail.value as string}</p>}
-        {href && (
-          <a className="dest-link" href={href}>
-            {linkText}
-          </a>
-        )}
+        <p>
+          <Text field={item.detail?.jsonValue} />
+        </p>
+        {(isEditing || hasLink) && link && <Link field={link} className="dest-link" />}
       </div>
     </article>
   );
 }
 
-const DestinationsGrid = ({ fields, params }: DestinationsGridProps): JSX.Element => {
-  // Server component editing signal: scalar fields carry metadata only in edit/preview.
-  const isEditing = !!fields?.Heading?.metadata;
-
-  // GridLimit rendering parameter: '0'/absent = all; positive int = first N.
-  const rawLimit = params?.GridLimit;
-  const limit = rawLimit !== undefined ? parseInt(String(rawLimit), 10) : 0;
-  const allItems = fields?.items ?? [];
-  const items = Number.isFinite(limit) && limit > 0 ? allItems.slice(0, limit) : allItems;
+const DestinationsGrid = ({ fields }: DestinationsGridProps): JSX.Element => {
+  const ds = fields?.data?.datasource;
+  // Edit mode: jsonValue carries metadata only in Pages edit/preview.
+  const isEditing = !!ds?.heading?.jsonValue?.metadata;
+  const cards = ds?.children?.results ?? [];
 
   return (
     <section className="band atmos" id="destinations" aria-labelledby="dest-h">
       <div className="wrap">
         <div className="section-head" data-reveal="">
-          {(isEditing || fields?.Eyebrow?.value) && (
+          {(isEditing || ds?.eyebrow?.jsonValue?.value) && (
             <span className="eyebrow">
-              <Text field={fields?.Eyebrow} />
+              <Text field={ds?.eyebrow?.jsonValue} />
             </span>
           )}
           <h2 id="dest-h">
-            <Text field={fields?.Heading} />
-            {(isEditing || fields?.HeadingAccent?.value) && (
+            <Text field={ds?.heading?.jsonValue} />
+            {(isEditing || ds?.headingAccent?.jsonValue?.value) && (
               <>
                 {' '}
                 <span className="kinetic">
-                  <Text field={fields?.HeadingAccent} />
+                  <Text field={ds?.headingAccent?.jsonValue} />
                 </span>
               </>
             )}
           </h2>
-          {(isEditing || fields?.Intro?.value) && (
+          {(isEditing || ds?.intro?.jsonValue?.value) && (
             <p>
-              <Text field={fields?.Intro} />
+              <Text field={ds?.intro?.jsonValue} />
             </p>
           )}
         </div>
         <div className="grid grid-3">
-          {items.map((item) => (
-            <DestinationCard key={item.id || (item.fields.Name?.value as string)} item={item} />
+          {cards.map((item, i) => (
+            <DestinationCard key={item.id || i} item={item} isEditing={isEditing} />
           ))}
         </div>
       </div>
