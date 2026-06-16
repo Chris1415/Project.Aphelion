@@ -3,6 +3,9 @@ import { AppPlaceholder, DesignLibraryApp, Field, Page } from '@sitecore-content
 import Scripts from 'src/Scripts';
 import SitecoreStyles from 'components/content-sdk/SitecoreStyles';
 import componentMap from '.sitecore/component-map';
+import { SiteHeader } from 'src/site/SiteHeader';
+import { MobileNav } from 'src/site/MobileNav';
+import { SiteFooter } from 'src/site/SiteFooter';
 
 interface LayoutProps {
   page: Page;
@@ -34,19 +37,11 @@ const Layout = ({ page }: LayoutProps): JSX.Element => {
           )
         ) : (
           <>
-            <header>
-              <div id="header">
-                {route && (
-                  <AppPlaceholder
-                    page={page}
-                    componentMap={componentMap}
-                    name="headless-header"
-                    rendering={route}
-                  />
-                )}
-              </div>
-            </header>
-            <main>
+            {/* Chrome (ADR-0005 nav exception) — rendered from the layout, NOT via
+                placeholders / the component-map. Static nav for now (src/site/). */}
+            <SiteHeader />
+            <MobileNav />
+            <main id="main-content">
               <div id="content">
                 {route && (
                   <AppPlaceholder
@@ -58,18 +53,7 @@ const Layout = ({ page }: LayoutProps): JSX.Element => {
                 )}
               </div>
             </main>
-            <footer>
-              <div id="footer">
-                {route && (
-                  <AppPlaceholder
-                    page={page}
-                    componentMap={componentMap}
-                    name="headless-footer"
-                    rendering={route}
-                  />
-                )}
-              </div>
-            </footer>
+            <SiteFooter />
           </>
         )}
       </div>
