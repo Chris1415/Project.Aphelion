@@ -1,19 +1,21 @@
 /**
- * SiteHeader — sticky, blur, brand mark + desktop nav + ThemeToggle.
- * Chrome (ADR-0005 nav exception) — NOT a Sitecore rendering. Ported from the static app.
- * Lives in src/site/ (NOT src/components/) so generate-map doesn't register it.
- * Rendered from Layout.tsx. Static nav from src/site/navigation.
+ * Header — Content SDK rendering (componentName "Header"). Place in the `headless-header`
+ * placeholder in Pages. Static chrome (ADR-0005 nav exception): sticky brand + desktop nav +
+ * ThemeToggle + MobileNav. Nav is hardcoded (src/site/navigation) for now — no datasource.
  *
- * The mobile menu trigger is owned by MobileNav (rendered alongside this in Layout.tsx),
- * not here — a duplicate static ☰ button would break aria-expanded state.
+ * Renders its own <header className="site-header"> (sticky). Layout places this placeholder
+ * directly in the flow (no wrapping <header>) so the sticky positioning works. MobileNav +
+ * navigation live in src/site/ (NOT src/components/) so generate-map doesn't register them.
  */
 
+import { JSX } from 'react';
 import Link from 'next/link';
 import { ThemeToggle } from 'src/ui/theme-toggle';
+import { MobileNav } from 'src/site/MobileNav';
 import { headerNav } from 'src/site/navigation';
 
-export function SiteHeader() {
-  return (
+const Header = (): JSX.Element => (
+  <>
     <header className="site-header" role="banner">
       <div className="wrap">
         <div className="header-inner">
@@ -32,12 +34,15 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          {/* Actions — ThemeToggle only; mobile menu trigger is in MobileNav */}
+          {/* Actions — ThemeToggle; the mobile menu trigger is owned by MobileNav */}
           <div className="header-actions">
             <ThemeToggle />
           </div>
         </div>
       </div>
     </header>
-  );
-}
+    <MobileNav />
+  </>
+);
+
+export default Header;

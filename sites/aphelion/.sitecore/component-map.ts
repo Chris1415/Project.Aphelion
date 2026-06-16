@@ -14,6 +14,8 @@ import * as Promo from 'src/components/Promo/Promo';
 import * as PageHero from 'src/components/PageHero/PageHero';
 import * as NewsletterCTA from 'src/components/NewsletterCTA/NewsletterCTA';
 import * as Marquee from 'src/components/Marquee/Marquee';
+import * as Header from 'src/components/Header/Header';
+import * as Footer from 'src/components/Footer/Footer';
 import * as ExperienceShowcase from 'src/components/ExperienceShowcase/ExperienceShowcase';
 import * as DestinationsGrid from 'src/components/DestinationsGrid/DestinationsGrid';
 import * as Container from 'src/components/Container/Container';
@@ -35,6 +37,8 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['PageHero', { ...PageHero }],
   ['NewsletterCTA', { ...NewsletterCTA, componentType: 'client' }],
   ['Marquee', { ...Marquee }],
+  ['Header', { ...Header }],
+  ['Footer', { ...Footer }],
   ['ExperienceShowcase', { ...ExperienceShowcase }],
   ['DestinationsGrid', { ...DestinationsGrid }],
   ['Container', { ...Container }],
