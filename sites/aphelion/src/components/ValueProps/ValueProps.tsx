@@ -60,13 +60,16 @@ export interface ValuePropsProps {
 /** Inline card — fields rendered via SDK helpers off jsonValue → inline-editable in Pages. */
 function ValueCard({
   item,
+  isEditing,
 }: {
   item: ValueCardResult;
   isEditing: boolean;
 }): JSX.Element {
   return (
-    <article className="card flowborder" data-magnetic="0.18" data-reveal="">
-      <div className="glyph" aria-hidden="true">
+    <article className="card flowborder" data-reveal="">
+      {/* glyph is decorative when published, but must NOT be aria-hidden in edit mode
+          or Pages won't let you edit the Icon field inside it */}
+      <div className="glyph" aria-hidden={isEditing ? undefined : true}>
         <Text field={item.icon?.jsonValue} />
       </div>
       <h3>

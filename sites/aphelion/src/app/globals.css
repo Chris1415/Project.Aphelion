@@ -666,3 +666,17 @@ a.contact-detail-value:hover { color: var(--accent-500); }
    Inside a flex .row the SDK's empty-placeholder div shrinks to the "+" button; force
    it to fill the row (in a Column Splitter this fills the COLUMN, which is what we want). */
 .sc-jss-empty-placeholder { flex: 1 0 100%; width: 100%; min-height: 48px; }
+
+/* ===========================================================================
+   Pages EDIT MODE — neutralize decorative effects so inline editing works.
+   The layout sets `.editing-mode` on its wrapper when page.mode.isEditing.
+   A CSS transform on .card (the magnetic translate) creates a transform context
+   that shifts Sitecore Pages' inline-edit click hotspots → field placeholders
+   render but aren't clickable. Reveal can also hide content. Disable both in edit.
+   ========================================================================== */
+.editing-mode [data-reveal] { opacity: 1 !important; transform: none !important; }
+.editing-mode .card,
+.editing-mode .card:hover,
+.editing-mode .card:focus-within { transform: none !important; }
+/* let the empty-field placeholder breathe in the small glyph badge */
+.editing-mode .glyph { overflow: visible; min-height: 48px; height: auto; font-size: 0.85rem; }

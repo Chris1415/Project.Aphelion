@@ -9,7 +9,7 @@ import {
 // end of built-in imports
 
 import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
-import { useSitecore, Text, Link, Image, CdpHelper } from '@sitecore-content-sdk/nextjs';
+import { Text, useSitecore, Link, Image, CdpHelper } from '@sitecore-content-sdk/nextjs';
 import { useCountUp, useMagnetic } from 'lib/motion';
 import { useState, useRef, useEffect } from 'react';
 import client from 'src/lib/sitecore-client';
@@ -28,8 +28,8 @@ const importMap = [
   {
     module: '@sitecore-content-sdk/nextjs',
     exports: [
-      { name: 'useSitecore', value: useSitecore },
       { name: 'Text', value: Text },
+      { name: 'useSitecore', value: useSitecore },
       { name: 'Link', value: Link },
       { name: 'Image', value: Image },
       { name: 'CdpHelper', value: CdpHelper },

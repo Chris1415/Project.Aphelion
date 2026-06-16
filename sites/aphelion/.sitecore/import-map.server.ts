@@ -8,8 +8,12 @@ import {
 // end of built-in imports
 
 import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
-import { Text, AppPlaceholder, RichText, Image } from '@sitecore-content-sdk/nextjs';
+import { Text, Image, AppPlaceholder, RichText, Link as Link_8a80e63291fea86e0744df19113dc44bec187216 } from '@sitecore-content-sdk/nextjs';
 import componentMap from '.sitecore/component-map';
+import Link from 'next/link';
+import { ThemeToggle } from 'src/ui/theme-toggle';
+import { MobileNav } from 'src/site/MobileNav';
+import { headerNav, footerNav } from 'src/site/navigation';
 
 const importMap = [
   {
@@ -24,15 +28,41 @@ const importMap = [
     module: '@sitecore-content-sdk/nextjs',
     exports: [
       { name: 'Text', value: Text },
+      { name: 'Image', value: Image },
       { name: 'AppPlaceholder', value: AppPlaceholder },
       { name: 'RichText', value: RichText },
-      { name: 'Image', value: Image },
+      { name: 'Link', value: Link_8a80e63291fea86e0744df19113dc44bec187216 },
     ]
   },
   {
     module: '.sitecore/component-map',
     exports: [
       { name: 'default', value: componentMap },
+    ]
+  },
+  {
+    module: 'next/link',
+    exports: [
+      { name: 'default', value: Link },
+    ]
+  },
+  {
+    module: 'src/ui/theme-toggle',
+    exports: [
+      { name: 'ThemeToggle', value: ThemeToggle },
+    ]
+  },
+  {
+    module: 'src/site/MobileNav',
+    exports: [
+      { name: 'MobileNav', value: MobileNav },
+    ]
+  },
+  {
+    module: 'src/site/navigation',
+    exports: [
+      { name: 'headerNav', value: headerNav },
+      { name: 'footerNav', value: footerNav },
     ]
   }
 ] as ImportEntry[];
