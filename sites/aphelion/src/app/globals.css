@@ -690,14 +690,18 @@ a.contact-detail-value:hover { color: var(--accent-500); }
 }
 .editing-empty strong { color: var(--fg); }
 
-/* Stats robustness — keep an oversized value from blowing out the 4-col grid.
-   (CSS-grid items default to min-width:auto, so wide content overflows its track;
-   min-width:0 + overflow-wrap contains it. Design intent is SHORT values: 7 / 1240+ / 100% / 4.9.) */
-.stats-grid { grid-auto-rows: 1fr; }
+/* Stats robustness — responsive auto-fit columns: as many ~min-width stats per row as fit,
+   the rest reflow to the next row (4 → 3 → 2 → 1 gracefully) instead of overflowing the row.
+   A single absurdly-long value truncates cleanly with an ellipsis (no ugly wrapping).
+   Design intent is SHORT values: 7 / 1240+ / 100% / 4.9. */
+.stats-grid {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-auto-rows: 1fr;
+}
 .stats-grid > .stat { min-width: 0; }
-.stat .v { overflow-wrap: anywhere; max-width: 100%; }
-/* On narrow viewports the static design already drops to 2 columns; clamp the value font
-   down a touch more there so longer values still fit. */
-@media (max-width: 640px) {
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+.stat .v {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
