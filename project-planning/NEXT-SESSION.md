@@ -1,5 +1,14 @@
 # Aphelion — pick-up for next session (handoff 2026-06-16)
 
+## Test foundation — ADDED 2026-06-17 ✅ (head-app now has its OWN tests)
+The static app's suite did NOT cover the port layer (SDK field binding); the head app had **zero** tests. Fixed:
+- **`npm test`** → 25 Vitest + RTL unit tests (12 files) against **real captured Edge fixtures** (`src/test/fixtures/*.layout.json`, harvested from `/Group-1-Test`). Covers 13 components' binding (flat Shape-A + integrated-GraphQL Shape-C), chrome (Header/Footer), and empty-state for the 4 unauthored containers.
+- **`npm run test:e2e`** → Playwright live-smoke (`tests/e2e/smoke.spec.ts`), 2 viewports × 6 routes; asserts chrome + no MissingComponent + clean console; unauthored 404 routes auto-skip. Covers splitters + chrome live.
+- **Re-capture fixtures** after authoring new content: dev server up → `GET /api/layout-debug?path=/<route>` (dev-only route; 404s in prod) → save under `src/test/fixtures/`.
+- Gate is green: lint + build (46 pages) + 25 unit + smoke all pass on `prd-001`.
+- **Still thin (by design — no real content yet):** ExperienceShowcase / Testimonials / ContactDetails / Marquee have empty-state tests only; splitter child-binding (build-trap #7) is unverified. Strengthen these once the containers are authored + recaptured.
+- Trap caught + fixed: colocated `*.test.tsx` were being registered as components by `generate-map` (build-trap #5) → `componentMap.exclude` globs added in `sitecore.cli.config.ts`.
+
 ## Where we are — head-app build is DONE + deploy-ready ✅
 - **Production build passes** (`npm run build` → component map + 45 prerendered pages). tsc + lint clean.
 - All 16 components + chrome (`Header`/`Footer` via partial designs) + `PartialDesignDynamicPlaceholder` + Integrated GraphQL + the editing-UX hardening are in and working.

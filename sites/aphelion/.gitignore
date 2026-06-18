@@ -21,6 +21,11 @@
 # vercel
 .vercel
 
+# test artifacts (Playwright)
+/playwright-report/
+/test-results/
+/.playwright-mcp/
+
 # sitecore temp files
 .sitecore/*
 # except for component-map

@@ -1,0 +1,99 @@
+{
+  "sitecore": {
+    "context": {
+      "pageEditing": false,
+      "site": {
+        "name": "aphelion"
+      },
+      "pageState": "normal",
+      "editMode": "chromes",
+      "language": "en",
+      "itemPath": "/",
+      "variantId": "_default"
+    },
+    "route": {
+      "name": "Home",
+      "displayName": "Home",
+      "fields": {
+        "Title": {
+          "value": "aphelion"
+        },
+        "Content": {
+          "value": ""
+        },
+        "NavigationFilter": [],
+        "NavigationTitle": {
+          "value": "aphelion"
+        },
+        "NavigationClass": null,
+        "SxaTags": [],
+        "Page Design": null
+      },
+      "databaseName": "master",
+      "deviceId": "fe5d7fdf-89c0-4d99-9aa3-b5fbd009c9f3",
+      "itemId": "6758b4a6-b309-48f3-a1f3-349e44cc08bf",
+      "itemLanguage": "en",
+      "itemVersion": 1,
+      "layoutId": "96e5f4ba-a2cf-4a4c-a4e7-64da88226362",
+      "templateId": "63b1f2db-3fdf-4fae-9d93-5e412b4191f7",
+      "templateName": "Page",
+      "placeholders": {
+        "headless-header": [
+          {
+            "uid": "a3ba86df-15f2-438c-82ec-aed42b60c6f6",
+            "componentName": "PartialDesignDynamicPlaceholder",
+            "dataSource": "",
+            "params": {
+              "sid": "{A3BA86DF-15F2-438C-82EC-AED42B60C6F6}",
+              "ph": "headless-header",
+              "sig": "sxa-header"
+            },
+            "placeholders": {
+              "sxa-header": [
+                {
+                  "uid": "7fd3d518-09a4-4e56-a40b-305d727a26e9",
+                  "componentName": "Header",
+                  "dataSource": "/sitecore/content/cosmos/aphelion/Presentation/Partial Designs/Header/Data/Header",
+                  "params": {
+                    "GridParameters": "col-12",
+                    "DynamicPlaceholderId": "1",
+                    "FieldNames": "Default"
+                  },
+                  "fields": {}
+                }
+              ]
+            }
+          }
+        ],
+        "headless-main": [],
+        "headless-footer": [
+          {
+            "uid": "0c557f7e-9e12-4127-bb33-1f756bc68d4c",
+            "componentName": "PartialDesignDynamicPlaceholder",
+            "dataSource": "",
+            "params": {
+              "sid": "{0C557F7E-9E12-4127-BB33-1F756BC68D4C}",
+              "ph": "headless-footer",
+              "sig": "sxa-footer"
+            },
+            "placeholders": {
+              "sxa-footer": [
+                {
+                  "uid": "77531837-711b-4403-aeb7-83cc318a4a6a",
+                  "componentName": "Footer",
+                  "dataSource": "/sitecore/content/cosmos/aphelion/Presentation/Partial Designs/Footer/Data/Footer",
+                  "params": {
+                    "GridParameters": "col-12",
+                    "DynamicPlaceholderId": "1",
+                    "FieldNames": "Default"
+                  },
+                  "fields": {}
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
