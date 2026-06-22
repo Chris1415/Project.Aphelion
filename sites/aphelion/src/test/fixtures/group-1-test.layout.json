@@ -1,0 +1,632 @@
+{
+  "sitecore": {
+    "context": {
+      "pageEditing": false,
+      "site": {
+        "name": "aphelion"
+      },
+      "pageState": "normal",
+      "editMode": "chromes",
+      "language": "en",
+      "itemPath": "/Group-1-Test",
+      "variantId": "_default"
+    },
+    "route": {
+      "name": "Group 1 Test",
+      "displayName": "Group 1 Test",
+      "fields": {
+        "Title": {
+          "value": "Group 1 Test"
+        },
+        "Content": {
+          "value": ""
+        },
+        "NavigationFilter": [],
+        "NavigationTitle": {
+          "value": "Group 1 Test"
+        },
+        "NavigationClass": null,
+        "SxaTags": [],
+        "Page Design": null
+      },
+      "databaseName": "master",
+      "deviceId": "fe5d7fdf-89c0-4d99-9aa3-b5fbd009c9f3",
+      "itemId": "871bfd3a-921c-4a46-8924-a976abda5792",
+      "itemLanguage": "en",
+      "itemVersion": 1,
+      "layoutId": "96e5f4ba-a2cf-4a4c-a4e7-64da88226362",
+      "templateId": "63b1f2db-3fdf-4fae-9d93-5e412b4191f7",
+      "templateName": "Page",
+      "placeholders": {
+        "headless-header": [
+          {
+            "uid": "a3ba86df-15f2-438c-82ec-aed42b60c6f6",
+            "componentName": "PartialDesignDynamicPlaceholder",
+            "dataSource": "",
+            "params": {
+              "sid": "{A3BA86DF-15F2-438C-82EC-AED42B60C6F6}",
+              "ph": "headless-header",
+              "sig": "sxa-header"
+            },
+            "placeholders": {
+              "sxa-header": [
+                {
+                  "uid": "7fd3d518-09a4-4e56-a40b-305d727a26e9",
+                  "componentName": "Header",
+                  "dataSource": "/sitecore/content/cosmos/aphelion/Presentation/Partial Designs/Header/Data/Header",
+                  "params": {
+                    "GridParameters": "col-12",
+                    "DynamicPlaceholderId": "1",
+                    "FieldNames": "Default"
+                  },
+                  "fields": {}
+                }
+              ]
+            }
+          }
+        ],
+        "headless-main": [
+          {
+            "uid": "e0cded78-9665-46e0-b604-04b35c3f3647",
+            "componentName": "StatsBand",
+            "dataSource": "/sitecore/content/cosmos/aphelion/Home/Group 1 Test/Data/statsband",
+            "params": {
+              "GridParameters": "col-12",
+              "DynamicPlaceholderId": "12",
+              "FieldNames": "Default"
+            },
+            "fields": {
+              "data": {
+                "datasource": {
+                  "bandHeading": {
+                    "jsonValue": {
+                      "value": ""
+                    }
+                  },
+                  "children": {
+                    "results": [
+                      {
+                        "id": "3E2E4609A0C347F3800C11D17BA5D1C3",
+                        "name": "Stat 1",
+                        "statValue": {
+                          "jsonValue": {
+                            "value": "12312321"
+                          }
+                        },
+                        "statLabel": {
+                          "jsonValue": {
+                            "value": "2131232131"
+                          }
+                        }
+                      },
+                      {
+                        "id": "1E1E0AC88E7B459395339606249446B2",
+                        "name": "Stat 2",
+                        "statValue": {
+                          "jsonValue": {
+                            "value": "1231232"
+                          }
+                        },
+                        "statLabel": {
+                          "jsonValue": {
+                            "value": "12312321321"
+                          }
+                        }
+                      },
+                      {
+                        "id": "955F09D1A63D46A3AD11B13E853FCE50",
+                        "name": "Stat 3",
+                        "statValue": {
+                          "jsonValue": {
+                            "value": "12"
+                          }
+                        },
+                        "statLabel": {
+                          "jsonValue": {
+                            "value": "3123213213"
+                          }
+                        }
+                      },
+                      {
+                        "id": "C2AF16B48AC2411BA308FA2EED889443",
+                        "name": "Stat 4",
+                        "statValue": {
+                          "jsonValue": {
+                            "value": "1231231"
+                          }
+                        },
+                        "statLabel": {
+                          "jsonValue": {
+                            "value": "13123213213"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "uid": "3dff892c-68b7-4b0a-83be-90797e19b883",
+            "componentName": "ValueProps",
+            "dataSource": "/sitecore/content/cosmos/aphelion/Home/Group 1 Test/Data/ValueProps",
+            "params": {
+              "GridParameters": "col-12",
+              "DynamicPlaceholderId": "11",
+              "FieldNames": "Default"
+            },
+            "fields": {
+              "data": {
+                "datasource": {
+                  "heading": {
+                    "jsonValue": {
+                      "value": "321321"
+                    }
+                  },
+                  "eyebrow": {
+                    "jsonValue": {
+                      "value": "1323213"
+                    }
+                  },
+                  "headingAccent": {
+                    "jsonValue": {
+                      "value": "123213213213"
+                    }
+                  },
+                  "children": {
+                    "results": [
+                      {
+                        "id": "A6F6371C7EAF4E1C97288E02C7BF16A4",
+                        "name": "First",
+                        "icon": {
+                          "jsonValue": {
+                            "value": "Hello"
+                          }
+                        },
+                        "cardTitle": {
+                          "jsonValue": {
+                            "value": "123213213"
+                          }
+                        },
+                        "body": {
+                          "jsonValue": {
+                            "value": "123213213213213"
+                          }
+                        }
+                      },
+                      {
+                        "id": "BA9C8837B6B04F44A305FD22595E63FB",
+                        "name": "Second",
+                        "icon": {
+                          "jsonValue": {
+                            "value": "sun"
+                          }
+                        },
+                        "cardTitle": {
+                          "jsonValue": {
+                            "value": "12321321321321"
+                          }
+                        },
+                        "body": {
+                          "jsonValue": {
+                            "value": "112321321 321 3213 21 3213 213 213 213 123 213 213 213 123"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "experiences": {}
+          },
+          {
+            "uid": "f6efd1a1-fb3a-44ed-a182-3f4f01c58a15",
+            "componentName": "DestinationsGrid",
+            "dataSource": "/sitecore/content/cosmos/aphelion/Home/Group 1 Test/Data/DGF",
+            "fields": {
+              "data": {
+                "datasource": {
+                  "heading": {
+                    "jsonValue": {
+                      "value": "21321321"
+                    }
+                  },
+                  "eyebrow": {
+                    "jsonValue": {
+                      "value": "123213213"
+                    }
+                  },
+                  "headingAccent": {
+                    "jsonValue": {
+                      "value": "123213213"
+                    }
+                  },
+                  "intro": {
+                    "jsonValue": {
+                      "value": "123213213213"
+                    }
+                  },
+                  "children": {
+                    "results": [
+                      {
+                        "id": "22EDEDA6AB5E444D82B7BA25D05B6D8E",
+                        "name": "123",
+                        "cardName": {
+                          "jsonValue": {
+                            "value": ""
+                          }
+                        },
+                        "tagline": {
+                          "jsonValue": {
+                            "value": ""
+                          }
+                        },
+                        "distance": {
+                          "jsonValue": {
+                            "value": ""
+                          }
+                        },
+                        "detail": {
+                          "jsonValue": {
+                            "value": ""
+                          }
+                        },
+                        "cardImage": {
+                          "jsonValue": {
+                            "value": {}
+                          }
+                        },
+                        "cardLink": {
+                          "jsonValue": {
+                            "value": {
+                              "href": ""
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "id": "6355E1ABC03241869A9E24B5F8E07FB1",
+                        "name": "4556t",
+                        "cardName": {
+                          "jsonValue": {
+                            "value": ""
+                          }
+                        },
+                        "tagline": {
+                          "jsonValue": {
+                            "value": ""
+                          }
+                        },
+                        "distance": {
+                          "jsonValue": {
+                            "value": ""
+                          }
+                        },
+                        "detail": {
+                          "jsonValue": {
+                            "value": ""
+                          }
+                        },
+                        "cardImage": {
+                          "jsonValue": {
+                            "value": {}
+                          }
+                        },
+                        "cardLink": {
+                          "jsonValue": {
+                            "value": {
+                              "href": ""
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "uid": "10ae793f-b399-4408-9880-c1f509327bfc",
+            "componentName": "Promo",
+            "dataSource": "/sitecore/content/cosmos/aphelion/Home/Group 1 Test/Data/promo",
+            "params": {
+              "GridParameters": "col-12",
+              "FieldNames": "Default",
+              "DynamicPlaceholderId": "3"
+            },
+            "fields": {
+              "Eyebrow": {
+                "value": "Commercial spaceflight · Est. 2419"
+              },
+              "Title": {
+                "value": "Drift past the"
+              },
+              "TitleAccent": {
+                "value": "1232132132131"
+              },
+              "Lede": {
+                "value": "Aphelion charters luminous voyages to the far points of the system — where the light bends, the silence sings, and the view rewrites you."
+              },
+              "PrimaryCta": {
+                "value": {
+                  "href": ""
+                }
+              },
+              "SecondaryCta": {
+                "value": {
+                  "href": "http://www.google.de",
+                  "linktype": "external",
+                  "url": "www.google.de",
+                  "target": "",
+                  "text": "",
+                  "title": "",
+                  "class": ""
+                }
+              },
+              "HeroImage": {
+                "value": {}
+              },
+              "MetaValue1": {
+                "value": "123"
+              },
+              "MetaLabel1": {
+                "value": "123"
+              },
+              "MetaValue3": {
+                "value": "123"
+              },
+              "MetaLabel2": {
+                "value": "213"
+              },
+              "MetaValue2": {
+                "value": "123"
+              },
+              "MetaLabel3": {
+                "value": "123"
+              }
+            }
+          },
+          {
+            "uid": "59e17173-2164-4a8b-96d8-f5af34439fc8",
+            "componentName": "PromoBand",
+            "dataSource": "afc23022-062d-4cb1-8d09-877f8a1192c5",
+            "params": {
+              "GridParameters": "col-12",
+              "DynamicPlaceholderId": "2",
+              "FieldNames": "Default"
+            },
+            "fields": {
+              "Heading": {
+                "value": "Charters open for the"
+              },
+              "PromoImage": {
+                "value": {
+                  "src": "https://xmc-sitecoresaa516c-chahdevexjoee24-proda41d.sitecorecloud.io/-/media/Project/cosmos/aphelion/b14d32ca-6787-4829-abd1-fca39f830166.jpg?h=1024&iar=0&w=1024&ttc=63917317953&tt=3D711C2927B8B69A289837FD1C722E8F&hash=27BF2ACFB1301DEF2068979150D75CF6",
+                  "alt": "b14d32ca-6787-4829-abd1-fca39f830166",
+                  "width": "1024",
+                  "height": "1024"
+                }
+              },
+              "Cta": {
+                "value": {
+                  "href": ""
+                }
+              },
+              "Eyebrow": {
+                "value": "2419 season"
+              },
+              "Body": {
+                "value": "<div class=\"ck-content\"><p>1321321321321321312</p></div>"
+              },
+              "HeadingAccent": {
+                "value": "12313213"
+              }
+            }
+          },
+          {
+            "uid": "f21d3929-4d9e-42a9-9201-e60d1e173da5",
+            "componentName": "PageHero",
+            "dataSource": "/sitecore/content/cosmos/aphelion/Home/Group 1 Test/Data/pagehero",
+            "params": {
+              "GridParameters": "col-12",
+              "DynamicPlaceholderId": "1",
+              "FieldNames": "Default"
+            },
+            "fields": {
+              "Title": {
+                "value": "12321321321"
+              },
+              "HeroImage": {
+                "value": {}
+              },
+              "Subtitle": {
+                "value": "[No tex3213213213123t in field]"
+              }
+            }
+          },
+          {
+            "uid": "8517f8f8-b449-46b8-ba05-54df0297e8e8",
+            "componentName": "RichTextSection",
+            "dataSource": "/sitecore/content/cosmos/aphelion/Home/Group 1 Test/Data/Text 1",
+            "params": {
+              "GridParameters": "col-12",
+              "DynamicPlaceholderId": "4",
+              "FieldNames": "Default"
+            },
+            "fields": {
+              "Body": {
+                "value": "<div class=\"ck-content\"><p>retewrntwetnwetwertnwer</p></div>"
+              },
+              "SectionHeading": {
+                "value": "rtnwete5rmtzerztmert"
+              }
+            }
+          },
+          {
+            "uid": "1a23b6f5-332e-42c7-b5bc-dd82c55bd297",
+            "componentName": "NewsletterCTA",
+            "dataSource": "0e923eb8-2e0d-4ccb-97d9-22662de9f18b",
+            "params": {
+              "GridParameters": "col-12",
+              "DynamicPlaceholderId": "5",
+              "FieldNames": "Default"
+            },
+            "fields": {
+              "HeadingAccent": {
+                "value": "21321321"
+              },
+              "Heading": {
+                "value": "1321321"
+              },
+              "TitleAccent": {
+                "value": ""
+              },
+              "Body": {
+                "value": "21321321321321321"
+              },
+              "Placeholder": {
+                "value": ""
+              },
+              "ButtonLabel": {
+                "value": "[No text i3112123213113213213212312n field]"
+              }
+            }
+          },
+          {
+            "uid": "be3d5eaf-18e9-4f81-aa4e-d8a3e1734f0e",
+            "componentName": "ContactForm",
+            "dataSource": "8f253a6d-2ac8-4d00-a239-6411d28ef773",
+            "params": {
+              "GridParameters": "col-12",
+              "DynamicPlaceholderId": "6",
+              "FieldNames": "Default"
+            },
+            "fields": {
+              "FormHeading": {
+                "value": "1232132132"
+              },
+              "Intro": {
+                "value": "13213"
+              },
+              "NameLabel": {
+                "value": "132132132"
+              },
+              "EmailLabel": {
+                "value": "[No text i213213213n field]"
+              },
+              "MessageLabel": {
+                "value": ""
+              },
+              "ButtonLabel": {
+                "value": "21321321"
+              }
+            }
+          },
+          {
+            "uid": "ad6a0786-f8ae-4545-ae33-436240b0711b",
+            "componentName": "Container",
+            "dataSource": "",
+            "params": {
+              "GridParameters": "col-12",
+              "DynamicPlaceholderId": "10",
+              "FieldNames": "Default"
+            },
+            "placeholders": {
+              "container-{*}": []
+            }
+          },
+          {
+            "uid": "7b85eef7-dc3e-43b5-98c3-4d2f9cfb6923",
+            "componentName": "Container",
+            "dataSource": "",
+            "params": {
+              "GridParameters": "col-12",
+              "DynamicPlaceholderId": "7",
+              "FieldNames": "Default"
+            },
+            "placeholders": {
+              "container-{*}": [
+                {
+                  "uid": "fc729fa9-67d1-4433-bc36-74b9ae15b09a",
+                  "componentName": "RowSplitter",
+                  "dataSource": "",
+                  "params": {
+                    "GridParameters": "col-12",
+                    "SplitterSize": "2",
+                    "EnabledPlaceholders": "1,2",
+                    "DynamicPlaceholderId": "9",
+                    "FieldNames": "Default"
+                  },
+                  "placeholders": {
+                    "row-1-{*}": [],
+                    "row-2-{*}": [],
+                    "row-3-{*}": [],
+                    "row-4-{*}": [],
+                    "row-5-{*}": [],
+                    "row-6-{*}": [],
+                    "row-7-{*}": [],
+                    "row-8-{*}": []
+                  }
+                },
+                {
+                  "uid": "3d48c6f0-90bb-45ad-a4b0-44fee77b3f4a",
+                  "componentName": "ColumnSplitter",
+                  "dataSource": "",
+                  "params": {
+                    "ColumnWidth1": "col-6",
+                    "ColumnWidth2": "col-6",
+                    "GridParameters": "col-12",
+                    "SplitterSize": "2",
+                    "EnabledPlaceholders": "1,2",
+                    "DynamicPlaceholderId": "8",
+                    "FieldNames": "Default"
+                  },
+                  "placeholders": {
+                    "column-1-{*}": [],
+                    "column-2-{*}": [],
+                    "column-3-{*}": [],
+                    "column-4-{*}": [],
+                    "column-5-{*}": [],
+                    "column-6-{*}": [],
+                    "column-7-{*}": [],
+                    "column-8-{*}": []
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "headless-footer": [
+          {
+            "uid": "0c557f7e-9e12-4127-bb33-1f756bc68d4c",
+            "componentName": "PartialDesignDynamicPlaceholder",
+            "dataSource": "",
+            "params": {
+              "sid": "{0C557F7E-9E12-4127-BB33-1F756BC68D4C}",
+              "ph": "headless-footer",
+              "sig": "sxa-footer"
+            },
+            "placeholders": {
+              "sxa-footer": [
+                {
+                  "uid": "77531837-711b-4403-aeb7-83cc318a4a6a",
+                  "componentName": "Footer",
+                  "dataSource": "/sitecore/content/cosmos/aphelion/Presentation/Partial Designs/Footer/Data/Footer",
+                  "params": {
+                    "GridParameters": "col-12",
+                    "DynamicPlaceholderId": "1",
+                    "FieldNames": "Default"
+                  },
+                  "fields": {}
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
