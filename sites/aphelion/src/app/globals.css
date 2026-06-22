@@ -345,6 +345,13 @@ html.js [data-reveal][data-delay='3'] { transition-delay: 0.24s; }
 .marquee-item::after { content: '✦'; color: var(--accent-500); font-size: 0.6em; }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+/* Marquee — Pages EDIT-MODE management view (static, selectable; never shown in preview/normal) */
+.marquee-edit { border: 1px dashed var(--line); border-radius: 12px; padding: 1rem 1.25rem; }
+.marquee-edit-note { font-size: 0.85rem; color: var(--fg-muted); margin: 0 0 0.75rem; line-height: 1.5; }
+.marquee-edit-list { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; }
+.marquee-edit-chip { font-family: var(--font-display); font-size: 0.95rem; color: var(--fg-muted); border: 1px solid var(--line); border-radius: 999px; padding: 0.3rem 0.85rem; }
+.marquee-edit-empty { font-size: 0.85rem; color: var(--accent-500); margin: 0; }
+
 /* ---- Cards generic -------------------------------------------------------- */
 .grid { display: grid; gap: clamp(1rem, 2.4vw, 1.75rem); }
 .grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
