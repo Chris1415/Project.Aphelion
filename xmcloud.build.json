@@ -1,6 +1,6 @@
 {
   "renderingHosts": {
-    "solo-website": {
+    "aphelion": {
       "path": "./sites/aphelion",
       "nodeVersion": "22.13.0",
       "jssDeploymentSecret": "110F1C44A496B45478640DD36F80C18C9",
