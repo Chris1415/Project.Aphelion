@@ -595,6 +595,23 @@ a.contact-detail-value:hover { color: var(--accent-500); }
 }
 
 /* ===========================================================================
+   Sitecore Pages editing chrome markers.
+   In editing mode the SDK's field components (Text/Image/Link/...) wrap each
+   field in <code type="text/sitecore" class="scpm"> hydration markers, and the
+   `kind="open"` marker carries the field's metadata as a JSON *text* payload.
+   These are non-visual hooks — Pages locates them via querySelector, not layout
+   — so they must never occupy space. `display:none` keeps them in the DOM while
+   removing them from flow. Without this, the JSON payload takes real layout
+   space: garbage text on normal fields, and — inside the gradient .kinetic
+   heading (color:transparent) — an invisible ~1500px phantom block that pushed
+   the Hero TitleAccent line far below the title. Published view is unaffected
+   (markers are absent when not editing).
+   ========================================================================== */
+.scpm {
+  display: none;
+}
+
+/* ===========================================================================
    Standard SXA splitter support — Bootstrap-compatible 12-column grid.
    The standard Container / RowSplitter / ColumnSplitter (taken from the official
    starter) emit Bootstrap classes (.row / .col-* / .container-fluid / .component*
